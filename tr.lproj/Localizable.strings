@@ -1,0 +1,52 @@
+"app.title" = "Taskly";
+"tab.tasks" = "Görevler";
+"tab.settings" = "Ayarlar";
+
+"filter.all" = "Tümü";
+
+"list.section.pending" = "GÖREVLER";
+"list.section.done" = "TAMAMLANDI";
+
+"add.title" = "Yeni Görev";
+"add.message" = "Bir başlık girin. Emoji kategorisi üstteki filtreden seçilir.";
+"add.placeholder.title" = "Görev başlığı";
+"add.placeholder.notes" = "Notlar (isteğe bağlı)";
+"add.cancel" = "İptal";
+"add.add" = "Ekle";
+"add.choose.category" = "Kategori Seç";
+"add.back" = "Geri";
+
+"empty.title" = "Henüz görev yok";
+"empty.subtitle" = "Yukarıdan bir kategori seçin. Emojiyi değiştirmek için uzun basın.";
+"empty.cta" = "✨ Yeni Görev ✨";
+
+"detail.title" = "Görev Detayı";
+"detail.no.date" = "Tarih belirtilmedi";
+"detail.notes" = "Notlar";
+
+"alerts.missing.title" = "Eksik Bilgi";
+"alerts.missing.message" = "Görev başlığı boş olamaz.";
+
+"settings.language" = "Dil";
+"settings.language.system" = "Sistem Dili";
+"settings.language.turkish" = "Türkçe";
+"settings.language.english" = "İngilizce";
+"settings.language.german" = "Almanca";
+"settings.restart.title" = "Dil Güncellendi";
+"settings.restart.message" = "Uygulama dili güncellendi.";
+"settings.ok" = "Tamam";
+
+"settings.theme" = "Tema";
+"settings.notifications" = "Bildirimler";
+"settings.about" = "Hakkında";
+
+"cat.edit.title" = "Kategoriyi Düzenle";
+"cat.edit.message" = "Tek bir emoji girin.";
+"cat.invalid.title" = "Geçersiz Emoji";
+"cat.invalid.message" = "Lütfen yalnızca tek bir emoji girin.";
+"common.cancel" = "İptal";
+"common.save" = "Kaydet";
+
+"actions.delete" = "Sil";
+"actions.undo" = "Geri Al";
+"actions.complete" = "Tamamla";

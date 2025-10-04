@@ -1,0 +1,52 @@
+"app.title" = "Taskly";
+"tab.tasks" = "Aufgaben";
+"tab.settings" = "Einstellungen";
+
+"filter.all" = "Alle";
+
+"list.section.pending" = "AUFGABEN";
+"list.section.done" = "ERLEDIGT";
+
+"add.title" = "Neue Aufgabe";
+"add.message" = "Gib einen Titel ein. Die Emoji-Kategorie wird oben gewählt.";
+"add.placeholder.title" = "Aufgabentitel";
+"add.placeholder.notes" = "Notizen (optional)";
+"add.cancel" = "Abbrechen";
+"add.add" = "Hinzufügen";
+"add.choose.category" = "Kategorie wählen";
+"add.back" = "Zurück";
+
+"empty.title" = "Noch keine Aufgaben";
+"empty.subtitle" = "Oben eine Kategorie wählen. Emoji ändern: lange drücken.";
+"empty.cta" = "✨ Neue Aufgabe ✨";
+
+"detail.title" = "Aufgabendetail";
+"detail.no.date" = "Kein Datum angegeben";
+"detail.notes" = "Notizen";
+
+"alerts.missing.title" = "Fehlende Angaben";
+"alerts.missing.message" = "Der Aufgabentitel darf nicht leer sein.";
+
+"settings.language" = "Sprache";
+"settings.language.system" = "Systemsprache";
+"settings.language.turkish" = "Türkisch";
+"settings.language.english" = "Englisch";
+"settings.language.german" = "Deutsch";
+"settings.restart.title" = "Sprache aktualisiert";
+"settings.restart.message" = "Die App-Sprache wurde aktualisiert.";
+"settings.ok" = "OK";
+
+"settings.theme" = "Thema";
+"settings.notifications" = "Benachrichtigungen";
+"settings.about" = "Info";
+
+"cat.edit.title" = "Kategorie bearbeiten";
+"cat.edit.message" = "Gib genau ein Emoji ein.";
+"cat.invalid.title" = "Ungültiges Emoji";
+"cat.invalid.message" = "Bitte genau ein Emoji eingeben.";
+"common.cancel" = "Abbrechen";
+"common.save" = "Sichern";
+
+"actions.delete" = "Löschen";
+"actions.undo" = "Rückgängig";
+"actions.complete" = "Erledigt";
