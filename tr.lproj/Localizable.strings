@@ -1,52 +1,140 @@
+/* =============================
+   UYGULAMA GENEL
+   ============================= */
 "app.title" = "Taskly";
+"common.ok" = "Tamam";
+"common.cancel" = "Vazgeç";
+"common.save" = "Kaydet";
+"common.error" = "Hata";
+
+/* Sekmeler */
 "tab.tasks" = "Görevler";
 "tab.settings" = "Ayarlar";
 
+/* (İsteğe bağlı) Başlıklar */
+"items.title" = "Görevler";
+
+/* =============================
+   GİRİŞ / KAYIT
+   ============================= */
+/* Login */
+"login.title" = "Giriş Yap";
+"login.subtitle" = "Görevlerini bulutla senkronize et";
+"login.email.placeholder" = "E-posta";
+"login.password.placeholder" = "Şifre";
+"login.signin" = "Giriş Yap";
+"login.apple" = "Apple ile devam et";
+"login.google" = "Google ile devam et";
+"login.orcontinue" = "veya bunlarla devam et";
+"login.noaccount" = "Hesabın yok mu? Kayıt ol";
+"login.footer" = "Devam ederek gizlilik politikası ve kullanım şartlarını kabul edersin.";
+
+/* Register */
+"register.title" = "Kayıt Ol";
+"register.subtitle" = "Dakikalar içinde hazırsın";
+"register.name.placeholder" = "Ad Soyad";
+"register.email.placeholder" = "E-posta";
+"register.password.placeholder" = "Şifre";
+"register.confirm.placeholder" = "Şifre (tekrar)";
+"register.signup" = "Kayıt Ol";
+"register.footer" = "Zaten hesabın var mı? Giriş Yap";
+
+/* Auth / Hata metinleri */
+"auth.error.title" = "Giriş Hatası";
+"auth.validation.missing" = "Geçerli e-posta ve en az 6 karakterli bir şifre girin.";
+"auth.userNotFound.title" = "Hesap Bulunamadı";
+"auth.userNotFound.message" = "Bu e-posta ile bir hesap yok. Kayıt olmak ister misin?";
+"auth.wrongPassword.title" = "Hatalı Şifre";
+"auth.wrongPassword.message" = "Şifreni kontrol edip tekrar dene.";
+"auth.unavailable.title" = "Giriş Kullanılamıyor";
+"auth.unavailable.message" = "E-posta ile giriş için FirebaseAuth gereklidir. Lütfen önce kayıt ol ya da Apple/Google ile giriş yap.";
+"auth.unsupported.title" = "Desteklenmiyor";
+"auth.unsupported.message" = "Bu özellik iOS 13 veya üzeri gerektirir.";
+"auth.google.title" = "Google ile Giriş";
+"auth.google.clientIdMissing" = "ClientID bulunamadı. Lütfen GoogleService-Info.plist dosyanızı kontrol edin.";
+"auth.google.sdkMissing" = "GoogleSignIn SDK ekli değil. Lütfen Swift Package Manager ile 'GoogleSignIn' paketini ekleyin.";
+"auth.google.missingToken" = "Google kimlik belirteci alınamadı.";
+"auth.apple.missingToken" = "Apple kimlik belirteci alınamadı.";
+"auth.firebase.missing.title" = "Firebase Yapılandırılmadı";
+"auth.firebase.missing.message" = "FirebaseApp.configure() çalışmıyor. AppDelegate içinde çağırdığından ve geçerli bir GoogleService-Info.plist eklediğinden emin ol.";
+"auth.required.title" = "Giriş Gerekli";
+"auth.required.message" = "Görev eklemek için lütfen giriş yapın.";
+
+/* Register hataları/başarı */
+"register.error.title" = "Hata";
+"register.validation.missing" = "Lütfen tüm alanları doldurun.";
+"register.password.mismatch" = "Şifreler uyuşmuyor.";
+"register.success.title" = "Kayıt Başarılı";
+"register.success.message" = "Hesabınız başarıyla oluşturuldu.";
+"register.error.generic" = "Kayıt işlemi başarısız. Lütfen tekrar deneyin.";
+"register.error.emailInUse" = "Bu e-posta adresi zaten kullanılıyor.";
+"register.error.invalidEmail" = "Lütfen geçerli bir e-posta adresi girin.";
+"register.error.weakPassword" = "Şifre en az 6 karakter olmalı.";
+"register.error.network" = "Ağ hatası. İnternet bağlantınızı kontrol edip tekrar deneyin.";
+"register.demo.title" = "Demo Kayıt";
+"register.demo.message" = "FirebaseAuth yüklü değil; kayıt yerelde oluşturuldu. Giriş ekranından oturum açmayı deneyin.";
+
+/* =============================
+   LİSTE / FİLTRE / BOŞ EKRAN
+   ============================= */
 "filter.all" = "Tümü";
+"filter.today" = "Bugün";
+"filter.overdue" = "Geciken";
 
 "list.section.pending" = "GÖREVLER";
-"list.section.done" = "TAMAMLANDI";
+"list.section.done" = "TAMAMLANANLAR";
 
+"empty.title" = "Henüz görev yok";
+"empty.subtitle" = "Yukarıdan bir kategori seç. Emojiye uzun basarak değiştirebilirsin.";
+"empty.cta" = "✨ Yeni Görev ✨";
+
+/* Kart/Swipe eylemleri */
+"actions.delete" = "Sil";
+"actions.undo" = "Geri Al";
+"actions.complete" = "Tamamla";
+"actions.signout" = "Çıkış Yap";
+"actions.edit" = "Düzenle";
+
+/* =============================
+   GÖREV EKLE / DETAY
+   ============================= */
 "add.title" = "Yeni Görev";
-"add.message" = "Bir başlık girin. Emoji kategorisi üstteki filtreden seçilir.";
+"add.message" = "Bir başlık gir. Emoji kategori üstteki filtreden seçilecek.";
 "add.placeholder.title" = "Görev başlığı";
 "add.placeholder.notes" = "Notlar (isteğe bağlı)";
-"add.cancel" = "İptal";
+"add.cancel" = "Vazgeç";
 "add.add" = "Ekle";
 "add.choose.category" = "Kategori Seç";
 "add.back" = "Geri";
 
-"empty.title" = "Henüz görev yok";
-"empty.subtitle" = "Yukarıdan bir kategori seçin. Emojiyi değiştirmek için uzun basın.";
-"empty.cta" = "✨ Yeni Görev ✨";
-
 "detail.title" = "Görev Detayı";
 "detail.no.date" = "Tarih belirtilmedi";
-"detail.notes" = "Notlar";
+"detail.notes" = "Açıklama";
 
 "alerts.missing.title" = "Eksik Bilgi";
 "alerts.missing.message" = "Görev başlığı boş olamaz.";
+"tasks.add.failed" = "Görev eklenemedi";
 
+/* =============================
+   AYARLAR / TEMA / DİL / BİLDİRİMLER
+   ============================= */
+"settings.title" = "Ayarlar";
 "settings.language" = "Dil";
 "settings.language.system" = "Sistem Dili";
 "settings.language.turkish" = "Türkçe";
 "settings.language.english" = "İngilizce";
 "settings.language.german" = "Almanca";
-"settings.restart.title" = "Dil Güncellendi";
-"settings.restart.message" = "Uygulama dili güncellendi.";
-"settings.ok" = "Tamam";
-
 "settings.theme" = "Tema";
 "settings.notifications" = "Bildirimler";
 "settings.about" = "Hakkında";
+"settings.ok" = "Tamam";
 
-"cat.edit.title" = "Kategoriyi Düzenle";
-"cat.edit.message" = "Tek bir emoji girin.";
-"cat.invalid.title" = "Geçersiz Emoji";
-"cat.invalid.message" = "Lütfen yalnızca tek bir emoji girin.";
-"common.cancel" = "İptal";
-"common.save" = "Kaydet";
+/* Tema seçenekleri */
+"theme.system" = "Sistem";
+"theme.light" = "Açık";
+"theme.dark" = "Koyu";
 
-"actions.delete" = "Sil";
-"actions.undo" = "Geri Al";
-"actions.complete" = "Tamamla";
+/* Bildirim metinleri */
+"notif.daily.body" = "Günlük hatırlatma: günün görevlerini gözden geçir.";
+"notif.sample.body" = "Bunu kaçırma! Bir görevin var.";
+

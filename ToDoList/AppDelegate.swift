@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Bildirimler (görünürlük)
         UNUserNotificationCenter.current().delegate = self
 
+
         return true
     }
 
@@ -75,4 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .list, .sound])
     }
+
 }
+

@@ -1,5 +1,8 @@
 import UIKit
 import UserNotifications
+import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
 
 // MARK: - Renk
 extension UIColor {
@@ -8,22 +11,61 @@ extension UIColor {
     }
 }
 
-// MARK: - Model
+extension UIColor {
+    static var appPinkOrFallback: UIColor {
+        UIColor(named: "AppPink") ?? .systemPink
+    }
+}
+
+// MARK: - Font helper (brand script)
+extension UIFont {
+    /// Uses a custom brand script font if set, otherwise falls back to common iOS script fonts.
+    /// To override at runtime: UserDefaults.standard.set("PostScript-Font-Name", forKey: "BrandScriptFontName")
+    static func scriptBrandFont(size: CGFloat) -> UIFont {
+        if let name = UserDefaults.standard.string(forKey: "BrandScriptFontName"),
+           let f = UIFont(name: name, size: size) {
+            return f
+        }
+        let candidates = [
+            "CUSTOM_FONT_PLACEHOLDER",     // Kendi PostScript adın (varsa)
+            "SnellRoundhand",              // daha sade script
+            "BradleyHandITCTT",            // regular Bradley Hand
+            "ChalkboardSE-Light",          // daha okunaklı chalk stil
+            "MarkerFelt-Thin",            // ince marker
+            "Zapfino"                      // en sona itildi
+        ]
+        for n in candidates {
+            if let f = UIFont(name: n, size: size) { return f }
+        }
+        return UIFont.italicSystemFont(ofSize: size)
+    }
+}
+
+// MARK: - Model (Firestore uyumlu)
 struct Task: Codable, Equatable, Identifiable {
-    let id: UUID
+    @DocumentID var id: String?
     var title: String
     var emoji: String
     var done: Bool
     var dueDate: Date?
     var notes: String?
+    @ServerTimestamp var createdAt: Date?
 
-    init(id: UUID = UUID(), title: String, emoji: String, done: Bool, dueDate: Date? = nil, notes: String? = nil) {
+    // Eski çağrıları bozmayalım: id/createdAt olmadan da oluşturulabilsin
+    init(id: String? = nil,
+         title: String,
+         emoji: String,
+         done: Bool,
+         dueDate: Date? = nil,
+         notes: String? = nil,
+         createdAt: Date? = nil) {
         self.id = id
         self.title = title
         self.emoji = emoji
         self.done = done
         self.dueDate = dueDate
         self.notes = notes
+        self.createdAt = createdAt
     }
 }
 
@@ -40,7 +82,7 @@ enum ReminderScheduler {
         // Tam saatinde
         if due > now {
             let contentAt = UNMutableNotificationContent()
-            contentAt.title = "Görev zamanı"
+            contentAt.title = L("reminder.dueNow.title")
             contentAt.body  = task.title
             contentAt.sound = .default
             let triggerAt = UNCalendarNotificationTrigger(dateMatching: calendarComponents(from: due), repeats: false)
@@ -52,7 +94,7 @@ enum ReminderScheduler {
         let before = due.addingTimeInterval(-30 * 60)
         if before > now {
             let contentBefore = UNMutableNotificationContent()
-            contentBefore.title = "Göreve 30 dakika kaldı"
+            contentBefore.title = L("reminder.thirtyMins.title")
             contentBefore.body  = task.title
             contentBefore.sound = .default
             let triggerBefore = UNCalendarNotificationTrigger(dateMatching: calendarComponents(from: before), repeats: false)
@@ -68,12 +110,12 @@ enum ReminderScheduler {
     }
 
     private static func id(_ task: Task, suffix: String) -> String {
-        task.id.uuidString + "#" + suffix
+        (task.id ?? UUID().uuidString) + "#" + suffix
     }
 
     private static func calendarComponents(from date: Date) -> DateComponents {
         var cal = Calendar.current
-        cal.locale = Locale(identifier: "tr_TR")
+        cal.locale = LanguageManager.shared.currentLocale
         return cal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
     }
 }
@@ -81,11 +123,14 @@ enum ReminderScheduler {
 // MARK: - ItemsViewController
 final class ItemsViewController: UITableViewController {
 
-    // Kalıcılık
-    private let storageKey = "tasks.v1"
+    // Firestore-backed kalıcılık
     private var tasks: [Task] = [] {
-        didSet { save(); refreshEmptyState() }
+        didSet { refreshEmptyState() }
     }
+
+    // MARK: - Firestore
+    private let db = Firestore.firestore()
+    private var listener: ListenerRegistration?
 
     // Kategoriler (kişiselleştirilebilir, 4 adet)
     private let categoriesStorageKey = "categories.v1"
@@ -94,6 +139,11 @@ final class ItemsViewController: UITableViewController {
     // Filtre (nil = Tümü)
     private var activeFilter: String? = nil
     private let filterControl = UISegmentedControl(items: [])
+
+    // Sadece bugünün görevlerini göster
+    private var showTodayOnly = false
+    // Sadece süresi geçmiş (tamamlanmamış) görevleri göster
+    private var showOverdueOnly = false
 
     // TR tarih/saat formatter
     private lazy var dateFormatter: DateFormatter = {
@@ -119,8 +169,21 @@ final class ItemsViewController: UITableViewController {
         UserDefaults.standard.set(categories, forKey: categoriesStorageKey)
     }
 
-    private var pending:   [Task] { tasks.filter { !$0.done && (activeFilter == nil || $0.emoji == activeFilter) } }
-    private var completed: [Task] { tasks.filter {  $0.done && (activeFilter == nil || $0.emoji == activeFilter) } }
+    private var pending: [Task] {
+        tasks.filter {
+            !$0.done &&
+            (activeFilter == nil || $0.emoji == activeFilter) &&
+            (!showTodayOnly || Calendar.current.isDateInToday($0.dueDate ?? Date.distantPast)) &&
+            (!showOverdueOnly || (($0.dueDate ?? Date.distantFuture) < Date() && !$0.done))
+        }
+    }
+    private var completed: [Task] {
+        tasks.filter {
+            $0.done &&
+            (activeFilter == nil || $0.emoji == activeFilter) &&
+            (!showTodayOnly || Calendar.current.isDateInToday($0.dueDate ?? Date.distantPast))
+        }
+    }
 
     // Floating Add Button
     private lazy var addButton: UIButton = {
@@ -144,37 +207,56 @@ final class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Görevler"
+        title = L("items.title")
         navigationController?.navigationBar.prefersLargeTitles = false
         NotificationCenter.default.addObserver(self, selector: #selector(reloadForLanguage), name: .languageDidChange, object: nil)
 
-        // MARK: Brand in Navigation Bar (sadece "Taskly" metni)
-        let titleLabel = UILabel()
-        let titleAttr = NSMutableAttributedString(
-            string: "Task",
-            attributes: [
-                .foregroundColor: UIColor.label,
-                .font: UIFont.systemFont(ofSize: 30, weight: .semibold)
-            ]
-        )
-        titleAttr.append(NSAttributedString(
-            string: "ly",
-            attributes: [
-                .foregroundColor: UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1),
-                .font: UIFont.systemFont(ofSize: 30, weight: .semibold)
-            ]
-        ))
-        titleLabel.attributedText = titleAttr
-        titleLabel.accessibilityLabel = "Taskly"
-        titleLabel.textAlignment = .center
-        titleLabel.sizeToFit()
-        navigationItem.titleView = titleLabel
+        // MARK: Brand in Navigation Bar (el yazısı güçlü stil)
+        let brandContainer = UIStackView()
+        brandContainer.axis = .horizontal
+        brandContainer.alignment = .center
+        brandContainer.spacing = -2
+
+        let taskLabel = UILabel()
+        taskLabel.text = "Task"
+        taskLabel.textColor = .label
+        taskLabel.font = .systemFont(ofSize: 30, weight: .semibold)
+
+        let lyLabel = UILabel()
+        lyLabel.textColor = .appPurpleOrFallback
+        lyLabel.font = .systemFont(ofSize: 30, weight: .semibold)
+        lyLabel.text = "ly"
+
+        brandContainer.addArrangedSubview(taskLabel)
+        brandContainer.addArrangedSubview(lyLabel)
+
+        let brandWrapper = UIView()
+        brandWrapper.addSubview(brandContainer)
+        brandContainer.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            brandContainer.leadingAnchor.constraint(equalTo: brandWrapper.leadingAnchor),
+            brandWrapper.trailingAnchor.constraint(equalTo: brandContainer.trailingAnchor),
+            brandContainer.topAnchor.constraint(equalTo: brandWrapper.topAnchor),
+            brandWrapper.bottomAnchor.constraint(equalTo: brandContainer.bottomAnchor)
+        ])
+
+        navigationItem.titleView = brandWrapper
+
+        // Bugün filtresi butonu
+        let todaySymbol = showTodayOnly ? "calendar.badge.clock" : "calendar"
+        let todayButton = UIBarButtonItem(image: UIImage(systemName: todaySymbol), style: .plain, target: self, action: #selector(toggleTodayFilter))
+        navigationItem.rightBarButtonItem = todayButton
+
+        // Süresi geçmiş filtre butonu
+        let overdueSymbol = showOverdueOnly ? "exclamationmark.circle.fill" : "exclamationmark.circle"
+        let overdueButton = UIBarButtonItem(image: UIImage(systemName: overdueSymbol), style: .plain, target: self, action: #selector(toggleOverdueFilter))
+        navigationItem.leftBarButtonItem = overdueButton
 
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
         tableView.rowHeight = 56
         tableView.separatorStyle = .singleLine
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = .systemGroupedBackground
         if #available(iOS 15.0, *) { tableView.sectionHeaderTopPadding = 8 }
 
         loadCategories()
@@ -194,7 +276,8 @@ final class ItemsViewController: UITableViewController {
         )
         emptyView.onPrimaryTap = { [weak self] in self?.presentAddTask() }
 
-        load()
+        startObservingTasks()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDidLogin), name: .tasklyDidLogin, object: nil)
         refreshEmptyState()
     }
 
@@ -250,6 +333,22 @@ final class ItemsViewController: UITableViewController {
         refreshEmptyState()
     }
 
+    @objc private func toggleTodayFilter() {
+        showTodayOnly.toggle()
+        let symbol = showTodayOnly ? "calendar.badge.clock" : "calendar"
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: symbol)
+        tableView.reloadData()
+        refreshEmptyState()
+    }
+
+    @objc private func toggleOverdueFilter() {
+        showOverdueOnly.toggle()
+        let symbol = showOverdueOnly ? "exclamationmark.circle.fill" : "exclamationmark.circle"
+        navigationItem.leftBarButtonItem?.image = UIImage(systemName: symbol)
+        tableView.reloadData()
+        refreshEmptyState()
+    }
+
     @objc private func handleCategoryLongPress(_ gr: UILongPressGestureRecognizer) {
         guard gr.state == .began else { return }
         let point = gr.location(in: filterControl)
@@ -292,30 +391,36 @@ final class ItemsViewController: UITableViewController {
         tableView.backgroundView = tasks.isEmpty ? emptyView : nil
     }
 
-    // MARK: - Persistence (UserDefaults)
-    private func save() {
-        if let data = try? JSONEncoder().encode(tasks) {
-            UserDefaults.standard.set(data, forKey: storageKey)
-        }
-    }
+    // MARK: - Firestore listening
+    private func startObservingTasks() {
+        // Önceki dinleyiciyi bırak
+        listener?.remove()
 
-    private func load() {
-        guard let data = UserDefaults.standard.data(forKey: storageKey) else { return }
-        if let decoded = try? JSONDecoder().decode([Task].self, from: data) {
-            self.tasks = decoded
+        guard let uid = Auth.auth().currentUser?.uid else {
+            tasks = []
+            tableView.reloadData()
             return
         }
-        // (Opsiyonel legacy göç) eski tuple formatını destekle
-        if let any = try? JSONSerialization.jsonObject(with: data, options: []),
-           let arr = any as? [[String: Any]] {
-            self.tasks = arr.compactMap { d in
-                guard let title = d["title"] as? String,
-                      let emoji = d["emoji"] as? String,
-                      let done  = d["done"]  as? Bool else { return nil }
-                let notes = d["notes"] as? String
-                return Task(title: title, emoji: emoji, done: done, notes: notes)
+
+        listener = db.collection("users")
+            .document(uid)
+            .collection("tasks")
+            .order(by: "createdAt", descending: false)
+            .addSnapshotListener { [weak self] snapshot, error in
+                guard let self = self else { return }
+                if let error = error {
+                    let proj = FirebaseApp.app()?.options.projectID ?? "nil"
+                    let uidLog = Auth.auth().currentUser?.uid ?? "nil"
+                    print("⚠️ Tasks listen error:", error.localizedDescription, "| ProjectID:", proj, "| UID:", uidLog)
+                    return
+                }
+                self.tasks = snapshot?.documents.compactMap { try? $0.data(as: Task.self) } ?? []
+                self.tableView.reloadData()
             }
-        }
+    }
+
+    @objc private func handleDidLogin() {
+        startObservingTasks()
     }
 
     // MARK: Sections
@@ -386,6 +491,21 @@ final class ItemsViewController: UITableViewController {
         ])
         cell.accessoryView = acc
         cell.contentConfiguration = cfg
+
+        // Kart stili (Settings ile aynı)
+        var bg = UIBackgroundConfiguration.listGroupedCell()
+        bg.backgroundColor = .secondarySystemGroupedBackground
+        cell.backgroundConfiguration = bg
+        cell.layer.cornerRadius = 12
+        cell.layer.masksToBounds = true
+
+        // Seçim vurgusu (hafif AppPurple tonuyla)
+        let sel = UIView()
+        sel.backgroundColor = (UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)).withAlphaComponent(0.12)
+        sel.layer.cornerRadius = 12
+        sel.layer.masksToBounds = true
+        cell.selectedBackgroundView = sel
+
         return cell
     }
 
@@ -410,11 +530,18 @@ final class ItemsViewController: UITableViewController {
         let delete = UIContextualAction(style: .destructive, title: L("actions.delete")) { [weak self] _,_,done in
             guard let self = self else { return }
             if let gi = self.globalIndex(from: indexPath) {
-                ReminderScheduler.cancel(for: self.tasks[gi])
-                self.tasks.remove(at: gi)
+                let task = self.tasks[gi]
+                ReminderScheduler.cancel(for: task)
+                if let id = task.id, let uid = Auth.auth().currentUser?.uid {
+                    self.db.collection("users").document(uid).collection("tasks").document(id).delete { err in
+                        if let err = err {
+                            let proj = FirebaseApp.app()?.options.projectID ?? "nil"
+                            print("Delete error:", err.localizedDescription, "| ProjectID:", proj)
+                        }
+                        // UI snapshot listener ile güncellenecek
+                    }
+                }
             }
-            tableView.reloadData()
-            self.refreshEmptyState()
             done(true)
         }
         delete.image = UIImage(systemName: "trash")
@@ -428,17 +555,26 @@ final class ItemsViewController: UITableViewController {
         let title = t.done ? L("actions.undo") : L("actions.complete")
         let action = UIContextualAction(style: .normal, title: title) { [weak self] _,_,done in
             guard let self = self, let gi = self.globalIndex(from: indexPath) else { return }
-            self.tasks[gi].done.toggle()
+            var target = self.tasks[gi]
+            let newDone = !target.done
+            target.done = newDone
 
-            // Duruma göre bildirimleri yönet
-            if self.tasks[gi].done {
-                ReminderScheduler.cancel(for: self.tasks[gi])
+            if newDone {
+                ReminderScheduler.cancel(for: target)
             } else {
-                ReminderScheduler.schedule(for: self.tasks[gi])
+                ReminderScheduler.schedule(for: target)
             }
 
-            tableView.reloadData()
-            self.refreshEmptyState()
+            if let id = target.id, let uid = Auth.auth().currentUser?.uid {
+                self.db.collection("users").document(uid).collection("tasks").document(id)
+                    .updateData(["done": newDone]) { err in
+                        if let err = err {
+                            let proj = FirebaseApp.app()?.options.projectID ?? "nil"
+                            print("Toggle error:", err.localizedDescription, "| ProjectID:", proj)
+                        }
+                        // UI snapshot listener ile güncellenecek
+                    }
+            }
             done(true)
         }
         action.image = UIImage(systemName: t.done ? "arrow.uturn.left" : "checkmark")
@@ -468,8 +604,8 @@ final class ItemsViewController: UITableViewController {
         let pickerVC = UIViewController()
         let picker = UIDatePicker()
         picker.datePickerMode = .dateAndTime
-        picker.locale = Locale(identifier: "tr_TR")              // Türkçe
-        var cal = Calendar.current; cal.locale = Locale(identifier: "tr_TR")
+        picker.locale = LanguageManager.shared.currentLocale
+        var cal = Calendar.current; cal.locale = LanguageManager.shared.currentLocale
         picker.calendar = cal
         if #available(iOS 13.4, *) { picker.preferredDatePickerStyle = .wheels }
         picker.minimumDate = Date()
@@ -500,10 +636,31 @@ final class ItemsViewController: UITableViewController {
 
             let addTask: (String) -> Void = { chosenEmoji in
                 let due = picker.date
-                var new = Task(title: rawTitle, emoji: chosenEmoji, done: false, dueDate: due, notes: finalNotes)
-                self.tasks.insert(new, at: 0)
-                ReminderScheduler.schedule(for: new)
-                self.tableView.reloadData()
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    self.showAlert(title: L("auth.required.title"), message: L("auth.required.message"))
+                    return
+                }
+                let col = self.db.collection("users").document(uid).collection("tasks")
+                let doc = col.document()
+                let data: [String: Any?] = [
+                    "title": rawTitle,
+                    "emoji": chosenEmoji,
+                    "done": false,
+                    "dueDate": due,
+                    "notes": finalNotes,
+                    "createdAt": FieldValue.serverTimestamp()
+                ]
+                doc.setData(data.compactMapValues { $0 }, merge: true) { err in
+                    if let err = err {
+                        let proj = FirebaseApp.app()?.options.projectID ?? "nil"
+                        print("⚠️ Add task error:", err.localizedDescription, "| ProjectID:", proj, "| UID:", uid)
+                        self.showAlert(title: L("common.error"), message: L("tasks.add.failed") + "\n" + err.localizedDescription)
+                        return
+                    }
+                    let scheduled = Task(id: doc.documentID, title: rawTitle, emoji: chosenEmoji, done: false, dueDate: due, notes: finalNotes, createdAt: nil)
+                    ReminderScheduler.schedule(for: scheduled)
+                    // UI snapshot listener ile gelecek
+                }
             }
 
             if let chosen = self.activeFilter {
@@ -532,6 +689,8 @@ final class ItemsViewController: UITableViewController {
     }
 
     @objc private func reloadForLanguage() {
+        // Refresh navigation title
+        title = L("items.title")
         // Update formatter locale
         dateFormatter.locale = LanguageManager.shared.currentLocale
         // Rebuild segmented control first segment title
@@ -547,7 +706,9 @@ final class ItemsViewController: UITableViewController {
     }
 
     deinit {
+        listener?.remove()
         NotificationCenter.default.removeObserver(self, name: .languageDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .tasklyDidLogin, object: nil)
     }
 }
 
@@ -570,7 +731,7 @@ final class TaskDetailViewController: UIViewController {
         let f = DateFormatter()
         f.dateStyle = .medium
         f.timeStyle = .short
-        f.locale = Locale(identifier: "tr_TR")
+        f.locale = LanguageManager.shared.currentLocale
         return f
     }()
 
@@ -584,7 +745,7 @@ final class TaskDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Görev Detayı"
+        title = L("detail.title")
         navigationItem.largeTitleDisplayMode = .never
 
         // Ana dikey stack
@@ -630,7 +791,7 @@ final class TaskDetailViewController: UIViewController {
             dateLabel.text = df.string(from: d)
             dateLabel.textColor = .secondaryLabel
         } else {
-            dateLabel.text = "Tarih belirtilmemiş"
+            dateLabel.text = L("detail.no.date")
             dateLabel.textColor = .tertiaryLabel
         }
         dateLabel.textAlignment = .center
@@ -638,7 +799,7 @@ final class TaskDetailViewController: UIViewController {
         dateRow.addArrangedSubview(dateLabel)
 
         // Notlar başlığı
-        notesTitleLabel.text = "Açıklama"
+        notesTitleLabel.text = L("detail.notes")
         notesTitleLabel.font = .systemFont(ofSize: 17, weight: .semibold)
         notesTitleLabel.textAlignment = .center
 

@@ -6,6 +6,12 @@
 //
 
 import UIKit
+#if canImport(FirebaseAuth)
+import FirebaseAuth
+#endif
+#if canImport(GoogleSignIn)
+import GoogleSignIn
+#endif
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -74,12 +80,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Login ekranını gerektiğinde sun
     private func presentLoginIfNeeded(animated: Bool) {
         // Eğer kullanıcı giriş yapmamışsa Login ekranını tam ekran göster
-        guard SettingsViewController.UserSession.shared.currentUser == nil,
-              let root = window?.rootViewController else { return }
+        #if canImport(FirebaseAuth)
+        let notLoggedIn = (Auth.auth().currentUser == nil)
+        #else
+        let notLoggedIn = (SettingsViewController.UserSession.shared.currentUser == nil)
+        #endif
+        guard notLoggedIn, let root = window?.rootViewController else { return }
         // Zaten gösteriliyorsa tekrar açma
         if root.presentedViewController is LoginViewController { return }
         let login = LoginViewController()
         login.modalPresentationStyle = .fullScreen
         root.present(login, animated: animated)
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        #if canImport(GoogleSignIn)
+        guard let url = URLContexts.first?.url else { return }
+        GIDSignIn.sharedInstance.handle(url)
+        #endif
     }
 }

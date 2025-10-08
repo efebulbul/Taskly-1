@@ -1,86 +1,65 @@
 import Foundation
 
+// MARK: - Apple-recommended localization approach
+// We rely entirely on iOS/App Settings for the app language.
+// No custom bundle switching. All strings are resolved via NSLocalizedString.
+// Keep a thin helper so existing calls L("key") continue to work.
+
 enum AppLanguage: String, CaseIterable {
-    case system   // iOS sistem dilini kullan
-    case tr
-    case en
-    case de
-
-    var locale: Locale {
-        switch self {
-        case .system: return Locale.autoupdatingCurrent
-        case .tr: return Locale(identifier: "tr_TR")
-        case .en: return Locale(identifier: "en_US")
-        case .de: return Locale(identifier: "de_DE")
-        }
-    }
-
-    var lprojCode: String? {
-        switch self {
-        case .system: return nil
-        case .tr: return "tr"
-        case .en: return "en"
-        case .de: return "de"
-        }
-    }
-
-    var displayName: String {
-        switch self {
-        case .system: return NSLocalizedString("settings.language.system", comment: "")
-        case .tr:     return NSLocalizedString("settings.language.turkish", comment: "")
-        case .en:     return NSLocalizedString("settings.language.english", comment: "")
-        case .de:     return NSLocalizedString("settings.language.german", comment: "")
-        }
-    }
+    // Kept for backward compatibility with existing code, but we always follow system.
+    case system
+    case tr, en, de
 }
 
 final class LanguageManager {
     static let shared = LanguageManager()
 
+    // We keep the stored value only for compatibility (e.g., UI that may read it),
+    // but it does NOT override the system/App Settings language anymore.
     private let key = "app.language"
     private(set) var current: AppLanguage = .system
-    private var bundle: Bundle = .main
 
     private init() {
+        // If something was stored earlier, keep it for UI display purposes only.
         if let raw = UserDefaults.standard.string(forKey: key),
            let lang = AppLanguage(rawValue: raw) {
-            set(language: lang, broadcast: false)
+            current = lang
         } else {
             current = .system
-            bundle = .main
         }
     }
 
+    // Compatibility: allow writing a preferred language without changing the runtime bundle.
+    // We still broadcast so UI that listens can refresh if desired.
     func set(language: AppLanguage, broadcast: Bool = true) {
         current = language
         UserDefaults.standard.set(language.rawValue, forKey: key)
-
-        if let code = language.lprojCode,
-           let path = Bundle.main.path(forResource: code, ofType: "lproj"),
-           let b = Bundle(path: path) {
-            bundle = b
-        } else {
-            bundle = .main // sistem diline geri dön
-        }
-
         if broadcast {
             NotificationCenter.default.post(name: .languageDidChange, object: nil)
         }
     }
 
+    // Always resolve using the system/App Settings-selected language.
     func localized(_ key: String) -> String {
-        bundle.localizedString(forKey: key, value: nil, table: nil)
+        NSLocalizedString(key, comment: "")
     }
 
-    // Tarih/Saat formatlayıcılar bu locale'i kullansın
-    var currentLocale: Locale { current.locale }
+    // Date/number/etc. formatters should use the system/app language automatically.
+    // (Do NOT force a specific locale here.)
+    var currentLocale: Locale { .autoupdatingCurrent }
 }
 
+// We keep the notification name for any listeners (harmless if unused).
 extension Notification.Name {
     static let languageDidChange = Notification.Name("LanguageDidChange")
 }
 
-// Kısa yardımcı
+// Short helpers (kept to avoid touching all call sites)
 func L(_ key: String) -> String {
     LanguageManager.shared.localized(key)
+}
+
+func Lf(_ key: String, _ fallback: String) -> String {
+    let v = LanguageManager.shared.localized(key)
+    return (v == key) ? fallback : v
 }

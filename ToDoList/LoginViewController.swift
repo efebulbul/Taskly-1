@@ -1,6 +1,11 @@
 import UIKit
 import AuthenticationServices  // Sign in with Apple (opsiyonel)
+import CryptoKit
 import WebKit
+
+#if canImport(GoogleSignIn)
+import GoogleSignIn
+#endif
 
 #if canImport(FirebaseAuth)
 import FirebaseAuth
@@ -8,17 +13,65 @@ import FirebaseAuth
 #if canImport(FirebaseCore)
 import FirebaseCore
 #endif
+#if canImport(FirebaseFirestore)
+import FirebaseFirestore
+#endif
 
 final class LoginViewController: UIViewController {
+
+    // MARK: - Localization helper
+    private func L(_ key: String) -> String {
+        NSLocalizedString(key, comment: "")
+    }
+
+    private func Lf(_ key: String, _ fallback: String) -> String {
+        let v = NSLocalizedString(key, comment: "")
+        return (v == key) ? fallback : v
+    }
+
+    // MARK: - Apply localized texts (Login)
+    private func applyLocalizedTexts_Login() {
+        // Subtitle
+        subtitleLabel.text = L("login.subtitle")
+
+        // Text fields
+        emailField.placeholder = L("login.email.placeholder")
+        passwordField.placeholder = L("login.password.placeholder")
+
+        // Primary button
+        signInButton.setTitle(L("login.signin"), for: .normal)
+
+        // Apple / Google buttons (UIButton.Configuration titles)
+        if var cfg = appleButton.configuration {
+            cfg.title = L("login.apple")
+            appleButton.configuration = cfg
+        }
+        if var cfg = googleButton.configuration {
+            cfg.title = L("login.google")
+            googleButton.configuration = cfg
+        }
+
+        // Divider center label: "or continue with"
+        if let h = divider.arrangedSubviews.compactMap({ $0 as? UILabel }).first {
+            h.text = L("login.orcontinue")
+        }
+
+        // Bottom helper labels
+        registerLabel.text = L("login.noaccount")
+        footerLabel.text = L("login.footer")
+    }
 
     // MARK: - UI
     private let scroll = UIScrollView()
     private let content = UIStackView()
 
+    // Apple Sign In nonce (replay-attack koruması)
+    private var currentNonce: String?
+
     private let logoView: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "AppLogo")) // yoksa SF Symbol kullan
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        iv.tintColor = UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
         iv.heightAnchor.constraint(equalToConstant: 84).isActive = true
         return iv
     }()
@@ -75,7 +128,7 @@ final class LoginViewController: UIViewController {
         let bt = UIButton(type: .system)
         bt.setTitle("Giriş Yap", for: .normal)
         bt.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        bt.backgroundColor = UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        bt.backgroundColor = UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
         bt.tintColor = .white
         bt.layer.cornerRadius = 12
         bt.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -115,7 +168,7 @@ final class LoginViewController: UIViewController {
         let bt = UIButton(type: .system)
         var cfg = UIButton.Configuration.tinted()
         cfg.baseBackgroundColor = .systemBackground
-        cfg.baseForegroundColor = UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        cfg.baseForegroundColor = UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
         cfg.cornerStyle = .large
         cfg.title = "Google ile devam et"
         cfg.image = UIImage(systemName: "globe")
@@ -142,7 +195,7 @@ final class LoginViewController: UIViewController {
         let lb = UILabel()
         lb.text = "Hesabın yok mu? Kayıt Ol"
         lb.font = .preferredFont(forTextStyle: .footnote)
-        lb.textColor = UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        lb.textColor = UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
         lb.textAlignment = .center
         lb.isUserInteractionEnabled = true
         return lb
@@ -155,6 +208,24 @@ final class LoginViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
 
         setupLayout()
+        // Brand title styling: "Task" normal, "ly" AppPurple (same font)
+        let appPurple = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
+        let baseFont = UIFont.systemFont(ofSize: 32, weight: .bold)
+        let taskPart = NSAttributedString(string: "Task", attributes: [
+            .font: baseFont,
+            .foregroundColor: UIColor.label
+        ])
+        let lyPart = NSAttributedString(string: "ly", attributes: [
+            .font: baseFont,
+            .foregroundColor: appPurple
+        ])
+        let brandTitle = NSMutableAttributedString()
+        brandTitle.append(taskPart)
+        brandTitle.append(lyPart)
+        // Localize all visible texts for current iOS language
+        applyLocalizedTexts_Login()
+        titleLabel.attributedText = brandTitle
+        titleLabel.accessibilityLabel = "Taskly"
         signInButton.addTarget(self, action: #selector(didTapEmailSignIn), for: .touchUpInside)
         appleButton.addTarget(self, action: #selector(didTapApple), for: .touchUpInside)
         googleButton.addTarget(self, action: #selector(didTapGoogle), for: .touchUpInside)
@@ -211,7 +282,10 @@ final class LoginViewController: UIViewController {
         let pass = passwordField.text ?? ""
         // Kayıt/giriş için minimum 6 karakter şifre kuralı
         guard email.contains("@"), pass.count >= 6 else {
-            showAlert("Hata", "Geçerli e-posta ve en az 6 karakterli şifre gir.")
+            showAlert(
+                Lf("auth.error.title", "Error"),
+                Lf("auth.validation.missing", "Please enter a valid email and a password of at least 6 characters.")
+            )
             return
         }
 
@@ -222,16 +296,23 @@ final class LoginViewController: UIViewController {
             if let err = error as NSError? {
                 // Kullanıcı bulunamadı veya şifre hatalı senaryolarını ayrıştır
                 if err.code == AuthErrorCode.userNotFound.rawValue {
-                    let ac = UIAlertController(title: "Hesap Bulunamadı", message: "Bu e‑posta ile hesap yok. Kayıt olmak ister misin?", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Vazgeç", style: .cancel))
-                    ac.addAction(UIAlertAction(title: "Kayıt Ol", style: .default, handler: { _ in
+                    let ac = UIAlertController(
+                        title: Lf("auth.userNotFound.title", "Account Not Found"),
+                        message: Lf("auth.userNotFound.message", "No account exists with this email. Would you like to sign up?"),
+                        preferredStyle: .alert
+                    )
+                    ac.addAction(UIAlertAction(title: L("common.cancel"), style: .cancel))
+                    ac.addAction(UIAlertAction(title: L("register.signup"), style: .default, handler: { _ in
                         self.openRegister()
                     }))
                     self.present(ac, animated: true)
                 } else if err.code == AuthErrorCode.wrongPassword.rawValue {
-                    self.showAlert("Hatalı Şifre", "Şifreni kontrol et ve tekrar dene.")
+                    self.showAlert(
+                        Lf("auth.wrongPassword.title", "Incorrect Password"),
+                        Lf("auth.wrongPassword.message", "Please check your password and try again.")
+                    )
                 } else {
-                    self.showAlert("Giriş Hatası", err.localizedDescription)
+                    self.showAlert(Lf("auth.error.title", "Sign-in Error"), err.localizedDescription)
                 }
                 return
             }
@@ -253,18 +334,121 @@ final class LoginViewController: UIViewController {
     }
 
     @objc private func didTapApple() {
-        // Basit demo: gerçek Apple Sign In entegrasyonu için Capability + ASAuthorizationController gerekir.
         if #available(iOS 13.0, *) {
-            // Burada gerçek Apple flow’u çalıştırabilirsin.
-            fakeSocialLogin(name: "Apple Kullanıcısı", email: "appleuser@taskly.app")
+            startSignInWithAppleFlow()
         } else {
-            showAlert("Desteklenmiyor", "Bu özellik iOS 13 ve sonrası için geçerlidir.")
+            showAlert(
+                Lf("auth.unsupported.title", "Unsupported"),
+                Lf("auth.unsupported.message", "This feature requires iOS 13 or later.")
+            )
         }
     }
 
     @objc private func didTapGoogle() {
-        // Gerçek Google Sign-In için GoogleSignIn SDK kurulmalı (URL scheme + client ID).
-        fakeSocialLogin(name: "Google Kullanıcısı", email: "googleuser@taskly.app")
+#if canImport(GoogleSignIn)
+        // iOS 13+ Google Sign-In (SDK v7+) — Firebase ile
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            showAlert("Google Sign-In", "clientID bulunamadı. GoogleService-Info.plist dosyasını kontrol et.")
+            return
+        }
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] result, error in
+            guard let self = self else { return }
+            if let error = error {
+                print("Google Sign-In error:", error)
+                self.showAlert("Giriş Hatası", error.localizedDescription)
+                return
+            }
+            guard let user = result?.user,
+                  let idToken = user.idToken?.tokenString else {
+                self.showAlert("Giriş Hatası", "Google kimlik belirteci alınamadı.")
+                return
+            }
+            let accessToken = user.accessToken.tokenString
+
+            #if canImport(FirebaseAuth)
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+            Auth.auth().signIn(with: credential) { [weak self] authResult, error in
+                guard let self = self else { return }
+                if let error = error {
+                    print("Firebase Google sign-in hata:", error)
+                    self.showAlert("Giriş Hatası", error.localizedDescription)
+                    return
+                }
+
+                // Profil bilgilerini (ad/e‑posta) Firestore'a yaz (opsiyonel, Apple ile aynı mantık)
+                #if canImport(FirebaseFirestore)
+                if let uid = Auth.auth().currentUser?.uid {
+                    let db = Firestore.firestore()
+                    var profile: [String: Any] = ["updatedAt": FieldValue.serverTimestamp()]
+                    if let email = authResult?.user.email ?? user.profile?.email {
+                        profile["email"] = email
+                    }
+                    let display = authResult?.user.displayName ?? user.profile?.name
+                    if let name = display { profile["displayName"] = name }
+                    db.collection("users").document(uid).setData(["profile": profile], merge: true)
+                }
+                #endif
+
+                NotificationCenter.default.post(name: .tasklyDidLogin, object: nil)
+                self.dismiss(animated: true)
+            }
+            #else
+            self.showAlert("Firebase Eksik", "FirebaseAuth modülü ekli değil. Lütfen FirebaseAuth'u hedefe bağla.")
+            #endif
+        }
+#else
+        showAlert("Google Sign-In", "GoogleSignIn SDK ekli değil. Swift Package Manager ile 'GoogleSignIn' paketini ekleyin.")
+#endif
+    }
+
+    // MARK: - Apple Sign In Flow
+    @available(iOS 13.0, *)
+    private func startSignInWithAppleFlow() {
+        let provider = ASAuthorizationAppleIDProvider()
+        let request = provider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+
+        // Nonce üret ve hash'ini isteğe ekle
+        let nonce = randomNonceString()
+        currentNonce = nonce
+        request.nonce = sha256(nonce)
+
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+
+    // Rastgele nonce üretimi
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        let charset = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remaining = length
+        while remaining > 0 {
+            var bytes = [UInt8](repeating: 0, count: 16)
+            let status = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
+            if status != errSecSuccess {
+                fatalError("Nonce üretilemedi. OSStatus: \(status)")
+            }
+            for b in bytes where remaining > 0 {
+                if b < charset.count {
+                    result.append(charset[Int(b)])
+                    remaining -= 1
+                }
+            }
+        }
+        return result
+    }
+
+    // SHA256(nonce) -> String
+    private func sha256(_ input: String) -> String {
+        let data = Data(input.utf8)
+        let hashed = SHA256.hash(data: data)
+        return hashed.map { String(format: "%02x", $0) }.joined()
     }
 
     private func fakeSocialLogin(name: String, email: String) {
@@ -291,7 +475,8 @@ final class LoginViewController: UIViewController {
 
     private func showAlert(_ t: String, _ m: String) {
         let ac = UIAlertController(title: t, message: m, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Tamam", style: .default))
+        let okTitle = NSLocalizedString("settings.ok", comment: "OK button")
+        ac.addAction(UIAlertAction(title: okTitle, style: .default))
         present(ac, animated: true)
     }
     
@@ -327,16 +512,42 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension Notification.Name {
     static let tasklyDidRegister = Notification.Name("Taskly.didRegister")
+    static let tasklyDidLogin = Notification.Name("Taskly.didLogin")
 }
 
 final class RegisterViewController: UIViewController {
+    // MARK: - Localization helper
+    private func L(_ key: String) -> String {
+        NSLocalizedString(key, comment: "")
+    }
+    private func Lf(_ key: String, _ fallback: String) -> String {
+        let v = NSLocalizedString(key, comment: "")
+        return (v == key) ? fallback : v
+    }
+
+    // MARK: - Apply localized texts (Register)
+    private func applyLocalizedTexts_Register() {
+        // Titles
+        titleLabel.text = L("register.title")
+        subtitleLabel.text = L("register.subtitle")
+
+        // Placeholders
+        nameField.placeholder = L("register.name.placeholder")
+        emailField.placeholder = L("register.email.placeholder")
+        passwordField.placeholder = L("register.password.placeholder")
+        confirmField.placeholder = L("register.confirm.placeholder")
+
+        // Buttons & footer
+        signUpButton.setTitle(L("register.signup"), for: .normal)
+        footerLabel.text = L("register.footer")
+    }
     private let scroll = UIScrollView()
     private let content = UIStackView()
 
     private let logoView: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "AppLogo"))
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        iv.tintColor = UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
         iv.heightAnchor.constraint(equalToConstant: 84).isActive = true
         return iv
     }()
@@ -367,7 +578,7 @@ final class RegisterViewController: UIViewController {
         let bt = UIButton(type: .system)
         bt.setTitle("Kayıt Ol", for: .normal)
         bt.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        bt.backgroundColor = UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        bt.backgroundColor = UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
         bt.tintColor = .white
         bt.layer.cornerRadius = 12
         bt.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -378,7 +589,7 @@ final class RegisterViewController: UIViewController {
         let lb = UILabel()
         lb.text = "Zaten hesabın var mı? Giriş Yap"
         lb.font = .preferredFont(forTextStyle: .footnote)
-        lb.textColor = UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        lb.textColor = UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
         lb.textAlignment = .center
         lb.isUserInteractionEnabled = true
         return lb
@@ -390,6 +601,8 @@ final class RegisterViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
 
         setupLayout()
+        // Localize all visible texts for current iOS language
+        applyLocalizedTexts_Register()
         signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(backToLogin))
@@ -471,7 +684,10 @@ final class RegisterViewController: UIViewController {
                 case AuthErrorCode.emailAlreadyInUse.rawValue:
                     // Zaten mevcutsa login'e yönlendir
                     NotificationCenter.default.post(name: .tasklyDidRegister, object: nil, userInfo: ["email": email])
-                    self.showAlert("Zaten Kayıtlı", "Bu e‑posta ile bir hesap zaten var. Giriş yap ekranına dönüyoruz.")
+                    self.showAlert(
+                        Lf("register.error.title", "Error"),
+                        Lf("register.error.emailInUse", "This email address is already in use.")
+                    )
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { self.dismiss(animated: true) }
                 case AuthErrorCode.invalidEmail.rawValue:
                     self.showAlert("Geçersiz E‑posta", "Lütfen geçerli bir e‑posta adresi gir.")
@@ -525,7 +741,8 @@ final class RegisterViewController: UIViewController {
 
     private func showAlert(_ title: String, _ message: String) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Tamam", style: .default))
+        let okTitle = NSLocalizedString("settings.ok", comment: "OK button")
+        ac.addAction(UIAlertAction(title: okTitle, style: .default))
         present(ac, animated: true)
     }
 
@@ -564,3 +781,89 @@ extension RegisterViewController: UITextFieldDelegate {
     }
 }
 
+
+
+// MARK: - ASAuthorizationControllerDelegate
+extension LoginViewController: ASAuthorizationControllerDelegate {
+
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization) {
+
+        guard let appleID = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        guard let nonce = currentNonce else {
+            assertionFailure("Nonce kayıp")
+            return
+        }
+        guard let tokenData = appleID.identityToken,
+              let idToken = String(data: tokenData, encoding: .utf8) else {
+            print("identityToken alınamadı.")
+            showAlert(
+                Lf("auth.error.title", "Sign-in Error"),
+                Lf("auth.apple.missingToken", "Could not retrieve Apple identity token.")
+            )
+            return
+        }
+
+        #if canImport(FirebaseAuth)
+        let credential = OAuthProvider.appleCredential(withIDToken: idToken,
+                                                      rawNonce: nonce,
+                                                      fullName: appleID.fullName)
+
+        Auth.auth().signIn(with: credential) { [weak self] result, error in
+            guard let self = self else { return }
+            if let error = error {
+                print("Firebase Apple sign-in hata:", error)
+                self.showAlert("Giriş Hatası", error.localizedDescription)
+                return
+            }
+
+            // İlk girişte ad/soyad geldiyse profili güncelle (opsiyonel)
+            if let fn = appleID.fullName,
+               (fn.givenName?.isEmpty == false || fn.familyName?.isEmpty == false) {
+                let display = [fn.givenName, fn.familyName].compactMap { $0 }.joined(separator: " ")
+                let change = Auth.auth().currentUser?.createProfileChangeRequest()
+                change?.displayName = display
+                change?.commitChanges(completion: nil)
+            }
+
+            // Firestore'a kullanıcı profili yaz (email + displayName). Email sadece ilk girişte gelebilir.
+            #if canImport(FirebaseFirestore)
+            if let uid = Auth.auth().currentUser?.uid {
+                let db = Firestore.firestore()
+                var profile: [String: Any] = [
+                    "updatedAt": FieldValue.serverTimestamp()
+                ]
+                if let email = appleID.email ?? Auth.auth().currentUser?.email {
+                    profile["email"] = email
+                }
+                if let name = Auth.auth().currentUser?.displayName {
+                    profile["displayName"] = name
+                }
+                db.collection("users").document(uid).setData(["profile": profile], merge: true)
+            }
+            #endif
+
+            // Ayarlar/profil ekranları güncellesin
+            NotificationCenter.default.post(name: .tasklyDidLogin, object: nil)
+
+            // Başarılı giriş → login ekranını kapat
+            self.dismiss(animated: true)
+        }
+        #else
+        showAlert("Firebase Eksik", "FirebaseAuth modülü ekli değil. Lütfen FirebaseAuth'u hedefe bağla.")
+        #endif
+    }
+
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithError error: Error) {
+        print("Apple sign-in başarısız:", error)
+        showAlert(Lf("auth.error.title", "Sign-in Error"), error.localizedDescription)
+    }
+}
+
+// MARK: - ASAuthorizationControllerPresentationContextProviding
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        view.window ?? ASPresentationAnchor()
+    }
+}

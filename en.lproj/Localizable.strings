@@ -1,14 +1,102 @@
 "app.title" = "Taskly";
+"common.ok" = "OK";
+"common.cancel" = "Cancel";
+"common.save" = "Save";
+"common.error" = "Error";
+
+/* Tabs */
 "tab.tasks" = "Tasks";
 "tab.settings" = "Settings";
 
+/* Titles */
+"items.title" = "Tasks";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "Sign In";
+"login.subtitle" = "Sync your tasks with the cloud";
+"login.email.placeholder" = "Email";
+"login.password.placeholder" = "Password";
+"login.signin" = "Sign In";
+"login.apple" = "Continue with Apple";
+"login.google" = "Continue with Google";
+"login.orcontinue" = "or continue with";
+"login.noaccount" = "Don't have an account? Sign Up";
+"login.footer" = "By continuing, you agree to our Privacy Policy and Terms of Use.";
+
+/* Register */
+"register.title" = "Sign Up";
+"register.subtitle" = "Ready in just a minute";
+"register.name.placeholder" = "Full Name";
+"register.email.placeholder" = "Email";
+"register.password.placeholder" = "Password";
+"register.confirm.placeholder" = "Confirm Password";
+"register.signup" = "Sign Up";
+"register.footer" = "Already have an account? Sign In";
+
+/* Auth / Errors */
+"auth.error.title" = "Sign-in Error";
+"auth.validation.missing" = "Please enter a valid email and a password with at least 6 characters.";
+"auth.userNotFound.title" = "Account Not Found";
+"auth.userNotFound.message" = "No account exists with this email. Would you like to sign up?";
+"auth.wrongPassword.title" = "Incorrect Password";
+"auth.wrongPassword.message" = "Please check your password and try again.";
+"auth.unavailable.title" = "Unavailable";
+"auth.unavailable.message" = "Email sign-in requires FirebaseAuth. Please sign up or use Apple/Google.";
+"auth.unsupported.title" = "Unsupported";
+"auth.unsupported.message" = "This feature requires iOS 13 or later.";
+"auth.google.title" = "Google Sign-In";
+"auth.google.clientIdMissing" = "ClientID not found. Check your GoogleService-Info.plist file.";
+"auth.google.sdkMissing" = "GoogleSignIn SDK not added. Please add it via Swift Package Manager.";
+"auth.google.missingToken" = "Could not retrieve Google identity token.";
+"auth.apple.missingToken" = "Could not retrieve Apple identity token.";
+"auth.firebase.missing.title" = "Firebase Not Configured";
+"auth.firebase.missing.message" = "FirebaseApp.configure() is missing. Ensure it's called and GoogleService-Info.plist exists.";
+"auth.required.title" = "Sign-in Required";
+"auth.required.message" = "Please sign in to add a task.";
+
+/* Register Success / Errors */
+"register.error.title" = "Error";
+"register.validation.missing" = "Please fill in all fields.";
+"register.password.mismatch" = "Passwords do not match.";
+"register.success.title" = "Registration Successful";
+"register.success.message" = "Your account has been created successfully.";
+"register.error.generic" = "Registration failed. Please try again.";
+"register.error.emailInUse" = "This email address is already in use.";
+"register.error.invalidEmail" = "Please enter a valid email address.";
+"register.error.weakPassword" = "Password must be at least 6 characters long.";
+"register.error.network" = "Network error. Check your internet connection and try again.";
+"register.demo.title" = "Demo Sign-Up";
+"register.demo.message" = "FirebaseAuth is not installed. Account created locally. Try signing in.";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================= */
 "filter.all" = "All";
+"filter.today" = "Today";
+"filter.overdue" = "Overdue";
 
 "list.section.pending" = "TASKS";
-"list.section.done" = "COMPLETED";
+"list.section.done"    = "COMPLETED";
 
+"empty.title"    = "No tasks yet";
+"empty.subtitle" = "Select a category above. Long-press the emoji to change it.";
+"empty.cta"      = "✨ New Task ✨";
+
+/* Actions */
+"actions.delete"   = "Delete";
+"actions.undo"     = "Undo";
+"actions.complete" = "Complete";
+"actions.signout"  = "Sign Out";
+"actions.edit"     = "Edit";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
 "add.title" = "New Task";
-"add.message" = "Enter a title. Emoji category will be chosen from the top filter.";
+"add.message" = "Enter a title. The emoji category will be chosen from the filter above.";
 "add.placeholder.title" = "Task title";
 "add.placeholder.notes" = "Notes (optional)";
 "add.cancel" = "Cancel";
@@ -16,37 +104,107 @@
 "add.choose.category" = "Choose Category";
 "add.back" = "Back";
 
-"empty.title" = "No tasks yet";
-"empty.subtitle" = "Pick a category above. Long-press emoji to change it.";
-"empty.cta" = "✨ New Task ✨";
-
 "detail.title" = "Task Detail";
 "detail.no.date" = "No date specified";
-"detail.notes" = "Notes";
+"detail.notes" = "Description";
 
-"alerts.missing.title" = "Missing Info";
+"alerts.missing.title" = "Missing Information";
 "alerts.missing.message" = "Task title cannot be empty.";
+"tasks.add.failed" = "Failed to add task.";
 
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "Settings";
 "settings.language" = "Language";
 "settings.language.system" = "System Language";
 "settings.language.turkish" = "Turkish";
 "settings.language.english" = "English";
 "settings.language.german" = "German";
-"settings.restart.title" = "Language Updated";
-"settings.restart.message" = "App language has been updated.";
-"settings.ok" = "OK";
-
 "settings.theme" = "Theme";
 "settings.notifications" = "Notifications";
 "settings.about" = "About";
+"settings.ok" = "OK";
 
+/* Theme Options */
+"theme.system" = "System";
+"theme.light" = "Light";
+"theme.dark" = "Dark";
+
+/* Notifications */
+"notif.daily.body" = "Daily reminder: review your tasks for today.";
+"notif.sample.body" = "Don't miss this! You have a task.";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "Use System Language?";
+"lang.system.sheet.message"  = "The app language will follow your iOS system language.";
+"lang.system.sheet.continue" = "Continue";
+"lang.system.sheet.cancel"   = "Cancel";
+
+"signout.confirm.title"   = "Sign Out";
+"signout.confirm.message" = "Are you sure you want to sign out?";
+"signout.confirm.cancel"  = "Cancel";
+"signout.confirm.ok"      = "Sign Out";
+
+"about.title"    = "About";
+"about.version"  = "Taskly v%@";
+"about.subtitle" = "Thanks for using Taskly!";
+
+"profile.email.title" = "Email";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "Tasks";
+"filter.all" = "All";
+"list.section.pending" = "TASKS";
+"list.section.done" = "COMPLETED";
+
+"empty.title" = "No tasks yet";
+"empty.subtitle" = "Pick a category above. Long-press an emoji to change it.";
+"empty.cta" = "✨ New Task ✨";
+
+/* ADD TASK FLOW */
+"add.title" = "New Task";
+"add.message" = "Enter a title. The emoji category will be chosen from the top filter.";
+"add.placeholder.title" = "Task title";
+"add.placeholder.notes" = "Notes (optional)";
+"add.cancel" = "Cancel";
+"add.add" = "Add";
+"add.choose.category" = "Choose Category";
+"add.back" = "Back";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "Missing Info";
+"alerts.missing.message" = "Task title cannot be empty.";
+"common.error" = "Error";
+"tasks.add.failed" = "Task couldn’t be added.";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "Delete";
+"actions.undo" = "Undo";
+"actions.complete" = "Complete";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "Sign-in Required";
+"auth.required.message" = "Please sign in to add tasks.";
+
+/* CATEGORY EDIT */
 "cat.edit.title" = "Edit Category";
 "cat.edit.message" = "Enter a single emoji.";
 "cat.invalid.title" = "Invalid Emoji";
 "cat.invalid.message" = "Please enter only a single emoji.";
-"common.cancel" = "Cancel";
-"common.save" = "Save";
 
-"actions.delete" = "Delete";
-"actions.undo" = "Undo";
-"actions.complete" = "Complete";
+/* TASK DETAIL */
+"detail.title" = "Task Detail";
+"detail.no.date" = "No date specified";
+"detail.notes" = "Notes";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "Task due now";
+"reminder.thirtyMins.title" = "30 minutes to task";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "OK";
+
