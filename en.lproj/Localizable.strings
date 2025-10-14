@@ -83,7 +83,7 @@
 
 "empty.title"    = "No tasks yet";
 "empty.subtitle" = "Select a category above. Long-press the emoji to change it.";
-"empty.cta"      = "✨ New Task ✨";
+"empty.cta"      = "New Task 🖇️";
 
 /* Actions */
 "actions.delete"   = "Delete";
@@ -163,7 +163,7 @@
 
 "empty.title" = "No tasks yet";
 "empty.subtitle" = "Pick a category above. Long-press an emoji to change it.";
-"empty.cta" = "✨ New Task ✨";
+"empty.cta" = "New Task 🖇️";
 
 /* ADD TASK FLOW */
 "add.title" = "New Task";
@@ -202,9 +202,53 @@
 "detail.notes" = "Notes";
 
 /* NOTIFICATION TITLES (ReminderScheduler) */
-"reminder.dueNow.title" = "Task due now";
+"reminder.dueNow.title" = "Task Time!";
 "reminder.thirtyMins.title" = "30 minutes to task";
 
 /* COMMON OK (alert buttons) */
 "settings.ok" = "OK";
 
+/* Daily Reminder (missing keys) */
+"settings.dailyReminder" = "Daily Reminder";
+"settings.dailyReminder.subtitle.everydayAt" = "Receive a reminder every morning.";
+
+/* Backward-compat with hyphen */
+"settings.dailyReminder.subtitle.every-dayAt" = "Receive a reminder every morning.";
+
+/* Notification status */
+"settings.notifications.on" = "Notifications on";
+"settings.notifications.off" = "Notifications off";
+
+/* Notification permission alerts */
+"notifications.permission.title" = "Notifications";
+"notifications.permission.sampleScheduled" = "A sample notification was scheduled successfully.";
+
+/* Language (Login + Settings) */
+"settings.language" = "Language";
+"settings.ok" = "OK"; // varsa tekrar ekleme
+
+/* System language sheet */
+"lang.system.sheet.title" = "Use System Language?";
+"lang.system.sheet.message" = "The app language will follow your iOS system language.";
+"lang.system.sheet.continue" = "Continue";
+"lang.system.sheet.cancel" = "Cancel";
+
+/* Fallback when Settings URL cannot be opened */
+"lang.system.unavailable" = "Language settings are unavailable on this device.";
+"profile.setName.title" = "Display Name";
+"profile.setName.message" = "Choose a name to display on your profile.";
+"profile.unknownName" = "Unknown";
+
+"settings.account.delete" = "Delete Account";
+"account.delete.title"    = "Delete Account";
+"account.delete.message"  = "This action cannot be undone. All your data will be deleted.";
+"common.delete"           = "Delete";
+
+"notifications.permission.denied"   = "Notifications are not allowed. Please enable them in Settings.";
+"notifications.permission.settings" = "Notifications are disabled. You can turn them on in Settings > Notifications.";
+
+"settings.dailyReminder.subtitle.everydayAt" = "Every day at %@.";
+
+"profile.signin"          = "Sign In";
+"profile.signin.subtitle" = "Sign in to keep your tasks in sync.";
+"profile.email.missing"   = "Email not available";

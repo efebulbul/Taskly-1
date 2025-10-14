@@ -414,8 +414,10 @@ final class ItemsViewController: UITableViewController {
                     print("⚠️ Tasks listen error:", error.localizedDescription, "| ProjectID:", proj, "| UID:", uidLog)
                     return
                 }
-                self.tasks = snapshot?.documents.compactMap { try? $0.data(as: Task.self) } ?? []
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tasks = snapshot?.documents.compactMap { try? $0.data(as: Task.self) } ?? []
+                    self.tableView.reloadData()
+                }
             }
     }
 
@@ -531,6 +533,12 @@ final class ItemsViewController: UITableViewController {
             guard let self = self else { return }
             if let gi = self.globalIndex(from: indexPath) {
                 let task = self.tasks[gi]
+                // Optimistic UI removal so the row disappears immediately
+                DispatchQueue.main.async {
+                    self.tasks.removeAll { $0.id == task.id }
+                    self.tableView.reloadData()
+                    self.refreshEmptyState()
+                }
                 ReminderScheduler.cancel(for: task)
                 if let id = task.id, let uid = Auth.auth().currentUser?.uid {
                     self.db.collection("users").document(uid).collection("tasks").document(id).delete { err in
@@ -558,6 +566,12 @@ final class ItemsViewController: UITableViewController {
             var target = self.tasks[gi]
             let newDone = !target.done
             target.done = newDone
+            // Optimistic toggle in UI
+            DispatchQueue.main.async {
+                self.tasks[gi].done = newDone
+                self.tableView.reloadData()
+                self.refreshEmptyState()
+            }
 
             if newDone {
                 ReminderScheduler.cancel(for: target)
@@ -648,7 +662,8 @@ final class ItemsViewController: UITableViewController {
                     "done": false,
                     "dueDate": due,
                     "notes": finalNotes,
-                    "createdAt": FieldValue.serverTimestamp()
+                    "createdAt": Timestamp(date: Date()),
+                    "createdAtServer": FieldValue.serverTimestamp()
                 ]
                 doc.setData(data.compactMapValues { $0 }, merge: true) { err in
                     if let err = err {
@@ -659,6 +674,14 @@ final class ItemsViewController: UITableViewController {
                     }
                     let scheduled = Task(id: doc.documentID, title: rawTitle, emoji: chosenEmoji, done: false, dueDate: due, notes: finalNotes, createdAt: nil)
                     ReminderScheduler.schedule(for: scheduled)
+                    DispatchQueue.main.async {
+                        // Optimistic insert so the item appears immediately without restart
+                        var immediate = scheduled
+                        immediate.createdAt = Date()
+                        self.tasks.append(immediate)
+                        self.tableView.reloadData()
+                        self.refreshEmptyState()
+                    }
                     // UI snapshot listener ile gelecek
                 }
             }

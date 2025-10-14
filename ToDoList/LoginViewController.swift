@@ -201,6 +201,22 @@ final class LoginViewController: UIViewController {
         return lb
     }()
 
+    private let languageButton: UIButton = {
+        let b = UIButton(type: .system)
+        if let img = UIImage(systemName: "globe") {
+            b.setImage(img, for: .normal)
+            b.tintColor = (UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1))
+        }
+        b.setTitle(NSLocalizedString("settings.language", comment: ""), for: .normal)
+        b.setTitleColor((UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)), for: .normal)
+        b.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
+        b.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 12)
+        b.layer.cornerRadius = 10
+        b.backgroundColor = .secondarySystemBackground
+        b.accessibilityIdentifier = "login.language.button"
+        return b
+    }()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -234,10 +250,27 @@ final class LoginViewController: UIViewController {
         emailField.delegate = self
         passwordField.delegate = self
         registerForKeyboardNotifications()
+
+        // Tap anywhere to dismiss keyboard (same as Register)
+        let tapDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapDismiss.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapDismiss)
+
+        // Allow interactive keyboard dismissal when scrolling (same as Register)
+        scroll.keyboardDismissMode = .interactive
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(openRegister))
         registerLabel.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(didRegister(_:)), name: .tasklyDidRegister, object: nil)
+
+        // Language button (same behavior as Settings → Language)
+        languageButton.addTarget(self, action: #selector(didTapLanguage), for: .touchUpInside)
+        view.addSubview(languageButton)
+        languageButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            languageButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            languageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12)
+        ])
     }
 
     deinit { NotificationCenter.default.removeObserver(self) }
@@ -486,11 +519,35 @@ final class LoginViewController: UIViewController {
         present(vc, animated: true)
     }
 
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
     @objc private func didRegister(_ note: Notification) {
         if let email = note.userInfo?["email"] as? String {
             emailField.text = email
             passwordField.becomeFirstResponder()
         }
+    }
+
+    @objc private func didTapLanguage() {
+        presentSystemLanguageHintAndOpenSettings()
+    }
+
+    private func presentSystemLanguageHintAndOpenSettings() {
+        let title = L("lang.system.sheet.title")
+        let message = L("lang.system.sheet.message")
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: L("lang.system.sheet.cancel"), style: .cancel))
+        ac.addAction(UIAlertAction(title: L("lang.system.sheet.continue"), style: .default, handler: { _ in
+            let urlStr = UIApplication.openSettingsURLString
+            guard let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) else {
+                self.showAlert(self.L("settings.language"), self.L("lang.system.unavailable"))
+                return
+            }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }))
+        present(ac, animated: true)
     }
 }
 
@@ -833,21 +890,62 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 var profile: [String: Any] = [
                     "updatedAt": FieldValue.serverTimestamp()
                 ]
-                if let email = appleID.email ?? Auth.auth().currentUser?.email {
-                    profile["email"] = email
-                }
-                if let name = Auth.auth().currentUser?.displayName {
-                    profile["displayName"] = name
-                }
+                // Email (Apple sadece ilk girişte sağlayabilir)
+                let curEmail = Auth.auth().currentUser?.email ?? appleID.email
+                if let email = curEmail { profile["email"] = email }
+
+                // Görünen ad (sabit fallback ile her durumda yaz)
+                let appleFullName: String? = {
+                    if let fn = appleID.fullName, (fn.givenName?.isEmpty == false || fn.familyName?.isEmpty == false) {
+                        return [fn.givenName, fn.familyName].compactMap { $0 }.joined(separator: " ")
+                    }
+                    return nil
+                }()
+                let computedName = Auth.auth().currentUser?.displayName
+                    ?? appleFullName
+                    ?? curEmail?.components(separatedBy: "@").first?.capitalized
+                    ?? "User"
+                profile["displayName"] = computedName
+
                 db.collection("users").document(uid).setData(["profile": profile], merge: true)
             }
             #endif
 
-            // Ayarlar/profil ekranları güncellesin
-            NotificationCenter.default.post(name: .tasklyDidLogin, object: nil)
+            // Update in-app session (UserSession) and ensure Auth has a displayName for Apple sign-in
+            DispatchQueue.main.async {
+                let curEmail = Auth.auth().currentUser?.email ?? appleID.email ?? ""
+                let appleFullName: String? = {
+                    if let fn = appleID.fullName, (fn.givenName?.isEmpty == false || fn.familyName?.isEmpty == false) {
+                        return [fn.givenName, fn.familyName].compactMap { $0 }.joined(separator: " ")
+                    }
+                    return nil
+                }()
+                let displayNow = Auth.auth().currentUser?.displayName
+                    ?? appleFullName
+                    ?? curEmail.components(separatedBy: "@").first?.capitalized
+                    ?? "User"
+                let appUser = SettingsViewController.AppUser(
+                    name: displayNow,
+                    email: curEmail,
+                    avatar: UIImage(systemName: "person.crop.circle.fill")
+                )
+                SettingsViewController.UserSession.shared.currentUser = appUser
 
-            // Başarılı giriş → login ekranını kapat
-            self.dismiss(animated: true)
+                if let u = Auth.auth().currentUser, (u.displayName == nil || u.displayName?.isEmpty == true) {
+                    let change = u.createProfileChangeRequest()
+                    change.displayName = displayNow
+                    change.commitChanges(completion: nil)
+                }
+
+                // Notify views that rely on UserSession to refresh
+                NotificationCenter.default.post(name: .init("Taskly.UserSessionDidUpdate"), object: nil)
+
+                // Ayarlar/profil ekranları güncellesin
+                NotificationCenter.default.post(name: .tasklyDidLogin, object: nil)
+
+                // Başarılı giriş → login ekranını kapat
+                self.dismiss(animated: true)
+            }
         }
         #else
         showAlert("Firebase Eksik", "FirebaseAuth modülü ekli değil. Lütfen FirebaseAuth'u hedefe bağla.")

@@ -30,7 +30,7 @@ final class SettingsViewController: UITableViewController {
     }
 
     // MARK: - Rows
-    private enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, about }
+    private enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, about, accountDelete }
 
     // MARK: - Theme
     private enum ThemeOption: Int, CaseIterable {
@@ -82,6 +82,7 @@ final class SettingsViewController: UITableViewController {
         // Dil değişimini artık iOS yönetiyor; .languageDidChange observer'ına gerek yok.
         NotificationCenter.default.addObserver(self, selector: #selector(handleDidLogin), name: .tasklyDidLogin, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTexts), name: .languageDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDidLogin), name: Notification.Name("Taskly.UserSessionDidUpdate"), object: nil)
 
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .systemGroupedBackground
@@ -233,6 +234,14 @@ final class SettingsViewController: UITableViewController {
                 cfg.secondaryText = "v\(ver)"
                 cfg.secondaryTextProperties.color = .secondaryLabel
                 cell.accessoryType = .disclosureIndicator
+
+            case .accountDelete:
+                cfg.text = Lf("settings.account.delete", "Hesabı Sil")
+                cfg.image = UIImage(systemName: "trash")
+                cfg.textProperties.color = .systemRed
+                cfg.secondaryText = nil
+                cell.accessoryType = .none
+                cell.selectionStyle = .default
             }
 
             cell.contentConfiguration = cfg
@@ -274,6 +283,8 @@ final class SettingsViewController: UITableViewController {
                 requestNotifications()
             case .about:
                 presentAbout()
+            case .accountDelete:
+                presentAccountDeleteConfirm()
             }
         }
     }
@@ -285,10 +296,10 @@ final class SettingsViewController: UITableViewController {
 
         #if canImport(FirebaseAuth)
         if let user = Auth.auth().currentUser {
-            cfg.text = cachedDisplayName ?? user.displayName ?? L("profile.unknownName")
+            cfg.text = resolvedDisplayName()
             cfg.secondaryText = ""
             cfg.image = UIImage(systemName: "person.circle.fill")
-            cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 48, weight: .regular)
+            cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
             let appColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
             cfg.imageProperties.tintColor = appColor
 
@@ -312,7 +323,7 @@ final class SettingsViewController: UITableViewController {
             cfg.text = L("profile.signin")
             cfg.secondaryText = L("profile.signin.subtitle")
             cfg.image = UIImage(systemName: "person.crop.circle")
-            cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 48, weight: .regular)
+            cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
             let appColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
             cfg.imageProperties.tintColor = appColor
 
@@ -329,7 +340,7 @@ final class SettingsViewController: UITableViewController {
         cfg.text = L("profile.signin")
         cfg.secondaryText = L("profile.signin.subtitle")
         cfg.image = UIImage(systemName: "person.crop.circle")
-        cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 48, weight: .regular)
+        cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
         let appColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
         cfg.imageProperties.tintColor = appColor
         #endif
@@ -345,6 +356,85 @@ final class SettingsViewController: UITableViewController {
         cell.layer.masksToBounds = true
 
         return cell
+    }
+
+    // MARK: - Name resolution (UserSession → Auth → cached → email → fallback)
+    private func resolvedDisplayName() -> String {
+        let sessionName = SettingsViewController.UserSession.shared.currentUser?.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let s = sessionName, !s.isEmpty { return s }
+#if canImport(FirebaseAuth)
+        if let authName = Auth.auth().currentUser?.displayName?.trimmingCharacters(in: .whitespacesAndNewlines), !authName.isEmpty {
+            return authName
+        }
+        let authEmail = Auth.auth().currentUser?.email
+#else
+        let authEmail: String? = nil
+#endif
+        if let cached = cachedDisplayName?.trimmingCharacters(in: .whitespacesAndNewlines), !cached.isEmpty {
+            return cached
+        }
+        let email = SettingsViewController.UserSession.shared.currentUser?.email ?? cachedEmail ?? authEmail
+        if let local = email?.split(separator: "@").first, !local.isEmpty {
+            return String(local).capitalized
+        }
+        return Lf("profile.unknownName", "Bilinmiyor")
+    }
+    // MARK: - Account Deletion
+    private func presentAccountDeleteConfirm() {
+        let title = Lf("account.delete.title", "Hesabı Sil")
+        let msg = Lf("account.delete.message", "Bu işlem geri alınamaz. Tüm verilerin silinecek.")
+        let ok = Lf("common.delete", "Sil")
+        let cancel = L("common.cancel")
+        let ac = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: cancel, style: .cancel))
+        ac.addAction(UIAlertAction(title: ok, style: .destructive, handler: { _ in
+            self.performAccountDeletion()
+        }))
+        present(ac, animated: true)
+    }
+
+    private func performAccountDeletion() {
+#if canImport(FirebaseAuth)
+        guard let _ = Auth.auth().currentUser else {
+            self.presentOK(title: L("common.error"), message: "No current user.")
+            return
+        }
+#endif
+#if canImport(FirebaseFirestore)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+        let userDoc = db.collection("users").document(uid)
+
+        db.collection("users").document(uid).collection("tasks").getDocuments { snap, _ in
+            let batch = db.batch()
+            snap?.documents.forEach { batch.deleteDocument($0.reference) }
+            batch.deleteDocument(userDoc)
+            batch.commit { [weak self] _ in
+                guard let self = self else { return }
+#if canImport(FirebaseAuth)
+                Auth.auth().currentUser?.delete(completion: { err in
+                    DispatchQueue.main.async {
+                        if let err = err as NSError?, err.code == AuthErrorCode.requiresRecentLogin.rawValue {
+                            self.presentOK(title: L("auth.required.title"), message: Lf("auth.required.message", "Lütfen devam etmek için tekrar giriş yap."))
+                            return
+                        } else if let err = err {
+                            self.presentOK(title: L("common.error"), message: err.localizedDescription)
+                            return
+                        }
+                        SettingsViewController.UserSession.shared.signOut()
+                        try? Auth.auth().signOut()
+                        self.tableView.reloadData()
+                        let login = LoginViewController()
+                        login.modalPresentationStyle = .fullScreen
+                        self.present(login, animated: true)
+                    }
+                })
+#endif
+            }
+        }
+#else
+        self.presentOK(title: L("common.error"), message: "Firestore not available in this build.")
+#endif
     }
 
     // MARK: - Profile actions
@@ -581,5 +671,6 @@ final class SettingsViewController: UITableViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .tasklyDidLogin, object: nil)
         NotificationCenter.default.removeObserver(self, name: .languageDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("Taskly.UserSessionDidUpdate"), object: nil)
     }
 }
