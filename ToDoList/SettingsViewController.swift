@@ -6,6 +6,14 @@ import FirebaseAuth
 #if canImport(FirebaseFirestore)
 import FirebaseFirestore
 #endif
+import  SwiftUI
+
+
+#Preview {
+    ViewControllerPreview {
+        SettingsViewController()
+    }
+}
 
 
 final class SettingsViewController: UITableViewController {
@@ -14,7 +22,7 @@ final class SettingsViewController: UITableViewController {
     private enum Section: Int, CaseIterable { case profile = 0, settings }
 
     // MARK: - Profile
-    private enum ProfileRow: Int, CaseIterable { case summary = 0, signOut }
+    private enum ProfileRow: Int, CaseIterable { case summary = 0 }
 
     struct AppUser {
         let name: String
@@ -30,7 +38,7 @@ final class SettingsViewController: UITableViewController {
     }
 
     // MARK: - Rows
-    private enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, about, accountDelete }
+    private enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, about }
 
     // MARK: - Theme
     private enum ThemeOption: Int, CaseIterable {
@@ -137,24 +145,7 @@ final class SettingsViewController: UITableViewController {
 
         switch section {
         case .profile:
-            if indexPath.row == ProfileRow.summary.rawValue {
-                return buildProfileSummaryCell(tableView)
-            } else {
-                // Sign out cell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-                var cfg = cell.defaultContentConfiguration()
-                cfg.text = L("actions.signout")
-                cfg.textProperties.color = .systemRed
-                cell.contentConfiguration = cfg
-                cell.accessoryType = .none
-                cell.gestureRecognizers?.forEach { cell.removeGestureRecognizer($0) }
-                var bgSign = UIBackgroundConfiguration.listGroupedCell()
-                bgSign.backgroundColor = .secondarySystemGroupedBackground
-                cell.backgroundConfiguration = bgSign
-                cell.layer.cornerRadius = 12
-                cell.layer.masksToBounds = true
-                return cell
-            }
+            return buildProfileSummaryCell(tableView)
 
         case .settings:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -235,13 +226,6 @@ final class SettingsViewController: UITableViewController {
                 cfg.secondaryTextProperties.color = .secondaryLabel
                 cell.accessoryType = .disclosureIndicator
 
-            case .accountDelete:
-                cfg.text = Lf("settings.account.delete", "Hesabı Sil")
-                cfg.image = UIImage(systemName: "trash")
-                cfg.textProperties.color = .systemRed
-                cfg.secondaryText = nil
-                cell.accessoryType = .none
-                cell.selectionStyle = .default
             }
 
             cell.contentConfiguration = cfg
@@ -263,8 +247,6 @@ final class SettingsViewController: UITableViewController {
             #if canImport(FirebaseAuth)
             if Auth.auth().currentUser == nil {
                 presentLogin()
-            } else if indexPath.row == ProfileRow.signOut.rawValue {
-                presentSignOutConfirm()
             }
             #else
             presentLogin()
@@ -283,8 +265,6 @@ final class SettingsViewController: UITableViewController {
                 requestNotifications()
             case .about:
                 presentAbout()
-            case .accountDelete:
-                presentAccountDeleteConfirm()
             }
         }
     }
@@ -295,7 +275,7 @@ final class SettingsViewController: UITableViewController {
         var cfg = UIListContentConfiguration.subtitleCell()
 
         #if canImport(FirebaseAuth)
-        if let user = Auth.auth().currentUser {
+        if Auth.auth().currentUser != nil {
             cfg.text = resolvedDisplayName()
             cfg.secondaryText = ""
             cfg.image = UIImage(systemName: "person.circle.fill")
@@ -303,21 +283,12 @@ final class SettingsViewController: UITableViewController {
             let appColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
             cfg.imageProperties.tintColor = appColor
 
-            // Tap to show email
+            // Tap to open profile panel (name, email, sign out, delete)
             cell.gestureRecognizers?.forEach { cell.removeGestureRecognizer($0) }
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.showEmail))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.presentProfilePanel))
             cell.addGestureRecognizer(tap)
             cell.isUserInteractionEnabled = true
-
-            // Edit button
-            let editButton = UIButton(type: .system)
-            editButton.setTitle(L("actions.edit"), for: .normal)
-            editButton.setTitleColor(appColor, for: .normal)
-            editButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-            editButton.addAction(UIAction { _ in
-                self.presentLogin()
-            }, for: .touchUpInside)
-            cell.accessoryView = editButton
+            cell.accessoryView = nil
 
         } else {
             cfg.text = L("profile.signin")
@@ -380,7 +351,7 @@ final class SettingsViewController: UITableViewController {
         return Lf("profile.unknownName", "Bilinmiyor")
     }
     // MARK: - Account Deletion
-    private func presentAccountDeleteConfirm() {
+    fileprivate func presentAccountDeleteConfirm() {
         let title = Lf("account.delete.title", "Hesabı Sil")
         let msg = Lf("account.delete.message", "Bu işlem geri alınamaz. Tüm verilerin silinecek.")
         let ok = Lf("common.delete", "Sil")
@@ -454,7 +425,7 @@ final class SettingsViewController: UITableViewController {
         present(login, animated: true)
     }
 
-    private func presentSignOutConfirm() {
+    fileprivate func presentSignOutConfirm() {
         let ac = UIAlertController(title: L("actions.signout"), message: L("signout.confirm.message"), preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: L("common.cancel"), style: .cancel))
         ac.addAction(UIAlertAction(title: L("actions.signout"), style: .destructive, handler: { _ in
@@ -472,6 +443,25 @@ final class SettingsViewController: UITableViewController {
             }
         }))
         present(ac, animated: true)
+    }
+
+    // MARK: - Profile Panel (sheet)
+    @objc private func presentProfilePanel() {
+        let vc = ProfilePanelViewController()
+        if let user = (Auth.auth().currentUser) {
+            vc.displayName = self.resolvedDisplayName()
+            vc.email = user.email
+        } else {
+            vc.displayName = self.resolvedDisplayName()
+            vc.email = cachedEmail
+        }
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
+        vc.host = self
+        vc.modalPresentationStyle = .pageSheet
+        present(vc, animated: true)
     }
 
     // MARK: - Theme picker
@@ -545,7 +535,7 @@ final class SettingsViewController: UITableViewController {
                     UserDefaults.standard.set(false, forKey: self.dailyReminderKey)
                     self.presentOK(title: L("settings.notifications"), message: L("notifications.permission.settings"))
                     self.tableView.reloadData()
-                @unknown default:
+                default:
                     break
                 }
             }
@@ -674,3 +664,115 @@ final class SettingsViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("Taskly.UserSessionDidUpdate"), object: nil)
     }
 }
+
+final class ProfilePanelViewController: UITableViewController {
+    var displayName: String?
+    var email: String?
+    weak var host: SettingsViewController?
+
+    private enum Row: Int, CaseIterable { case name = 0, mail, signOut, delete }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.backgroundColor = .systemGroupedBackground
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.rowHeight = 64
+        tableView.estimatedRowHeight = 64
+        title = Lf("settings.account.title", "Hesap")
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int { 1 }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { Row.allCases.count }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let symbolCfg = UIImage.SymbolConfiguration(pointSize: 28, weight: .semibold)
+
+        switch Row(rawValue: indexPath.row)! {
+        case .name:
+            var cfg = UIListContentConfiguration.valueCell()
+            cfg.text = Lf("profile.name.title", "Kullanıcı Adı")
+            cfg.secondaryText = displayName ?? "—"
+            cfg.textProperties.adjustsFontForContentSizeCategory = true
+            cfg.secondaryTextProperties.adjustsFontForContentSizeCategory = true
+            cfg.textProperties.font = .preferredFont(forTextStyle: .body)
+            cfg.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
+            cfg.secondaryTextProperties.color = .secondaryLabel
+            cfg.prefersSideBySideTextAndSecondaryText = true
+            cfg.image = UIImage(systemName: "person.circle")
+            cfg.imageProperties.preferredSymbolConfiguration = symbolCfg
+            cfg.imageProperties.maximumSize = CGSize(width: 30, height: 30)
+            cfg.imageToTextPadding = 12
+            cell.contentConfiguration = cfg
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+
+        case .mail:
+            var cfg = UIListContentConfiguration.valueCell()
+            cfg.text = L("profile.email.title")
+            cfg.secondaryText = email ?? "—"
+            cfg.textProperties.adjustsFontForContentSizeCategory = true
+            cfg.secondaryTextProperties.adjustsFontForContentSizeCategory = true
+            cfg.textProperties.font = .preferredFont(forTextStyle: .body)
+            cfg.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
+            cfg.secondaryTextProperties.color = .secondaryLabel
+            cfg.prefersSideBySideTextAndSecondaryText = true
+            cfg.image = UIImage(systemName: "envelope")
+            cfg.imageProperties.preferredSymbolConfiguration = symbolCfg
+            cfg.imageProperties.maximumSize = CGSize(width: 30, height: 30)
+            cfg.imageToTextPadding = 12
+            cell.contentConfiguration = cfg
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+
+        case .signOut:
+            var cfg = UIListContentConfiguration.cell()
+            cfg.text = L("actions.signout")
+            cfg.textProperties.font = .preferredFont(forTextStyle: .footnote)
+            cfg.image = UIImage(systemName: "rectangle.portrait.and.arrow.right")
+            cfg.imageProperties.preferredSymbolConfiguration = symbolCfg
+            cfg.imageProperties.maximumSize = CGSize(width: 30, height: 30)
+            cfg.imageToTextPadding = 12
+            cell.contentConfiguration = cfg
+            cell.accessoryType = .none
+
+        case .delete:
+            var cfg = UIListContentConfiguration.cell()
+            cfg.text = Lf("settings.account.delete", "Hesabı Sil")
+            cfg.textProperties.font = .preferredFont(forTextStyle: .footnote)
+            cfg.textProperties.color = .systemRed
+            cfg.image = UIImage(systemName: "trash")
+            cfg.imageProperties.preferredSymbolConfiguration = symbolCfg
+            cfg.imageProperties.maximumSize = CGSize(width: 30, height: 30)
+            cfg.imageToTextPadding = 12
+            cell.contentConfiguration = cfg
+            cell.accessoryType = .none
+        }
+
+        var bg = UIBackgroundConfiguration.listGroupedCell()
+        bg.backgroundColor = .secondarySystemGroupedBackground
+        cell.backgroundConfiguration = bg
+        cell.layer.cornerRadius = 12
+        cell.layer.masksToBounds = true
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let parent = host ?? (presentingViewController as? SettingsViewController) else { return }
+        switch Row(rawValue: indexPath.row)! {
+        case .name, .mail:
+            break
+        case .signOut:
+            dismiss(animated: true) {
+                parent.presentSignOutConfirm()
+            }
+        case .delete:
+            dismiss(animated: true) {
+                parent.presentAccountDeleteConfirm()
+            }
+        }
+    }
+}
+

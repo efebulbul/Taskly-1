@@ -2,6 +2,13 @@ import UIKit
 import AuthenticationServices  // Sign in with Apple (opsiyonel)
 import CryptoKit
 import WebKit
+import SwiftUI
+
+#Preview {
+  ViewControllerPreview {
+    LoginViewController()
+  }
+}
 
 #if canImport(GoogleSignIn)
 import GoogleSignIn
@@ -41,11 +48,7 @@ final class LoginViewController: UIViewController {
         // Primary button
         signInButton.setTitle(L("login.signin"), for: .normal)
 
-        // Apple / Google buttons (UIButton.Configuration titles)
-        if var cfg = appleButton.configuration {
-            cfg.title = L("login.apple")
-            appleButton.configuration = cfg
-        }
+        // Google button (UIButton.Configuration title)
         if var cfg = googleButton.configuration {
             cfg.title = L("login.google")
             googleButton.configuration = cfg
@@ -150,18 +153,12 @@ final class LoginViewController: UIViewController {
         return h
     }()
 
-    private let appleButton: UIButton = {
-        let bt = UIButton(type: .system)
-        var cfg = UIButton.Configuration.filled()
-        cfg.baseBackgroundColor = .label
-        cfg.baseForegroundColor = .systemBackground
-        cfg.cornerStyle = .large
-        cfg.title = "Apple ile devam et"
-        cfg.image = UIImage(systemName: "apple.logo")
-        cfg.imagePadding = 8
-        bt.configuration = cfg
-        bt.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        return bt
+    private let appleButton: ASAuthorizationAppleIDButton = {
+        // Always visible on black background: white border + white text
+        let b = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
+        b.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        b.cornerRadius = 12
+        return b
     }()
 
     private let googleButton: UIButton = {
@@ -203,16 +200,31 @@ final class LoginViewController: UIViewController {
 
     private let languageButton: UIButton = {
         let b = UIButton(type: .system)
-        if let img = UIImage(systemName: "globe") {
-            b.setImage(img, for: .normal)
-            b.tintColor = (UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1))
+        let appPurple = (UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1))
+        
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.title = NSLocalizedString("settings.language", comment: "")
+            config.image = UIImage(systemName: "globe")
+            config.imagePadding = 6
+            config.baseForegroundColor = appPurple
+            config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 12)
+            config.background.backgroundColor = .secondarySystemBackground
+            config.background.cornerRadius = 10
+            b.configuration = config
+        } else {
+            if let img = UIImage(systemName: "globe") {
+                b.setImage(img, for: .normal)
+                b.tintColor = appPurple
+            }
+            b.setTitle(NSLocalizedString("settings.language", comment: ""), for: .normal)
+            b.setTitleColor(appPurple, for: .normal)
+            b.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
+            b.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 12)
+            b.layer.cornerRadius = 10
+            b.backgroundColor = .secondarySystemBackground
         }
-        b.setTitle(NSLocalizedString("settings.language", comment: ""), for: .normal)
-        b.setTitleColor((UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)), for: .normal)
-        b.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        b.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 12)
-        b.layer.cornerRadius = 10
-        b.backgroundColor = .secondarySystemBackground
+        
         b.accessibilityIdentifier = "login.language.button"
         return b
     }()
@@ -220,7 +232,8 @@ final class LoginViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = .dark }
+        view.backgroundColor = .black
         navigationController?.setNavigationBarHidden(true, animated: false)
 
         setupLayout()
@@ -654,7 +667,8 @@ final class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = .dark }
+        view.backgroundColor = .black
         navigationController?.setNavigationBarHidden(true, animated: false)
 
         setupLayout()
@@ -954,6 +968,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
 
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithError error: Error) {
+        if let ae = error as? ASAuthorizationError, ae.code == .canceled {
+            return // user canceled; per HIG, do not alert
+        }
         print("Apple sign-in başarısız:", error)
         showAlert(Lf("auth.error.title", "Sign-in Error"), error.localizedDescription)
     }

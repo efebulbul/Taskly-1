@@ -3,6 +3,8 @@ import UserNotifications
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+import SwiftUI
+
 
 // MARK: - Renk
 extension UIColor {
@@ -142,6 +144,8 @@ final class ItemsViewController: UITableViewController {
 
     // Sadece bugünün görevlerini göster
     private var showTodayOnly = false
+    // Sadece bu haftanın (Pazartesi–Pazar) görevlerini göster
+    private var showThisWeekOnly = false
     // Sadece süresi geçmiş (tamamlanmamış) görevleri göster
     private var showOverdueOnly = false
 
@@ -169,11 +173,21 @@ final class ItemsViewController: UITableViewController {
         UserDefaults.standard.set(categories, forKey: categoriesStorageKey)
     }
 
+    private func isInCurrentWeek(_ date: Date?) -> Bool {
+        guard let date = date else { return false }
+        let calendar = Calendar.current
+        guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: Date()) else {
+            return false
+        }
+        return weekInterval.contains(date)
+    }
+
     private var pending: [Task] {
         tasks.filter {
             !$0.done &&
             (activeFilter == nil || $0.emoji == activeFilter) &&
             (!showTodayOnly || Calendar.current.isDateInToday($0.dueDate ?? Date.distantPast)) &&
+            (!showThisWeekOnly || isInCurrentWeek($0.dueDate)) &&
             (!showOverdueOnly || (($0.dueDate ?? Date.distantFuture) < Date() && !$0.done))
         }
     }
@@ -181,7 +195,8 @@ final class ItemsViewController: UITableViewController {
         tasks.filter {
             $0.done &&
             (activeFilter == nil || $0.emoji == activeFilter) &&
-            (!showTodayOnly || Calendar.current.isDateInToday($0.dueDate ?? Date.distantPast))
+            (!showTodayOnly || Calendar.current.isDateInToday($0.dueDate ?? Date.distantPast)) &&
+            (!showThisWeekOnly || isInCurrentWeek($0.dueDate))
         }
     }
 
@@ -242,15 +257,14 @@ final class ItemsViewController: UITableViewController {
 
         navigationItem.titleView = brandWrapper
 
-        // Bugün filtresi butonu
-        let todaySymbol = showTodayOnly ? "calendar.badge.clock" : "calendar"
-        let todayButton = UIBarButtonItem(image: UIImage(systemName: todaySymbol), style: .plain, target: self, action: #selector(toggleTodayFilter))
-        navigationItem.rightBarButtonItem = todayButton
-
-        // Süresi geçmiş filtre butonu
-        let overdueSymbol = showOverdueOnly ? "exclamationmark.circle.fill" : "exclamationmark.circle"
-        let overdueButton = UIBarButtonItem(image: UIImage(systemName: overdueSymbol), style: .plain, target: self, action: #selector(toggleOverdueFilter))
-        navigationItem.leftBarButtonItem = overdueButton
+        // Filtre butonu (sol üstte ünlem)
+        let filterButton = UIBarButtonItem(
+            image: UIImage(systemName: "exclamationmark.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(presentFilterSheet)
+        )
+        navigationItem.leftBarButtonItem = filterButton
 
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
@@ -333,22 +347,62 @@ final class ItemsViewController: UITableViewController {
         refreshEmptyState()
     }
 
-    @objc private func toggleTodayFilter() {
-        showTodayOnly.toggle()
-        let symbol = showTodayOnly ? "calendar.badge.clock" : "calendar"
-        navigationItem.rightBarButtonItem?.image = UIImage(systemName: symbol)
-        tableView.reloadData()
-        refreshEmptyState()
-    }
+    @objc private func presentFilterSheet() {
+        let ac = UIAlertController(
+            title: L("filter.sheet.title"),
+            message: nil,
+            preferredStyle: .actionSheet
+        )
 
-    @objc private func toggleOverdueFilter() {
-        showOverdueOnly.toggle()
-        let symbol = showOverdueOnly ? "exclamationmark.circle.fill" : "exclamationmark.circle"
-        navigationItem.leftBarButtonItem?.image = UIImage(systemName: symbol)
-        tableView.reloadData()
-        refreshEmptyState()
-    }
+        // Genel: tüm görevler
+        ac.addAction(UIAlertAction(title: L("filter.menu.allTasks"), style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.showTodayOnly = false
+            self.showThisWeekOnly = false
+            self.showOverdueOnly = false
+            self.tableView.reloadData()
+            self.refreshEmptyState()
+        }))
 
+        // Sadece bugün yapılacaklar
+        ac.addAction(UIAlertAction(title: L("filter.menu.todayTasks"), style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.showTodayOnly = true
+            self.showThisWeekOnly = false
+            self.showOverdueOnly = false
+            self.tableView.reloadData()
+            self.refreshEmptyState()
+        }))
+
+        // Bu haftanın görevleri (Pazartesi–Pazar)
+        ac.addAction(UIAlertAction(title: L("filter.menu.weekTasks"), style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.showTodayOnly = false
+            self.showThisWeekOnly = true
+            self.showOverdueOnly = false
+            self.tableView.reloadData()
+            self.refreshEmptyState()
+        }))
+
+        // Süresi geçen ve tamamlanmamışlar
+        ac.addAction(UIAlertAction(title: L("filter.menu.overdueTasks"), style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.showTodayOnly = false
+            self.showThisWeekOnly = false
+            self.showOverdueOnly = true
+            self.tableView.reloadData()
+            self.refreshEmptyState()
+        }))
+
+        ac.addAction(UIAlertAction(title: L("common.cancel"), style: .cancel))
+
+        if let pop = ac.popoverPresentationController {
+            pop.barButtonItem = navigationItem.leftBarButtonItem
+        }
+
+        present(ac, animated: true)
+    }
+   
     @objc private func handleCategoryLongPress(_ gr: UILongPressGestureRecognizer) {
         guard gr.state == .began else { return }
         let point = gr.location(in: filterControl)
@@ -426,18 +480,37 @@ final class ItemsViewController: UITableViewController {
     }
 
     // MARK: Sections
-    override func numberOfSections(in tableView: UITableView) -> Int { tasks.isEmpty ? 0 : 2 }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if tasks.isEmpty { return 0 }
+        // "Süresi geçen ve tamamlanmamışlar" filtresi açıkken sadece bekleyen/overdue görevler için 1 bölüm göster
+        return showOverdueOnly ? 1 : 2
+    }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        section == 0 ? L("list.section.pending") : L("list.section.done")
+        if showOverdueOnly {
+            // Tek bölüm: süresi geçen ve tamamlanmamış görevler
+            return L("list.section.pending")
+        } else {
+            return section == 0 ? L("list.section.pending") : L("list.section.done")
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? pending.count : completed.count
+        if showOverdueOnly {
+            // Bu modda sadece pending/overdue görevler gösterilsin
+            return pending.count
+        } else {
+            return section == 0 ? pending.count : completed.count
+        }
     }
 
     private func item(at indexPath: IndexPath) -> Task {
-        indexPath.section == 0 ? pending[indexPath.row] : completed[indexPath.row]
+        if showOverdueOnly {
+            // Tek bölümde yalnızca pending/overdue görevler var
+            return pending[indexPath.row]
+        } else {
+            return indexPath.section == 0 ? pending[indexPath.row] : completed[indexPath.row]
+        }
     }
 
     private func globalIndex(from indexPath: IndexPath) -> Int? {
@@ -920,7 +993,13 @@ final class EmptyStateView: UIView {
         actionButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
         actionButton.backgroundColor = .appPurpleOrFallback
         actionButton.layer.cornerRadius = 12
-        actionButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 18, bottom: 12, right: 18)
+        if #available(iOS 15.0, *) {
+            var config = actionButton.configuration ?? UIButton.Configuration.plain()
+            config.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 18, bottom: 12, trailing: 18)
+            actionButton.configuration = config
+        } else {
+            actionButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 18, bottom: 12, right: 18)
+        }
         actionButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
         stack.addArrangedSubview(titleLabel)
@@ -937,6 +1016,12 @@ final class EmptyStateView: UIView {
     }
 
     @objc private func buttonTapped() { onPrimaryTap?() }
+}
+
+#Preview {
+    ViewControllerPreview {
+        ItemsViewController()
+    }
 }
 
 // MARK: - Emoji doğrulama (ileride kişiselleştirme istersen işe yarar)

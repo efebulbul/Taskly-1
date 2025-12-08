@@ -252,3 +252,10 @@
 "profile.signin"          = "Sign In";
 "profile.signin.subtitle" = "Sign in to keep your tasks in sync.";
 "profile.email.missing"   = "Email not available";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "Tasks to Show";
+"filter.menu.allTasks"      = "All Tasks";
+"filter.menu.todayTasks"    = "Today’s Tasks";
+"filter.menu.weekTasks"     = "This Week’s Tasks";
+"filter.menu.overdueTasks"  = "Incomplete Tasks";

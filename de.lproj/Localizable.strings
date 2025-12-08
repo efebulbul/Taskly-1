@@ -252,3 +252,10 @@
 "profile.signin"          = "Anmelden";
 "profile.signin.subtitle" = "Melde dich an, um deine Aufgaben zu synchronisieren.";
 "profile.email.missing"   = "E-Mail nicht verfügbar";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "Anzuzeigende Aufgaben";
+"filter.menu.allTasks"      = "Alle Aufgaben";
+"filter.menu.todayTasks"    = "Heutige Aufgaben";
+"filter.menu.weekTasks"     = "Aufgaben dieser Woche";
+"filter.menu.overdueTasks"  = "Unerledigte Aufgaben";

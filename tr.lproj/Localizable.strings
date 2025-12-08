@@ -258,3 +258,10 @@
 "profile.signin"          = "Giriş Yap";
 "profile.signin.subtitle" = "Hesabınla giriş yaparak senkronize et.";
 "profile.email.missing"   = "E-posta bulunamadı";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "Gösterilecek görevler";
+"filter.menu.allTasks"      = "Tüm Görevler";
+"filter.menu.todayTasks"    = "Bugün Yapılacak Görevler";
+"filter.menu.weekTasks"     = "Bu Haftanın Görevleri";
+"filter.menu.overdueTasks"  = "Tamamlanmamış Görevler";
