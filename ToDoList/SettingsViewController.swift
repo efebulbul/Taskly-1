@@ -190,7 +190,7 @@ final class SettingsViewController: UITableViewController {
 
                 let sw = UISwitch()
                 sw.isOn = UserDefaults.standard.bool(forKey: dailyReminderKey)
-                sw.onTintColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
+                sw.onTintColor = UIColor(named: "AppBlue") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
                 sw.addAction(UIAction { [weak self] _ in
                     guard let self = self else { return }
                     let enabled = sw.isOn
@@ -280,7 +280,7 @@ final class SettingsViewController: UITableViewController {
             cfg.secondaryText = ""
             cfg.image = UIImage(systemName: "person.circle.fill")
             cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-            let appColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
+            let appColor = UIColor(named: "AppBlue") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
             cfg.imageProperties.tintColor = appColor
 
             // Tap to open profile panel (name, email, sign out, delete)
@@ -295,7 +295,7 @@ final class SettingsViewController: UITableViewController {
             cfg.secondaryText = L("profile.signin.subtitle")
             cfg.image = UIImage(systemName: "person.crop.circle")
             cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-            let appColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
+            let appColor = UIColor(named: "AppBlue") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
             cfg.imageProperties.tintColor = appColor
 
             let loginButton = UIButton(type: .system)
@@ -312,7 +312,7 @@ final class SettingsViewController: UITableViewController {
         cfg.secondaryText = L("profile.signin.subtitle")
         cfg.image = UIImage(systemName: "person.crop.circle")
         cfg.imageProperties.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
-        let appColor = UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
+        let appColor = UIColor(named: "AppBlue") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1.0)
         cfg.imageProperties.tintColor = appColor
         #endif
 

@@ -8,38 +8,8 @@ import SwiftUI
 
 // MARK: - Renk
 extension UIColor {
-    static var appPurpleOrFallback: UIColor {
-        UIColor(named: "AppPurple") ?? UIColor(red: 96/255, green: 42/255, blue: 128/255, alpha: 1)
-    }
-}
-
-extension UIColor {
-    static var appPinkOrFallback: UIColor {
-        UIColor(named: "AppPink") ?? .systemPink
-    }
-}
-
-// MARK: - Font helper (brand script)
-extension UIFont {
-    /// Uses a custom brand script font if set, otherwise falls back to common iOS script fonts.
-    /// To override at runtime: UserDefaults.standard.set("PostScript-Font-Name", forKey: "BrandScriptFontName")
-    static func scriptBrandFont(size: CGFloat) -> UIFont {
-        if let name = UserDefaults.standard.string(forKey: "BrandScriptFontName"),
-           let f = UIFont(name: name, size: size) {
-            return f
-        }
-        let candidates = [
-            "CUSTOM_FONT_PLACEHOLDER",     // Kendi PostScript adın (varsa)
-            "SnellRoundhand",              // daha sade script
-            "BradleyHandITCTT",            // regular Bradley Hand
-            "ChalkboardSE-Light",          // daha okunaklı chalk stil
-            "MarkerFelt-Thin",            // ince marker
-            "Zapfino"                      // en sona itildi
-        ]
-        for n in candidates {
-            if let f = UIFont(name: n, size: size) { return f }
-        }
-        return UIFont.italicSystemFont(ofSize: size)
+    static var appBlueOrFallback: UIColor {
+        UIColor(named: "AppBlue") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
     }
 }
 
@@ -53,7 +23,7 @@ struct Task: Codable, Equatable, Identifiable {
     var notes: String?
     @ServerTimestamp var createdAt: Date?
 
-    // Eski çağrıları bozmayalım: id/createdAt olmadan da oluşturulabilsin
+  
     init(id: String? = nil,
          title: String,
          emoji: String,
@@ -76,12 +46,12 @@ enum ReminderScheduler {
     static func schedule(for task: Task) {
         guard let due = task.dueDate, !task.done else { return }
         let center = UNUserNotificationCenter.current()
-        // Çakışmaları önlemek için aynı id'leri önce temizle
+     
         cancel(for: task)
 
         let now = Date()
 
-        // Tam saatinde
+        
         if due > now {
             let contentAt = UNMutableNotificationContent()
             contentAt.title = L("reminder.dueNow.title")
@@ -92,7 +62,7 @@ enum ReminderScheduler {
             center.add(reqAt, withCompletionHandler: nil)
         }
 
-        // 30 dk önce
+        
         let before = due.addingTimeInterval(-30 * 60)
         if before > now {
             let contentBefore = UNMutableNotificationContent()
@@ -158,7 +128,7 @@ final class ItemsViewController: UITableViewController {
         return f
     }()
 
-    // Varsayılan 4 kategori
+    
     private let defaultCategories = ["📝","💼","🏠","🏃🏻"]
 
     private func loadCategories() {
@@ -200,13 +170,13 @@ final class ItemsViewController: UITableViewController {
         }
     }
 
-    // Floating Add Button
+    
     private lazy var addButton: UIButton = {
         let b = UIButton(type: .system)
         b.setImage(UIImage(systemName: "plus"), for: .normal)
         b.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 28, weight: .bold), forImageIn: .normal)
         b.tintColor = .white
-        b.backgroundColor = .appPurpleOrFallback
+        b.backgroundColor = .appBlueOrFallback
         b.layer.cornerRadius = 32
         b.layer.shadowOpacity = 0.25
         b.layer.shadowRadius = 6
@@ -238,7 +208,7 @@ final class ItemsViewController: UITableViewController {
         taskLabel.font = .systemFont(ofSize: 30, weight: .semibold)
 
         let lyLabel = UILabel()
-        lyLabel.textColor = .appPurpleOrFallback
+        lyLabel.textColor = .appBlueOrFallback
         lyLabel.font = .systemFont(ofSize: 30, weight: .semibold)
         lyLabel.text = "ly"
 
@@ -259,7 +229,7 @@ final class ItemsViewController: UITableViewController {
 
         // Filtre butonu (sol üstte ünlem)
         let filterButton = UIBarButtonItem(
-            image: UIImage(systemName: "exclamationmark.circle"),
+            image: UIImage(systemName: "line.3.horizontal.decrease.circle"),
             style: .plain,
             target: self,
             action: #selector(presentFilterSheet)
@@ -296,7 +266,7 @@ final class ItemsViewController: UITableViewController {
     }
 
     private func setupFilterControl() {
-        // Mevcut seçimi hatırla (0: Tümü)
+        
         let previousIndex = filterControl.selectedSegmentIndex
 
         filterControl.removeAllSegments()
@@ -315,7 +285,7 @@ final class ItemsViewController: UITableViewController {
         filterControl.addTarget(self, action: #selector(filterChanged(_:)), for: .valueChanged)
         filterControl.translatesAutoresizingMaskIntoConstraints = false
 
-        // Uzun basınca kategori düzenleme (aynı recognizer ekli değilse ekle)
+        
         let alreadyHasLP = filterControl.gestureRecognizers?.contains(where: { $0 is UILongPressGestureRecognizer }) ?? false
         if !alreadyHasLP {
             let lp = UILongPressGestureRecognizer(target: self, action: #selector(handleCategoryLongPress(_:)))
@@ -323,7 +293,7 @@ final class ItemsViewController: UITableViewController {
         }
     }
 
-    // Header container (segmented control için uygun yükseklik/kenar boşlukları)
+   
     private func makeHeaderContainer(for view: UIView) -> UIView {
         let container = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 54))
         container.backgroundColor = .clear
@@ -354,7 +324,7 @@ final class ItemsViewController: UITableViewController {
             preferredStyle: .actionSheet
         )
 
-        // Genel: tüm görevler
+        
         ac.addAction(UIAlertAction(title: L("filter.menu.allTasks"), style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
             self.showTodayOnly = false
@@ -364,7 +334,7 @@ final class ItemsViewController: UITableViewController {
             self.refreshEmptyState()
         }))
 
-        // Sadece bugün yapılacaklar
+        
         ac.addAction(UIAlertAction(title: L("filter.menu.todayTasks"), style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
             self.showTodayOnly = true
@@ -374,7 +344,6 @@ final class ItemsViewController: UITableViewController {
             self.refreshEmptyState()
         }))
 
-        // Bu haftanın görevleri (Pazartesi–Pazar)
         ac.addAction(UIAlertAction(title: L("filter.menu.weekTasks"), style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
             self.showTodayOnly = false
@@ -384,7 +353,7 @@ final class ItemsViewController: UITableViewController {
             self.refreshEmptyState()
         }))
 
-        // Süresi geçen ve tamamlanmamışlar
+    
         ac.addAction(UIAlertAction(title: L("filter.menu.overdueTasks"), style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
             self.showTodayOnly = false
@@ -447,7 +416,7 @@ final class ItemsViewController: UITableViewController {
 
     // MARK: - Firestore listening
     private func startObservingTasks() {
-        // Önceki dinleyiciyi bırak
+     
         listener?.remove()
 
         guard let uid = Auth.auth().currentUser?.uid else {
@@ -482,13 +451,13 @@ final class ItemsViewController: UITableViewController {
     // MARK: Sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         if tasks.isEmpty { return 0 }
-        // "Süresi geçen ve tamamlanmamışlar" filtresi açıkken sadece bekleyen/overdue görevler için 1 bölüm göster
+     
         return showOverdueOnly ? 1 : 2
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if showOverdueOnly {
-            // Tek bölüm: süresi geçen ve tamamlanmamış görevler
+           
             return L("list.section.pending")
         } else {
             return section == 0 ? L("list.section.pending") : L("list.section.done")
@@ -497,7 +466,7 @@ final class ItemsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if showOverdueOnly {
-            // Bu modda sadece pending/overdue görevler gösterilsin
+            
             return pending.count
         } else {
             return section == 0 ? pending.count : completed.count
@@ -506,7 +475,7 @@ final class ItemsViewController: UITableViewController {
 
     private func item(at indexPath: IndexPath) -> Task {
         if showOverdueOnly {
-            // Tek bölümde yalnızca pending/overdue görevler var
+  
             return pending[indexPath.row]
         } else {
             return indexPath.section == 0 ? pending[indexPath.row] : completed[indexPath.row]
@@ -524,7 +493,7 @@ final class ItemsViewController: UITableViewController {
         let it = item(at: indexPath)
 
         var cfg = cell.defaultContentConfiguration()
-        // 🚫 Üstü çizme yok
+        
         cfg.attributedText = nil
         cfg.text = it.title
         if it.done {
@@ -553,7 +522,7 @@ final class ItemsViewController: UITableViewController {
         }
         cfg.secondaryTextProperties.color = .secondaryLabel
 
-        // Sağda emoji
+       
         let emoji = UILabel()
         emoji.text = it.emoji
         emoji.font = .systemFont(ofSize: 20)
@@ -567,16 +536,16 @@ final class ItemsViewController: UITableViewController {
         cell.accessoryView = acc
         cell.contentConfiguration = cfg
 
-        // Kart stili (Settings ile aynı)
+        
         var bg = UIBackgroundConfiguration.listGroupedCell()
         bg.backgroundColor = .secondarySystemGroupedBackground
         cell.backgroundConfiguration = bg
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
 
-        // Seçim vurgusu (hafif AppPurple tonuyla)
+  
         let sel = UIView()
-        sel.backgroundColor = (UIColor(named: "AppPurple") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)).withAlphaComponent(0.12)
+        sel.backgroundColor = (UIColor(named: "AppBlue") ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)).withAlphaComponent(0.12)
         sel.layer.cornerRadius = 12
         sel.layer.masksToBounds = true
         cell.selectedBackgroundView = sel
@@ -584,7 +553,7 @@ final class ItemsViewController: UITableViewController {
         return cell
     }
 
-    // Hücre seçimi → detay sayfası
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let t = item(at: indexPath)
@@ -606,7 +575,7 @@ final class ItemsViewController: UITableViewController {
             guard let self = self else { return }
             if let gi = self.globalIndex(from: indexPath) {
                 let task = self.tasks[gi]
-                // Optimistic UI removal so the row disappears immediately
+             
                 DispatchQueue.main.async {
                     self.tasks.removeAll { $0.id == task.id }
                     self.tableView.reloadData()
@@ -619,7 +588,7 @@ final class ItemsViewController: UITableViewController {
                             let proj = FirebaseApp.app()?.options.projectID ?? "nil"
                             print("Delete error:", err.localizedDescription, "| ProjectID:", proj)
                         }
-                        // UI snapshot listener ile güncellenecek
+                    
                     }
                 }
             }
@@ -639,7 +608,6 @@ final class ItemsViewController: UITableViewController {
             var target = self.tasks[gi]
             let newDone = !target.done
             target.done = newDone
-            // Optimistic toggle in UI
             DispatchQueue.main.async {
                 self.tasks[gi].done = newDone
                 self.tableView.reloadData()
@@ -659,7 +627,6 @@ final class ItemsViewController: UITableViewController {
                             let proj = FirebaseApp.app()?.options.projectID ?? "nil"
                             print("Toggle error:", err.localizedDescription, "| ProjectID:", proj)
                         }
-                        // UI snapshot listener ile güncellenecek
                     }
             }
             done(true)
@@ -687,7 +654,6 @@ final class ItemsViewController: UITableViewController {
             tf.autocapitalizationType = .sentences
         }
 
-        // Tarih/Saat picker (alert'in contentViewController'ı)
         let pickerVC = UIViewController()
         let picker = UIDatePicker()
         picker.datePickerMode = .dateAndTime
@@ -736,7 +702,7 @@ final class ItemsViewController: UITableViewController {
                     "dueDate": due,
                     "notes": finalNotes,
                     "createdAt": Timestamp(date: Date()),
-                    "createdAtServer": FieldValue.serverTimestamp()
+                    
                 ]
                 doc.setData(data.compactMapValues { $0 }, merge: true) { err in
                     if let err = err {
@@ -748,14 +714,12 @@ final class ItemsViewController: UITableViewController {
                     let scheduled = Task(id: doc.documentID, title: rawTitle, emoji: chosenEmoji, done: false, dueDate: due, notes: finalNotes, createdAt: nil)
                     ReminderScheduler.schedule(for: scheduled)
                     DispatchQueue.main.async {
-                        // Optimistic insert so the item appears immediately without restart
                         var immediate = scheduled
                         immediate.createdAt = Date()
                         self.tasks.append(immediate)
                         self.tableView.reloadData()
                         self.refreshEmptyState()
                     }
-                    // UI snapshot listener ile gelecek
                 }
             }
 
@@ -880,7 +844,7 @@ final class TaskDetailViewController: UIViewController {
         dateRow.axis = .horizontal
         dateRow.alignment = .center
         dateRow.spacing = 8
-        dateIcon.tintColor = .appPurpleOrFallback
+        dateIcon.tintColor = .appBlueOrFallback
         dateIcon.contentMode = .scaleAspectFit
         dateIcon.setContentHuggingPriority(.required, for: .horizontal)
         if let d = task.dueDate {
@@ -991,7 +955,7 @@ final class EmptyStateView: UIView {
 
         actionButton.setTitleColor(.white, for: .normal)
         actionButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        actionButton.backgroundColor = .appPurpleOrFallback
+        actionButton.backgroundColor = .appBlueOrFallback
         actionButton.layer.cornerRadius = 12
         if #available(iOS 15.0, *) {
             var config = actionButton.configuration ?? UIButton.Configuration.plain()
@@ -1007,7 +971,7 @@ final class EmptyStateView: UIView {
         stack.addArrangedSubview(actionButton)
     }
 
-    func configure(title: String, subtitle: String?, buttonTitle: String, buttonColor: UIColor = .appPurpleOrFallback) {
+    func configure(title: String, subtitle: String?, buttonTitle: String, buttonColor: UIColor = .appBlueOrFallback) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         subtitleLabel.isHidden = (subtitle ?? "").isEmpty
@@ -1024,7 +988,7 @@ final class EmptyStateView: UIView {
     }
 }
 
-// MARK: - Emoji doğrulama (ileride kişiselleştirme istersen işe yarar)
+// MARK: - Emoji doğrulama 
 private extension String {
     var isSingleEmoji: Bool { count == 1 && first?.isEmoji == true }
 }

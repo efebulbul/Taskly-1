@@ -13,8 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
 #endif
         // ---- Tema rengi (#8C52B4)
-        let appPurple = UIColor(named: "AppPurple")
-            ?? UIColor(red: 140/255, green: 82/255, blue: 180/255, alpha: 1)
+        let appPurple = UIColor(named: "AppBlue")
+            ?? UIColor(red: 0/255, green: 111/255, blue: 255/255, alpha: 1)
 
         // ---- UINavigationBar (başlıklar sistem rengi, butonlar mor)
         let nav = UINavigationBarAppearance()
