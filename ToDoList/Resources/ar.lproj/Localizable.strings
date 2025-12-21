@@ -1,0 +1,261 @@
+"app.title" = "تاسكلي";
+"common.ok" = "موافق";
+"common.cancel" = "إلغاء";
+"common.save" = "حفظ";
+"common.error" = "خطأ";
+
+/* Tabs */
+"tab.tasks" = "المهام";
+"tab.settings" = "الإعدادات";
+
+/* Titles */
+"items.title" = "المهام";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "تسجيل الدخول";
+"login.subtitle" = "زامن مهامك مع السحابة";
+"login.email.placeholder" = "البريد الإلكتروني";
+"login.password.placeholder" = "كلمة المرور";
+"login.signin" = "تسجيل الدخول";
+"login.apple" = "المتابعة باستخدام Apple";
+"login.google" = "المتابعة باستخدام Google";
+"login.orcontinue" = "أو المتابعة باستخدام";
+"login.noaccount" = "ليس لديك حساب؟ أنشئ حسابًا";
+"login.footer" = "بالمتابعة، فإنك توافق على سياسة الخصوصية وشروط الاستخدام.";
+
+/* Register */
+"register.title" = "إنشاء حساب";
+"register.subtitle" = "جاهز خلال دقيقة واحدة";
+"register.name.placeholder" = "الاسم الكامل";
+"register.email.placeholder" = "البريد الإلكتروني";
+"register.password.placeholder" = "كلمة المرور";
+"register.confirm.placeholder" = "تأكيد كلمة المرور";
+"register.signup" = "إنشاء حساب";
+"register.footer" = "لديك حساب بالفعل؟ تسجيل الدخول";
+
+/* Auth / Errors */
+"auth.error.title" = "خطأ في تسجيل الدخول";
+"auth.validation.missing" = "يرجى إدخال بريد إلكتروني صالح وكلمة مرور لا تقل عن 6 أحرف.";
+"auth.userNotFound.title" = "الحساب غير موجود";
+"auth.userNotFound.message" = "لا يوجد حساب مرتبط بهذا البريد الإلكتروني. هل ترغب في إنشاء حساب؟";
+"auth.wrongPassword.title" = "كلمة مرور غير صحيحة";
+"auth.wrongPassword.message" = "يرجى التحقق من كلمة المرور والمحاولة مرة أخرى.";
+"auth.unavailable.title" = "غير متاح";
+"auth.unavailable.message" = "يتطلب تسجيل الدخول بالبريد الإلكتروني FirebaseAuth. يرجى التسجيل أو استخدام Apple/Google.";
+"auth.unsupported.title" = "غير مدعوم";
+"auth.unsupported.message" = "تتطلب هذه الميزة iOS 13 أو أحدث.";
+"auth.google.title" = "تسجيل الدخول عبر Google";
+"auth.google.clientIdMissing" = "معرّف ClientID غير موجود. تحقق من ملف GoogleService-Info.plist.";
+"auth.google.sdkMissing" = "حزمة GoogleSignIn غير مضافة. يرجى إضافتها عبر Swift Package Manager.";
+"auth.google.missingToken" = "تعذر الحصول على رمز تعريف Google.";
+"auth.apple.missingToken" = "تعذر الحصول على رمز تعريف Apple.";
+"auth.firebase.missing.title" = "Firebase غير مهيأ";
+"auth.firebase.missing.message" = "لم يتم استدعاء FirebaseApp.configure(). تأكد من استدعائه وأن ملف GoogleService-Info.plist موجود.";
+"auth.required.title" = "تسجيل الدخول مطلوب";
+"auth.required.message" = "يرجى تسجيل الدخول لإضافة مهمة.";
+
+/* Register Success / Errors */
+"register.error.title" = "خطأ";
+"register.validation.missing" = "يرجى ملء جميع الحقول.";
+"register.password.mismatch" = "كلمتا المرور غير متطابقتين.";
+"register.success.title" = "تم التسجيل بنجاح";
+"register.success.message" = "تم إنشاء حسابك بنجاح.";
+"register.error.generic" = "فشل التسجيل. يرجى المحاولة مرة أخرى.";
+"register.error.emailInUse" = "عنوان البريد الإلكتروني مستخدم بالفعل.";
+"register.error.invalidEmail" = "يرجى إدخال عنوان بريد إلكتروني صالح.";
+"register.error.weakPassword" = "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.";
+"register.error.network" = "خطأ في الشبكة. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.";
+"register.demo.title" = "تسجيل تجريبي";
+"register.demo.message" = "FirebaseAuth غير مثبت. تم إنشاء الحساب محليًا. جرّب تسجيل الدخول.";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================= */
+"filter.all" = "الكل";
+"filter.today" = "اليوم";
+"filter.overdue" = "متأخرة";
+
+"list.section.pending" = "المهام";
+"list.section.done"    = "مكتملة";
+
+"empty.title"    = "لا توجد مهام بعد";
+"empty.subtitle" = "اختر فئة من الأعلى. اضغط مطولًا على الإيموجي لتغييره.";
+"empty.cta"      = "مهمة جديدة 🖇️";
+
+/* Actions */
+"actions.delete"   = "حذف";
+"actions.undo"     = "تراجع";
+"actions.complete" = "إكمال";
+"actions.signout"  = "تسجيل الخروج";
+"actions.edit"     = "تعديل";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
+"add.title" = "مهمة جديدة";
+"add.message" = "أدخل عنوانًا. سيتم اختيار فئة الإيموجي من الفلتر أعلاه.";
+"add.placeholder.title" = "عنوان المهمة";
+"add.placeholder.notes" = "ملاحظات (اختياري)";
+"add.cancel" = "إلغاء";
+"add.add" = "إضافة";
+"add.choose.category" = "اختر الفئة";
+"add.back" = "رجوع";
+
+"detail.title" = "تفاصيل المهمة";
+"detail.no.date" = "لم يتم تحديد تاريخ";
+"detail.notes" = "الوصف";
+
+"alerts.missing.title" = "معلومات ناقصة";
+"alerts.missing.message" = "لا يمكن أن يكون عنوان المهمة فارغًا.";
+"tasks.add.failed" = "فشل في إضافة المهمة.";
+
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "الإعدادات";
+"settings.language" = "اللغة";
+"settings.language.system" = "لغة النظام";
+"settings.language.turkish" = "التركية";
+"settings.language.english" = "الإنجليزية";
+"settings.language.german" = "الألمانية";
+"settings.theme" = "المظهر";
+"settings.notifications" = "الإشعارات";
+"settings.about" = "حول";
+"settings.ok" = "موافق";
+
+/* Theme Options */
+"theme.system" = "النظام";
+"theme.light" = "فاتح";
+"theme.dark" = "داكن";
+
+/* Notifications */
+"notif.daily.body" = "تذكير يومي: راجع مهامك لليوم.";
+"notif.sample.body" = "لا تفوت هذا! لديك مهمة.";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "استخدام لغة النظام؟";
+"lang.system.sheet.message"  = "ستتبع لغة التطبيق لغة نظام iOS.";
+"lang.system.sheet.continue" = "متابعة";
+"lang.system.sheet.cancel"   = "إلغاء";
+
+"signout.confirm.title"   = "تسجيل الخروج";
+"signout.confirm.message" = "هل أنت متأكد أنك تريد تسجيل الخروج؟";
+"signout.confirm.cancel"  = "إلغاء";
+"signout.confirm.ok"      = "تسجيل الخروج";
+
+"about.title"    = "حول";
+"about.version"  = "تاسكلي v%@";
+"about.subtitle" = "شكرًا لاستخدامك تاسكلي!";
+
+"profile.email.title" = "البريد الإلكتروني";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "المهام";
+"filter.all" = "الكل";
+"list.section.pending" = "المهام";
+"list.section.done" = "مكتملة";
+
+"empty.title" = "لا توجد مهام بعد";
+"empty.subtitle" = "اختر فئة من الأعلى. اضغط مطولًا على الإيموجي لتغييره.";
+"empty.cta" = "مهمة جديدة 🖇️";
+
+/* ADD TASK FLOW */
+"add.title" = "مهمة جديدة";
+"add.message" = "أدخل عنوانًا. سيتم اختيار فئة الإيموجي من الفلتر العلوي.";
+"add.placeholder.title" = "عنوان المهمة";
+"add.placeholder.notes" = "ملاحظات (اختياري)";
+"add.cancel" = "إلغاء";
+"add.add" = "إضافة";
+"add.choose.category" = "اختر الفئة";
+"add.back" = "رجوع";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "معلومات ناقصة";
+"alerts.missing.message" = "لا يمكن أن يكون عنوان المهمة فارغًا.";
+"common.error" = "خطأ";
+"tasks.add.failed" = "تعذر إضافة المهمة.";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "حذف";
+"actions.undo" = "تراجع";
+"actions.complete" = "إكمال";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "تسجيل الدخول مطلوب";
+"auth.required.message" = "يرجى تسجيل الدخول لإضافة مهام.";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "تعديل الفئة";
+"cat.edit.message" = "أدخل إيموجي واحدًا فقط.";
+"cat.invalid.title" = "إيموجي غير صالح";
+"cat.invalid.message" = "يرجى إدخال إيموجي واحد فقط.";
+
+/* TASK DETAIL */
+"detail.title" = "تفاصيل المهمة";
+"detail.no.date" = "لم يتم تحديد تاريخ";
+"detail.notes" = "ملاحظات";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "حان وقت المهمة!";
+"reminder.thirtyMins.title" = "متبقي 30 دقيقة على المهمة";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "موافق";
+
+/* Daily Reminder (missing keys) */
+"settings.dailyReminder" = "تذكير يومي";
+"settings.dailyReminder.subtitle.everydayAt" = "احصل على تذكير كل صباح.";
+
+/* Backward-compat with hyphen */
+"settings.dailyReminder.subtitle.every-dayAt" = "احصل على تذكير كل صباح.";
+
+/* Notification status */
+"settings.notifications.on" = "الإشعارات مفعلة";
+"settings.notifications.off" = "الإشعارات معطلة";
+
+/* Notification permission alerts */
+"notifications.permission.title" = "الإشعارات";
+"notifications.permission.sampleScheduled" = "تمت جدولة إشعار تجريبي بنجاح.";
+
+/* Language (Login + Settings) */
+"settings.language" = "اللغة";
+"settings.ok" = "موافق"; // varsa tekrar ekleme
+
+/* System language sheet */
+"lang.system.sheet.title" = "استخدام لغة النظام؟";
+"lang.system.sheet.message" = "ستتبع لغة التطبيق لغة نظام iOS.";
+"lang.system.sheet.continue" = "متابعة";
+"lang.system.sheet.cancel" = "إلغاء";
+
+/* Fallback when Settings URL cannot be opened */
+"lang.system.unavailable" = "إعدادات اللغة غير متاحة على هذا الجهاز.";
+"profile.setName.title" = "اسم العرض";
+"profile.setName.message" = "اختر اسمًا ليظهر في ملفك الشخصي.";
+"profile.unknownName" = "غير معروف";
+
+"settings.account.delete" = "حذف الحساب";
+"account.delete.title"    = "حذف الحساب";
+"account.delete.message"  = "لا يمكن التراجع عن هذا الإجراء. سيتم حذف جميع بياناتك.";
+"common.delete"           = "حذف";
+
+"notifications.permission.denied"   = "الإشعارات غير مسموح بها. يرجى تفعيلها من الإعدادات.";
+"notifications.permission.settings" = "الإشعارات معطلة. يمكنك تفعيلها من الإعدادات > الإشعارات.";
+
+"settings.dailyReminder.subtitle.everydayAt" = "كل يوم في الساعة %@.";
+
+"profile.signin"          = "تسجيل الدخول";
+"profile.signin.subtitle" = "سجّل الدخول للحفاظ على مزامنة مهامك.";
+"profile.email.missing"   = "البريد الإلكتروني غير متوفر";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "المهام المعروضة";
+"filter.menu.allTasks"      = "جميع المهام";
+"filter.menu.todayTasks"    = "مهام اليوم";
+"filter.menu.weekTasks"     = "مهام هذا الأسبوع";
+"filter.menu.overdueTasks"  = "المهام غير المكتملة";

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "8FD41125-20E3-4E76-A263-3D4F3B168CA3.png",
+      "filename" : "TasklyX.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "8FD41125-20E3-4E76-A263-3D4F3B168CA3 1.png",
+      "filename" : "TasklyX 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,7 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "8FD41125-20E3-4E76-A263-3D4F3B168CA3 2.png",
+      "filename" : "TasklyX 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
