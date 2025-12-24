@@ -57,6 +57,7 @@ extension SettingsViewController {
             cell.accessoryType = .none
             cell.selectionStyle = .default
 
+
             switch row {
             case .language:
                 cfg.text = L("settings.language")
@@ -71,6 +72,23 @@ extension SettingsViewController {
                 cfg.secondaryTextProperties.color = .secondaryLabel
                 cfg.image = UIImage(systemName: "paintpalette")
                 cell.accessoryType = .disclosureIndicator
+
+            case .notifications:
+                cfg.text = L("settings.notifications")
+                cfg.image = UIImage(systemName: "bell.badge")
+                cell.accessoryType = .disclosureIndicator
+                UNUserNotificationCenter.current().getNotificationSettings { settings in
+                    DispatchQueue.main.async {
+                        if settings.authorizationStatus == .authorized {
+                            cfg.secondaryText = L("settings.notifications.on")
+                            cfg.secondaryTextProperties.color = .systemGreen
+                        } else {
+                            cfg.secondaryText = L("settings.notifications.off")
+                            cfg.secondaryTextProperties.color = .systemRed
+                        }
+                        cell.contentConfiguration = cfg
+                    }
+                }
 
             case .dailyReminder:
                 cfg.text = L("settings.dailyReminder")
@@ -98,23 +116,6 @@ extension SettingsViewController {
                 cell.accessoryView = sw
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
-
-            case .notifications:
-                cfg.text = L("settings.notifications")
-                cfg.image = UIImage(systemName: "bell.badge")
-                cell.accessoryType = .disclosureIndicator
-                UNUserNotificationCenter.current().getNotificationSettings { settings in
-                    DispatchQueue.main.async {
-                        if settings.authorizationStatus == .authorized {
-                            cfg.secondaryText = L("settings.notifications.on")
-                            cfg.secondaryTextProperties.color = .systemGreen
-                        } else {
-                            cfg.secondaryText = L("settings.notifications.off")
-                            cfg.secondaryTextProperties.color = .systemRed
-                        }
-                        cell.contentConfiguration = cfg
-                    }
-                }
 
             case .about:
                 cfg.text = L("settings.about")
@@ -157,10 +158,10 @@ extension SettingsViewController {
                 presentSystemLanguageHintAndOpenSettings()
             case .theme:
                 presentThemePicker()
-            case .dailyReminder:
-                break
             case .notifications:
                 requestNotifications()
+            case .dailyReminder:
+                break
             case .about:
                 presentAbout()
             }
