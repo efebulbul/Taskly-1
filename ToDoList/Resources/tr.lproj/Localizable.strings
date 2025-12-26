@@ -265,3 +265,40 @@
 "filter.menu.todayTasks"    = "Bugün Yapılacak Görevler";
 "filter.menu.weekTasks"     = "Bu Haftanın Görevleri";
 "filter.menu.overdueTasks"  = "Tamamlanmamış Görevler";
+
+
+/*Geri Bildirim*/
+"settings.support"  = "Destek & Geri Bildirim";
+"settings.legal"      = "Gizlilik & Şartlar";
+
+/* Mail */
+"mail.error.title"   = "E-posta";
+"mail.error.message" = "E-posta uygulaması açılamadı.";
+
+
+/* Support & Feedback */
+"support.sendEmail" = "E-posta Gönder";
+"support.reportBug" = "Hata Bildir";
+"support.email.subject" = "Taskly Destek / Geri Bildirim";
+"support.email.subject.bug" = "Taskly Hata Bildirimi";
+
+/* Support Mail Body */
+"support.mail.greeting" = "Merhaba,";
+"support.mail.bugPrompt" = "Bir hata bildirmek istiyorum:";
+"support.mail.feedbackPrompt" = "Geri bildirimim:";
+"support.mail.appLine" = "Uygulama: %@";
+"support.mail.versionLine" = "Versiyon: %@ (%@)";
+"support.mail.deviceLine" = "Cihaz: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "Gizlilik Politikası";
+"legal.termsOfUse" = "Kullanım Şartları";
+
+/* Link Error */
+"link.error.title" = "Bağlantı";
+"link.error.message" = "Bağlantı açılamadı.";
+
+/* Mail Error */
+"mail.error.title" = "E-posta";
+"mail.error.message" = "E-posta uygulaması açılamadı.";

@@ -59,6 +59,7 @@ extension SettingsViewController {
 
 
             switch row {
+                
             case .language:
                 cfg.text = L("settings.language")
                 cfg.secondaryText = L("settings.language.system")
@@ -77,6 +78,7 @@ extension SettingsViewController {
                 cfg.text = L("settings.notifications")
                 cfg.image = UIImage(systemName: "bell.badge")
                 cell.accessoryType = .disclosureIndicator
+
                 UNUserNotificationCenter.current().getNotificationSettings { settings in
                     DispatchQueue.main.async {
                         if settings.authorizationStatus == .authorized {
@@ -88,6 +90,7 @@ extension SettingsViewController {
                         }
                         cell.contentConfiguration = cfg
                     }
+                    
                 }
 
             case .dailyReminder:
@@ -120,10 +123,22 @@ extension SettingsViewController {
             case .about:
                 cfg.text = L("settings.about")
                 cfg.image = UIImage(systemName: "info.circle")
-                let ver = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
+                let ver = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.1"
                 cfg.secondaryText = "v\(ver)"
                 cfg.secondaryTextProperties.color = .secondaryLabel
                 cell.accessoryType = .disclosureIndicator
+                
+            case .support:
+                cfg.text =  L("settings.support")
+                cfg.image =  UIImage(systemName: "envelope")
+                cfg.imageProperties.tintColor = .appBlue
+                
+            case .legal:
+                cfg.text = L("settings.legal")
+                cfg.image = UIImage(systemName: "hand.raised")
+                cfg.imageProperties.tintColor = .appBlue
+
+
             }
 
             cell.contentConfiguration = cfg
@@ -159,11 +174,17 @@ extension SettingsViewController {
             case .theme:
                 presentThemePicker()
             case .notifications:
-                requestNotifications()
+                openAppSettings()
             case .dailyReminder:
                 break
             case .about:
                 presentAbout()
+            case .support:
+                presentSupportFeedback()
+            case .legal:
+                presentLegalLinks()
+                
+                
             }
         }
     }

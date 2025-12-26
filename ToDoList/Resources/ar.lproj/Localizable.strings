@@ -259,3 +259,38 @@
 "filter.menu.todayTasks"    = "مهام اليوم";
 "filter.menu.weekTasks"     = "مهام هذا الأسبوع";
 "filter.menu.overdueTasks"  = "المهام غير المكتملة";
+
+/* الدعم والملاحظات */
+"settings.support" = "الدعم والملاحظات";
+"settings.legal"   = "الخصوصية والشروط";
+
+/* البريد الإلكتروني */
+"mail.error.title"   = "البريد الإلكتروني";
+"mail.error.message" = "تعذر فتح تطبيق البريد الإلكتروني.";
+
+/* Support & Feedback */
+"support.sendEmail" = "إرسال بريد إلكتروني";
+"support.reportBug" = "الإبلاغ عن خطأ";
+"support.email.subject" = "دعم Taskly / الملاحظات";
+"support.email.subject.bug" = "بلاغ خطأ في Taskly";
+
+/* Support Mail Body */
+"support.mail.greeting" = "مرحبًا،";
+"support.mail.bugPrompt" = "أود الإبلاغ عن خطأ:";
+"support.mail.feedbackPrompt" = "ملاحظاتي:";
+"support.mail.appLine" = "التطبيق: %@";
+"support.mail.versionLine" = "الإصدار: %@ (%@)";
+"support.mail.deviceLine" = "الجهاز: %@";
+"support.mail.osLine" = "نظام iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "سياسة الخصوصية";
+"legal.termsOfUse" = "شروط الاستخدام";
+
+/* Link Error */
+"link.error.title" = "رابط";
+"link.error.message" = "تعذر فتح الرابط.";
+
+/* Mail Error */
+"mail.error.title" = "البريد الإلكتروني";
+"mail.error.message" = "تعذر فتح تطبيق البريد الإلكتروني.";

@@ -43,7 +43,7 @@ final class SettingsViewController: UITableViewController {
     }
 
     // MARK: - Rows
-    enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, about }
+    enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, about,support, legal }
 
     // MARK: - Theme
     enum ThemeOption: Int, CaseIterable {
@@ -127,4 +127,5 @@ final class SettingsViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: .languageDidChange, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("Taskly.UserSessionDidUpdate"), object: nil)
     }
+    
 }

@@ -259,3 +259,38 @@
 "filter.menu.todayTasks"    = "Today’s Tasks";
 "filter.menu.weekTasks"     = "This Week’s Tasks";
 "filter.menu.overdueTasks"  = "Incomplete Tasks";
+
+/* Support & Feedback */
+"settings.support" = "Support & Feedback";
+"settings.legal"   = "Privacy & Terms Of Use";
+
+/* Mail */
+"mail.error.title"   = "Email";
+"mail.error.message" = "The email app could not be opened.";
+
+/* Support & Feedback */
+"support.sendEmail" = "Send Email";
+"support.reportBug" = "Report a Bug";
+"support.email.subject" = "Taskly Support / Feedback";
+"support.email.subject.bug" = "Taskly Bug Report";
+
+/* Support Mail Body */
+"support.mail.greeting" = "Hello,";
+"support.mail.bugPrompt" = "I would like to report a bug:";
+"support.mail.feedbackPrompt" = "My feedback:";
+"support.mail.appLine" = "App: %@";
+"support.mail.versionLine" = "Version: %@ (%@)";
+"support.mail.deviceLine" = "Device: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "Privacy Policy";
+"legal.termsOfUse" = "Terms of Use";
+
+/* Link Error */
+"link.error.title" = "Link";
+"link.error.message" = "The link could not be opened.";
+
+/* Mail Error */
+"mail.error.title" = "Email";
+"mail.error.message" = "The email app could not be opened.";

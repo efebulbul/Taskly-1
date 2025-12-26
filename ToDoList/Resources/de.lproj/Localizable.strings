@@ -259,3 +259,38 @@
 "filter.menu.todayTasks"    = "Heutige Aufgaben";
 "filter.menu.weekTasks"     = "Aufgaben dieser Woche";
 "filter.menu.overdueTasks"  = "Unerledigte Aufgaben";
+
+/* Support & Feedback */
+"settings.support" = "Support & Feedback";
+"settings.legal"   = "Datenschutz & Nutzungsbedingungen";
+
+/* Mail */
+"mail.error.title"   = "E-Mail";
+"mail.error.message" = "Die E-Mail-App konnte nicht geöffnet werden.";
+
+/* Support & Feedback */
+"support.sendEmail" = "E-Mail senden";
+"support.reportBug" = "Fehler melden";
+"support.email.subject" = "Taskly Support / Feedback";
+"support.email.subject.bug" = "Taskly Fehlerbericht";
+
+/* Support Mail Body */
+"support.mail.greeting" = "Hallo,";
+"support.mail.bugPrompt" = "Ich möchte einen Fehler melden:";
+"support.mail.feedbackPrompt" = "Mein Feedback:";
+"support.mail.appLine" = "App: %@";
+"support.mail.versionLine" = "Version: %@ (%@)";
+"support.mail.deviceLine" = "Gerät: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "Datenschutzerklärung";
+"legal.termsOfUse" = "Nutzungsbedingungen";
+
+/* Link Error */
+"link.error.title" = "Link";
+"link.error.message" = "Der Link konnte nicht geöffnet werden.";
+
+/* Mail Error */
+"mail.error.title" = "E-Mail";
+"mail.error.message" = "Die E-Mail-App konnte nicht geöffnet werden.";
