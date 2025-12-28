@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import StoreKit
 #if canImport(FirebaseAuth)
 import FirebaseAuth
 #endif
@@ -43,7 +44,7 @@ final class SettingsViewController: UITableViewController {
     }
 
     // MARK: - Rows
-    enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, about,support, legal }
+    enum Row: Int, CaseIterable { case language = 0, theme, dailyReminder, notifications, rateUs, about, support, legal }
 
     // MARK: - Theme
     enum ThemeOption: Int, CaseIterable {
@@ -71,6 +72,24 @@ final class SettingsViewController: UITableViewController {
     let themeKey = "settings.theme.option"
     let dailyReminderKey = "settings.dailyReminder.enabled"
     let dailyReminderIdentifier = "daily.reminder.08"
+
+    // MARK: - App Store Review
+    // Replace with your real App Store ID (App Store Connect -> App Information)
+    private let appStoreAppID = "YOUR_APP_ID" // e.g. "1234567890"
+
+    func requestAppStoreReview() {
+        // iOS 14+: request the in-app review prompt in the current active scene
+        if let scene = view.window?.windowScene {
+            SKStoreReviewController.requestReview(in: scene)
+            return
+        }
+
+        // Fallback: open the App Store rating page
+        guard appStoreAppID != "YOUR_APP_ID" else { return }
+        if let url = URL(string: "https://apps.apple.com/app/id\(appStoreAppID)?action=write-review") {
+            UIApplication.shared.open(url)
+        }
+    }
 
     // MARK: - Cached profile
     var cachedDisplayName: String?

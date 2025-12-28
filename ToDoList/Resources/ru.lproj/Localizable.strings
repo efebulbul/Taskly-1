@@ -1,0 +1,307 @@
+"app.title" = "Taskly";
+"common.ok" = "ОК";
+"common.cancel" = "Отмена";
+"common.save" = "Сохранить";
+"common.error" = "Ошибка";
+
+/* Tabs */
+"tab.tasks" = "Задачи";
+"tab.settings" = "Настройки";
+
+/* Titles */
+"items.title" = "Задачи";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "Вход";
+"login.subtitle" = "Синхронизируйте задачи с облаком";
+"login.email.placeholder" = "Электронная почта";
+"login.password.placeholder" = "Пароль";
+"login.signin" = "Войти";
+"login.apple" = "Продолжить с Apple";
+"login.google" = "Продолжить с Google";
+"login.orcontinue" = "или продолжить через";
+"login.noaccount" = "Нет аккаунта? Зарегистрироваться";
+"login.footer" = "Продолжая, вы принимаете нашу Политику конфиденциальности и Условия использования.";
+
+/* Register */
+"register.title" = "Регистрация";
+"register.subtitle" = "Это займет всего минуту";
+"register.name.placeholder" = "Имя и фамилия";
+"register.email.placeholder" = "Электронная почта";
+"register.password.placeholder" = "Пароль";
+"register.confirm.placeholder" = "Подтвердите пароль";
+"register.signup" = "Зарегистрироваться";
+"register.footer" = "Уже есть аккаунт? Войти";
+
+/* Auth / Errors */
+"auth.error.title" = "Ошибка входа";
+"auth.validation.missing" = "Введите корректный email и пароль (минимум 6 символов).";
+"auth.userNotFound.title" = "Аккаунт не найден";
+"auth.userNotFound.message" = "Аккаунт с таким email не найден. Хотите зарегистрироваться?";
+"auth.wrongPassword.title" = "Неверный пароль";
+"auth.wrongPassword.message" = "Пожалуйста, проверьте пароль и попробуйте снова.";
+"auth.unavailable.title" = "Недоступно";
+"auth.unavailable.message" = "Вход через email требует FirebaseAuth. Пожалуйста, зарегистрируйтесь или используйте Apple/Google.";
+"auth.unsupported.title" = "Не поддерживается";
+"auth.unsupported.message" = "Эта функция требует iOS 13 или выше.";
+"auth.google.title" = "Вход через Google";
+"auth.google.clientIdMissing" = "ClientID не найден. Проверьте файл GoogleService-Info.plist.";
+"auth.google.sdkMissing" = "GoogleSignIn SDK не добавлен. Пожалуйста, добавьте его через Swift Package Manager.";
+"auth.google.missingToken" = "Не удалось получить токен идентификации Google.";
+"auth.apple.missingToken" = "Не удалось получить токен идентификации Apple.";
+"auth.firebase.missing.title" = "Firebase не настроен";
+"auth.firebase.missing.message" = "Отсутствует FirebaseApp.configure(). Убедитесь, что этот метод вызывается и файл GoogleService-Info.plist присутствует.";
+"auth.required.title" = "Требуется вход";
+"auth.required.message" = "Пожалуйста, войдите в систему, чтобы добавлять задачи.";
+
+/* Register Success / Errors */
+"register.error.title" = "Ошибка";
+"register.validation.missing" = "Пожалуйста, заполните все поля.";
+"register.password.mismatch" = "Пароли не совпадают.";
+"register.success.title" = "Регистрация успешна";
+"register.success.message" = "Ваш аккаунт успешно создан.";
+"register.error.generic" = "Ошибка регистрации. Пожалуйста, попробуйте снова.";
+"register.error.emailInUse" = "Этот адрес электронной почты уже используется.";
+"register.error.invalidEmail" = "Пожалуйста, введите корректный адрес электронной почты.";
+"register.error.weakPassword" = "Пароль должен содержать не менее 6 символов.";
+"register.error.network" = "Ошибка сети. Проверьте интернет-соединение и попробуйте снова.";
+"register.demo.title" = "Демо-регистрация";
+"register.demo.message" = "FirebaseAuth не установлен. Аккаунт создан локально. Попробуйте войти.";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================= */
+"filter.all" = "Все";
+"filter.today" = "Сегодня";
+"filter.overdue" = "Просроченные";
+
+"list.section.pending" = "ЗАДАЧИ";
+"list.section.done"    = "ВЫПОЛНЕНО";
+
+"empty.title"    = "Задач пока нет";
+"empty.subtitle" = "Выберите категорию выше. Вы можете изменить эмодзи, удерживая его.";
+"empty.cta"      = " Новая задача 🖇️";
+
+/* Actions */
+"actions.delete"   = "Удалить";
+"actions.undo"     = "Отменить";
+"actions.complete" = "Завершить";
+"actions.signout"  = "Выйти";
+"actions.edit"     = "Изменить";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
+"add.title" = "Новая задача";
+"add.message" = "Введите заголовок. Эмодзи категории будет выбран из фильтра выше.";
+"add.placeholder.title" = "Заголовок задачи";
+"add.placeholder.notes" = "Заметки (необязательно)";
+"add.cancel" = "Отмена";
+"add.add" = "Добавить";
+"add.choose.category" = "Выбрать категорию";
+"add.back" = "Назад";
+
+"detail.title" = "Детали задачи";
+"detail.no.date" = "Дата не указана";
+"detail.notes" = "Описание";
+
+"alerts.missing.title" = "Недостаточно информации";
+"alerts.missing.message" = "Заголовок задачи не может быть пустым.";
+"tasks.add.failed" = "Не удалось добавить задачу.";
+
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "Настройки";
+"settings.language" = "Язык";
+"settings.language.system" = "Язык системы";
+"settings.language.turkish" = "Турецкий";
+"settings.language.english" = "Английский";
+"settings.language.german" = "Немецкий";
+"settings.theme" = "Тема";
+"settings.notifications" = "Уведомления";
+"settings.about" = "О приложении";
+"settings.ok" = "ОК";
+
+/* Theme Options */
+"theme.system" = "Системная";
+"theme.light" = "Светлая";
+"theme.dark" = "Темная";
+
+/* Notifications */
+"notif.daily.body" = "Ежедневное напоминание: проверьте ваши задачи на сегодня.";
+"notif.sample.body" = "Не пропустите! У вас есть задача.";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "Использовать язык системы?";
+"lang.system.sheet.message"  = "Язык приложения будет установлен в соответствии с системным языком iOS.";
+"lang.system.sheet.continue" = "Продолжить";
+"lang.system.sheet.cancel"   = "Отмена";
+
+"signout.confirm.title"   = "Выйти";
+"signout.confirm.message" = "Вы уверены, что хотите выйти из аккаунта?";
+"signout.confirm.cancel"  = "Отмена";
+"signout.confirm.ok"      = "Выйти";
+
+"about.title"    = "О приложении";
+"about.version"  = "Taskly v%@";
+"about.subtitle" = "Спасибо, что пользуетесь Taskly!";
+
+"profile.email.title" = "Электронная почта";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "Задачи";
+"filter.all" = "Все";
+"list.section.pending" = "ЗАДАЧИ";
+"list.section.done" = "ВЫПОЛНЕНО";
+
+"empty.title" = "Задач пока нет";
+"empty.subtitle" = "Выберите категорию выше. Вы можете изменить эмодзи, удерживая его.";
+"empty.cta" = " Новая задача 🖇️";
+
+/* ADD TASK FLOW */
+"add.title" = "Новая задача";
+"add.message" = "Введите заголовок. Эмодзи категории будет выбран из фильтра выше.";
+"add.placeholder.title" = "Заголовок задачи";
+"add.placeholder.notes" = "Заметки (необязательно)";
+"add.cancel" = "Отмена";
+"add.add" = "Добавить";
+"add.choose.category" = "Выбрать категорию";
+"add.back" = "Назад";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "Недостаточно информации";
+"alerts.missing.message" = "Заголовок задачи не может быть пустым.";
+"common.error" = "Ошибка";
+"tasks.add.failed" = "Не удалось добавить задачу.";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "Удалить";
+"actions.undo" = "Отменить";
+"actions.complete" = "Завершить";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "Требуется вход";
+"auth.required.message" = "Пожалуйста, войдите в систему, чтобы добавлять задачи.";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "Изменить категорию";
+"cat.edit.message" = "Введите один эмодзи.";
+"cat.invalid.title" = "Неверный эмодзи";
+"cat.invalid.message" = "Пожалуйста, введите только один эмодзи.";
+
+/* TASK DETAIL */
+"detail.title" = "Детали задачи";
+"detail.no.date" = "Дата не указана";
+"detail.notes" = "Заметки";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "Пора за дело!";
+"reminder.thirtyMins.title" = "До задачи осталось 30 минут";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "ОК";
+
+/* Günlük Hatırlatıcı (eksik anahtarlar) */
+"settings.dailyReminder" = "Ежедневное напоминание";
+"settings.dailyReminder.subtitle.everydayAt" = "Получайте напоминание о задачах каждое утро.";
+
+/* Eski tireli varyantı da güvence için ekleyelim */
+"settings.dailyReminder.subtitle.every-dayAt" = "Получайте напоминание о задачах каждое утро.";
+
+/* Bildirim durumu (ekran altta yeşil yazı) */
+"settings.notifications.on" = "Уведомления включены";
+"settings.notifications.off" = "Уведомления выключены";
+
+/* Bildirim izinleri uyarıları */
+"notifications.permission.title" = "Уведомления";
+"notifications.permission.sampleScheduled" = "Тестовое уведомление успешно запланировано.";
+
+/* Dil (Giriş + Ayarlar) */
+"settings.language" = "Язык";
+"settings.ok" = "ОК";
+
+/* Sistem dili uyarısı */
+"lang.system.sheet.title" = "Использовать язык системы?";
+"lang.system.sheet.message" = "Язык приложения будет соответствовать языку системы iOS.";
+"lang.system.sheet.continue" = "Продолжить";
+"lang.system.sheet.cancel" = "Отмена";
+
+/* Ayarlar bağlantısı açılamazsa */
+"lang.system.unavailable" = "Настройки языка недоступны на этом устройстве.";
+"profile.setName.title" = "Имя пользователя";
+"profile.setName.message" = "Выберите имя, которое будет отображаться в вашем профиле.";
+
+/* Profil – bilinmeyen ad fallback (GEREKLİ) */
+"profile.unknownName" = "Неизвестно";
+
+/* Hesabı Sil (GEREKLİ) */
+"settings.account.delete" = "Удалить аккаунт";
+"account.delete.title"    = "Удалить аккаунт";
+"account.delete.message"  = "Это действие нельзя отменить. Все ваши данные будут удалены.";
+"common.delete"           = "Удалить";
+
+/* Bildirim izinleri uyarıları (GEREKLİ) */
+"notifications.permission.denied"   = "Доступ к уведомлениям запрещен. Включите их в настройках.";
+"notifications.permission.settings" = "Уведомления отключены. Вы можете включить их в меню Настройки > Уведомления.";
+
+/* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
+"settings.dailyReminder.subtitle.everydayAt" = "Получайте напоминание каждый день в %@.";
+
+/* (Opsiyonel ama faydalı) */
+"profile.signin"          = "Войти";
+"profile.signin.subtitle" = "Войдите в свой аккаунт для синхронизации.";
+"profile.email.missing"   = "Email не найден";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "Показать задачи";
+"filter.menu.allTasks"      = "Все задачи";
+"filter.menu.todayTasks"    = "Задачи на сегодня";
+"filter.menu.weekTasks"     = "Задачи на неделю";
+"filter.menu.overdueTasks"  = "Невыполненные задачи";
+
+
+/*Geri Bildirim*/
+"settings.support"  = "Поддержка и отзывы";
+"settings.legal"    = "Конфиденциальность и условия";
+
+/* Mail */
+"mail.error.title"   = "Электронная почта";
+"mail.error.message" = "Не удалось открыть почтовое приложение.";
+
+
+/* Support & Feedback */
+"support.sendEmail" = "Отправить письмо";
+"support.reportBug" = "Сообщить об ошибке";
+"support.email.subject" = "Поддержка / Отзывы Taskly";
+"support.email.subject.bug" = "Отчет об ошибке Taskly";
+
+/* Support Mail Body */
+"support.mail.greeting" = "Здравствуйте,";
+"support.mail.bugPrompt" = "Я хочу сообщить об ошибке:";
+"support.mail.feedbackPrompt" = "Мой отзыв:";
+"support.mail.appLine" = "Приложение: %@";
+"support.mail.versionLine" = "Версия: %@ (%@)";
+"support.mail.deviceLine" = "Устройство: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "Политика конфиденциальности";
+"legal.termsOfUse" = "Условия использования";
+
+/* Link Error */
+"link.error.title" = "Ссылка";
+"link.error.message" = "Не удалось открыть ссылку.";
+
+/* Mail Error */
+"mail.error.title" = "Электронная почта";
+"mail.error.message" = "Не удалось открыть почтовое приложение.";
+
+"settings.rateUs" = "Оцените нас";
+"settings.rateUs.subtitle" = "Оставьте оценку в App Store";

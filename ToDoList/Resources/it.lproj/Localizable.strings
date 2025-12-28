@@ -1,0 +1,307 @@
+"app.title" = "Taskly";
+"common.ok" = "OK";
+"common.cancel" = "Annulla";
+"common.save" = "Salva";
+"common.error" = "Errore";
+
+/* Tabs */
+"tab.tasks" = "Attività";
+"tab.settings" = "Impostazioni";
+
+/* Titles */
+"items.title" = "Attività";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "Accedi";
+"login.subtitle" = "Sincronizza i tuoi impegni con il cloud";
+"login.email.placeholder" = "E-mail";
+"login.password.placeholder" = "Password";
+"login.signin" = "Accedi";
+"login.apple" = "Continua con Apple";
+"login.google" = "Continua con Google";
+"login.orcontinue" = "o continua con";
+"login.noaccount" = "Non hai un account? Registrati";
+"login.footer" = "Continuando, accetti la nostra Informativa sulla Privacy e i Termini di Utilizzo.";
+
+/* Register */
+"register.title" = "Registrati";
+"register.subtitle" = "Richiederà solo un minuto";
+"register.name.placeholder" = "Nome e Cognome";
+"register.email.placeholder" = "E-mail";
+"register.password.placeholder" = "Password";
+"register.confirm.placeholder" = "Conferma Password";
+"register.signup" = "Registrati";
+"register.footer" = "Hai già un account? Accedi";
+
+/* Auth / Errors */
+"auth.error.title" = "Errore di accesso";
+"auth.validation.missing" = "Inserisci un'e-mail valida e una password di almeno 6 caratteri.";
+"auth.userNotFound.title" = "Account non trovato";
+"auth.userNotFound.message" = "Nessun account trovato con questa e-mail. Vuoi registrarti?";
+"auth.wrongPassword.title" = "Password errata";
+"auth.wrongPassword.message" = "Per favore, controlla la tua password e riprova.";
+"auth.unavailable.title" = "Non disponibile";
+"auth.unavailable.message" = "L'accesso via e-mail richiede FirebaseAuth. Registrati o usa Apple/Google.";
+"auth.unsupported.title" = "Non supportato";
+"auth.unsupported.message" = "Questa funzione richiede iOS 13 o superiore.";
+"auth.google.title" = "Accesso Google";
+"auth.google.clientIdMissing" = "ClientID non trovato. Controlla il file GoogleService-Info.plist.";
+"auth.google.sdkMissing" = "GoogleSignIn SDK non aggiunto. Aggiungilo tramite Swift Package Manager.";
+"auth.google.missingToken" = "Impossibile ottenere il token di identità Google.";
+"auth.apple.missingToken" = "Impossibile ottenere il token di identità Apple.";
+"auth.firebase.missing.title" = "Firebase non configurato";
+"auth.firebase.missing.message" = "FirebaseApp.configure() mancante. Assicurati che venga chiamato e che GoogleService-Info.plist sia presente.";
+"auth.required.title" = "Accesso richiesto";
+"auth.required.message" = "Per favore, accedi per aggiungere attività.";
+
+/* Register Success / Errors */
+"register.error.title" = "Errore";
+"register.validation.missing" = "Per favore, compila tutti i campi.";
+"register.password.mismatch" = "Le password non corrispondono.";
+"register.success.title" = "Registrazione completata";
+"register.success.message" = "Il tuo account è stato creato con successo.";
+"register.error.generic" = "Registrazione fallita. Per favore, riprova.";
+"register.error.emailInUse" = "Questo indirizzo e-mail è già in uso.";
+"register.error.invalidEmail" = "Inserisci un indirizzo e-mail valido.";
+"register.error.weakPassword" = "La password deve contenere almeno 6 caratteri.";
+"register.error.network" = "Errore di rete. Controlla la tua connessione e riprova.";
+"register.demo.title" = "Registrazione Demo";
+"register.demo.message" = "FirebaseAuth non installato. L'account è stato creato localmente. Prova ad accedere.";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================= */
+"filter.all" = "Tutti";
+"filter.today" = "Oggi";
+"filter.overdue" = "Scaduti";
+
+"list.section.pending" = "ATTIVITÀ";
+"list.section.done"    = "COMPLETATO";
+
+"empty.title"    = "Ancora nessuna attività";
+"empty.subtitle" = "Scegli una categoria sopra. Puoi cambiare l'emoji tenendo premuto a lungo.";
+"empty.cta"      = " Nuova Attività 🖇️";
+
+/* Actions */
+"actions.delete"   = "Elimina";
+"actions.undo"     = "Annulla";
+"actions.complete" = "Completa";
+"actions.signout"  = "Esci";
+"actions.edit"     = "Modifica";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
+"add.title" = "Nuova Attività";
+"add.message" = "Inserisci un titolo. L'emoji della categoria verrà scelta dal filtro in alto.";
+"add.placeholder.title" = "Titolo attività";
+"add.placeholder.notes" = "Note (opzionale)";
+"add.cancel" = "Annulla";
+"add.add" = "Aggiungi";
+"add.choose.category" = "Scegli Categoria";
+"add.back" = "Indietro";
+
+"detail.title" = "Dettaglio Attività";
+"detail.no.date" = "Data non specificata";
+"detail.notes" = "Descrizione";
+
+"alerts.missing.title" = "Informazioni mancanti";
+"alerts.missing.message" = "Il titolo dell'attività non può essere vuoto.";
+"tasks.add.failed" = "Impossibile aggiungere l'attività.";
+
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "Impostazioni";
+"settings.language" = "Lingua";
+"settings.language.system" = "Lingua di Sistema";
+"settings.language.turkish" = "Turco";
+"settings.language.english" = "Inglese";
+"settings.language.german" = "Tedesco";
+"settings.theme" = "Tema";
+"settings.notifications" = "Notifiche";
+"settings.about" = "Informazioni";
+"settings.ok" = "OK";
+
+/* Theme Options */
+"theme.system" = "Sistema";
+"theme.light" = "Chiaro";
+"theme.dark" = "Scuro";
+
+/* Notifications */
+"notif.daily.body" = "Promemoria giornaliero: controlla le tue attività di oggi.";
+"notif.sample.body" = "Non perdertelo! Hai un'attività.";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "Usare la lingua di sistema?";
+"lang.system.sheet.message"  = "La lingua dell'app verrà impostata in base alla lingua del sistema iOS.";
+"lang.system.sheet.continue" = "Continua";
+"lang.system.sheet.cancel"   = "Annulla";
+
+"signout.confirm.title"   = "Esci";
+"signout.confirm.message" = "Sei sicuro di voler uscire dal tuo account?";
+"signout.confirm.cancel"  = "Annulla";
+"signout.confirm.ok"      = "Esci";
+
+"about.title"    = "Informazioni";
+"about.version"  = "Taskly v%@";
+"about.subtitle" = "Grazie per aver scelto Taskly!";
+
+"profile.email.title" = "E-mail";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "Attività";
+"filter.all" = "Tutti";
+"list.section.pending" = "ATTIVITÀ";
+"list.section.done" = "COMPLETATO";
+
+"empty.title" = "Ancora nessuna attività";
+"empty.subtitle" = "Scegli una categoria sopra. Puoi cambiare l'emoji tenendo premuto a lungo.";
+"empty.cta" = " Nuova Attività 🖇️";
+
+/* ADD TASK FLOW */
+"add.title" = "Nuova Attività";
+"add.message" = "Inserisci un titolo. L'emoji della categoria verrà scelta dal filtro in alto.";
+"add.placeholder.title" = "Titolo attività";
+"add.placeholder.notes" = "Note (opzionale)";
+"add.cancel" = "Annulla";
+"add.add" = "Aggiungi";
+"add.choose.category" = "Scegli Categoria";
+"add.back" = "Indietro";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "Informazioni mancanti";
+"alerts.missing.message" = "Il titolo dell'attività non può essere vuoto.";
+"common.error" = "Errore";
+"tasks.add.failed" = "Impossibile aggiungere l'attività.";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "Elimina";
+"actions.undo" = "Annulla";
+"actions.complete" = "Completa";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "Accesso richiesto";
+"auth.required.message" = "Per favore, accedi per aggiungere attività.";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "Modifica Categoria";
+"cat.edit.message" = "Inserisci un'unica emoji.";
+"cat.invalid.title" = "Emoji non valida";
+"cat.invalid.message" = "Per favore, inserisci solo un'emoji.";
+
+/* TASK DETAIL */
+"detail.title" = "Dettaglio Attività";
+"detail.no.date" = "Data non specificata";
+"detail.notes" = "Note";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "È il momento!";
+"reminder.thirtyMins.title" = "Mancano 30 minuti all'attività";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "OK";
+
+/* Günlük Hatırlatıcı (eksik anahtarlar) */
+"settings.dailyReminder" = "Promemoria Giornaliero";
+"settings.dailyReminder.subtitle.everydayAt" = "Ricevi un promemoria per le tue attività ogni mattina.";
+
+/* Eski tireli varyantı da güvence için ekleyelim */
+"settings.dailyReminder.subtitle.every-dayAt" = "Ricevi un promemoria per le tue attività ogni mattina.";
+
+/* Bildirim durumu (ekran altta yeşil yazı) */
+"settings.notifications.on" = "Notifiche attive";
+"settings.notifications.off" = "Notifiche disattivate";
+
+/* Bildirim izinleri uyarıları */
+"notifications.permission.title" = "Notifiche";
+"notifications.permission.sampleScheduled" = "Una notifica di prova è stata programmata con successo.";
+
+/* Dil (Giriş + Ayarlar) */
+"settings.language" = "Lingua";
+"settings.ok" = "OK";
+
+/* Sistem dili uyarısı */
+"lang.system.sheet.title" = "Usare la lingua di sistema?";
+"lang.system.sheet.message" = "La lingua dell'app seguirà la lingua del sistema iOS.";
+"lang.system.sheet.continue" = "Continua";
+"lang.system.sheet.cancel" = "Annulla";
+
+/* Ayarlar bağlantısı açılamazsa */
+"lang.system.unavailable" = "Le impostazioni della lingua non sono disponibili su questo dispositivo.";
+"profile.setName.title" = "Nome Utente";
+"profile.setName.message" = "Imposta un nome da visualizzare nel tuo profilo.";
+
+/* Profil – bilinmeyen ad fallback (GEREKLİ) */
+"profile.unknownName" = "Sconosciuto";
+
+/* Hesabı Sil (GEREKLİ) */
+"settings.account.delete" = "Elimina Account";
+"account.delete.title"    = "Elimina Account";
+"account.delete.message"  = "Questa azione è irreversibile. Tutti i tuoi dati verranno eliminati.";
+"common.delete"           = "Elimina";
+
+/* Bildirim izinleri uyarıları (GEREKLİ) */
+"notifications.permission.denied"   = "Permesso notifiche negato. Attivalo nelle impostazioni.";
+"notifications.permission.settings" = "Le notifiche sono disattivate. Puoi attivarle in Impostazioni > Notifiche.";
+
+/* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
+"settings.dailyReminder.subtitle.everydayAt" = "Ricevi un promemoria ogni giorno alle %@.";
+
+/* (Opsiyonel ama faydalı) */
+"profile.signin"          = "Accedi";
+"profile.signin.subtitle" = "Accedi con il tuo account per sincronizzare.";
+"profile.email.missing"   = "E-mail non trovata";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "Attività da mostrare";
+"filter.menu.allTasks"      = "Tutte le Attività";
+"filter.menu.todayTasks"    = "Attività di Oggi";
+"filter.menu.weekTasks"     = "Attività della Settimana";
+"filter.menu.overdueTasks"  = "Attività non completate";
+
+
+/*Geri Bildirim*/
+"settings.support"  = "Supporto e Feedback";
+"settings.legal"    = "Privacy e Termini";
+
+/* Mail */
+"mail.error.title"   = "E-mail";
+"mail.error.message" = "Impossibile aprire l'app e-mail.";
+
+
+/* Support & Feedback */
+"support.sendEmail" = "Invia E-mail";
+"support.reportBug" = "Segnala un Bug";
+"support.email.subject" = "Supporto / Feedback Taskly";
+"support.email.subject.bug" = "Segnalazione Bug Taskly";
+
+/* Support Mail Body */
+"support.mail.greeting" = "Ciao,";
+"support.mail.bugPrompt" = "Vorrei segnalare un bug:";
+"support.mail.feedbackPrompt" = "Il mio feedback:";
+"support.mail.appLine" = "App: %@";
+"support.mail.versionLine" = "Versione: %@ (%@)";
+"support.mail.deviceLine" = "Dispositivo: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "Informativa sulla Privacy";
+"legal.termsOfUse" = "Termini di Utilizzo";
+
+/* Link Error */
+"link.error.title" = "Link";
+"link.error.message" = "Impossibile aprire il link.";
+
+/* Mail Error */
+"mail.error.title" = "E-mail";
+"mail.error.message" = "Impossibile aprire l'app e-mail.";
+
+"settings.rateUs" = "Valutaci";
+"settings.rateUs.subtitle" = "Lascia una valutazione su App Store";

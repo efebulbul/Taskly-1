@@ -1,0 +1,299 @@
+"app.title" = "Taskly";
+"common.ok" = "OK";
+"common.cancel" = "キャンセル";
+"common.save" = "保存";
+"common.error" = "エラー";
+
+/* Tabs */
+"tab.tasks" = "タスク";
+"tab.settings" = "設定";
+
+/* Titles */
+"items.title" = "タスク";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "ログイン";
+"login.subtitle" = "タスクをクラウドと同期する";
+"login.email.placeholder" = "メールアドレス";
+"login.password.placeholder" = "パスワード";
+"login.signin" = "ログイン";
+"login.apple" = "Appleでサインイン";
+"login.google" = "Googleでサインイン";
+"login.orcontinue" = "または以下で続行";
+"login.noaccount" = "アカウントをお持ちでないですか？ 新規登録";
+"login.footer" = "続行することで、プライバシーポリシーおよび利用規約に同意したことになります。";
+
+/* Register */
+"register.title" = "新規登録";
+"register.subtitle" = "登録は1分で完了します";
+"register.name.placeholder" = "氏名";
+"register.email.placeholder" = "メールアドレス";
+"register.password.placeholder" = "パスワード";
+"register.confirm.placeholder" = "パスワードを再入力";
+"register.signup" = "登録する";
+"register.footer" = "既にアカウントをお持ちですか？ ログイン";
+
+/* Auth / Errors */
+"auth.error.title" = "認証エラー";
+"auth.validation.missing" = "有効なメールアドレスと6文字以上のパスワードを入力してください。";
+"auth.userNotFound.title" = "アカウントが見つかりません";
+"auth.userNotFound.message" = "このメールアドレスで登録されたアカウントが見つかりません。新規登録しますか？";
+"auth.wrongPassword.title" = "パスワードが違います";
+"auth.wrongPassword.message" = "パスワードを確認して、もう一度お試しください。";
+"auth.unavailable.title" = "利用不可";
+"auth.unavailable.message" = "メールログインにはFirebaseAuthが必要です。登録するか、Apple/Googleを使用してください。";
+"auth.unsupported.title" = "未対応";
+"auth.unsupported.message" = "この機能にはiOS 13以上が必要です。";
+"auth.google.title" = "Googleログイン";
+"auth.google.clientIdMissing" = "ClientIDが見つかりません。GoogleService-Info.plistを確認してください。";
+"auth.google.sdkMissing" = "GoogleSignIn SDKが追加されていません。Swift Package Manager経由で追加してください。";
+"auth.google.missingToken" = "Google IDトークンを取得できませんでした。";
+"auth.apple.missingToken" = "Apple IDトークンを取得できませんでした。";
+"auth.firebase.missing.title" = "Firebase未設定";
+"auth.firebase.missing.message" = "FirebaseApp.configure()が不足しています。正しく呼び出されているか、plistファイルが存在するか確認してください。";
+"auth.required.title" = "ログインが必要です";
+"auth.required.message" = "タスクを追加するにはログインしてください。";
+
+/* Register Success / Errors */
+"register.error.title" = "エラー";
+"register.validation.missing" = "すべての項目を入力してください。";
+"register.password.mismatch" = "パスワードが一致しません。";
+"register.success.title" = "登録完了";
+"register.success.message" = "アカウントが正常に作成されました。";
+"register.error.generic" = "登録に失敗しました。もう一度お試しください。";
+"register.error.emailInUse" = "このメールアドレスは既に登録されています。";
+"register.error.invalidEmail" = "有効なメールアドレスを入力してください。";
+"register.error.weakPassword" = "パスワードは6文字以上で設定してください。";
+"register.error.network" = "ネットワークエラー。接続状況を確認して、もう一度お試しください。";
+"register.demo.title" = "デモ登録";
+"register.demo.message" = "FirebaseAuthがインストールされていません。アカウントはローカルに作成されました。";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================= */
+"filter.all" = "すべて";
+"filter.today" = "今日";
+"filter.overdue" = "期限切れ";
+
+"list.section.pending" = "進行中";
+"list.section.done"    = "完了済み";
+
+"empty.title"    = "タスクがありません";
+"empty.subtitle" = "上のカテゴリーから選んでください。絵文字を長押しすると変更できます。";
+"empty.cta"      = " 新しいタスク 🖇️";
+
+/* Actions */
+"actions.delete"   = "削除";
+"actions.undo"     = "元に戻す";
+"actions.complete" = "完了";
+"actions.signout"  = "サインアウト";
+"actions.edit"     = "編集";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
+"add.title" = "タスクを追加";
+"add.message" = "タイトルを入力。絵文字カテゴリーは上部のフィルターに基づいて設定されます。";
+"add.placeholder.title" = "タスクのタイトル";
+"add.placeholder.notes" = "メモ (任意)";
+"add.cancel" = "キャンセル";
+"add.add" = "追加";
+"add.choose.category" = "カテゴリーを選択";
+"add.back" = "戻る";
+
+"detail.title" = "タスク詳細";
+"detail.no.date" = "日付未設定";
+"detail.notes" = "説明";
+
+"alerts.missing.title" = "入力不足";
+"alerts.missing.message" = "タスクのタイトルは必須です。";
+"tasks.add.failed" = "タスクを追加できませんでした。";
+
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "設定";
+"settings.language" = "言語";
+"settings.language.system" = "システム言語";
+"settings.language.turkish" = "トルコ語";
+"settings.language.english" = "英語";
+"settings.language.german" = "ドイツ語";
+"settings.theme" = "テーマ";
+"settings.notifications" = "通知";
+"settings.about" = "アプリについて";
+"settings.ok" = "OK";
+
+/* Theme Options */
+"theme.system" = "システム設定に従う";
+"theme.light" = "ライト";
+"theme.dark" = "ダーク";
+
+/* Notifications */
+"notif.daily.body" = "デイリーリマインダー：今日のタスクを確認しましょう。";
+"notif.sample.body" = "お忘れなく！処理すべきタスクがあります。";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "システム言語を使用しますか？";
+"lang.system.sheet.message"  = "アプリの言語はiOSのシステム設定に従います。";
+"lang.system.sheet.continue" = "続ける";
+"lang.system.sheet.cancel"   = "キャンセル";
+
+"signout.confirm.title"   = "サインアウト";
+"signout.confirm.message" = "アカウントからサインアウトしてもよろしいですか？";
+"signout.confirm.cancel"  = "キャンセル";
+"signout.confirm.ok"      = "サインアウト";
+
+"about.title"    = "情報";
+"about.version"  = "Taskly v%@";
+"about.subtitle" = "Tasklyをご利用いただきありがとうございます！";
+
+"profile.email.title" = "メールアドレス";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "タスク";
+"filter.all" = "すべて";
+"list.section.pending" = "進行中";
+"list.section.done" = "完了済み";
+
+"empty.title" = "タスクがありません";
+"empty.subtitle" = "上のカテゴリーから選んでください。絵文字を長押しすると変更できます。";
+"empty.cta" = " 新しいタスク 🖇️";
+
+/* ADD TASK FLOW */
+"add.title" = "タスクを追加";
+"add.message" = "タイトルを入力。絵文字カテゴリーは上部のフィルターに基づいて設定されます。";
+"add.placeholder.title" = "タスクのタイトル";
+"add.placeholder.notes" = "メモ (任意)";
+"add.cancel" = "キャンセル";
+"add.add" = "追加";
+"add.choose.category" = "カテゴリーを選択";
+"add.back" = "戻る";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "入力不足";
+"alerts.missing.message" = "タスクのタイトルは必須です。";
+"common.error" = "エラー";
+"tasks.add.failed" = "タスクを追加できませんでした。";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "削除";
+"actions.undo" = "元に戻す";
+"actions.complete" = "完了";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "ログインが必要です";
+"auth.required.message" = "タスクを追加するにはログインしてください。";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "カテゴリーを編集";
+"cat.edit.message" = "絵文字を1つ入力してください。";
+"cat.invalid.title" = "無効な絵文字";
+"cat.invalid.message" = "絵文字は1つだけ入力してください。";
+
+/* TASK DETAIL */
+"detail.title" = "タスク詳細";
+"detail.no.date" = "日付未設定";
+"detail.notes" = "メモ";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "タスクの時間です！";
+"reminder.thirtyMins.title" = "タスク開始の30分前です";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "OK";
+
+/* Daily Reminder */
+"settings.dailyReminder" = "デイリーリマインダー";
+"settings.dailyReminder.subtitle.everydayAt" = "毎朝、タスクのリマインダーを受け取ります。";
+"settings.dailyReminder.subtitle.every-dayAt" = "毎朝、タスクのリマインダーを受け取ります。";
+
+/* Notification Status */
+"settings.notifications.on" = "通知オン";
+"settings.notifications.off" = "通知オフ";
+
+/* Permissions */
+"notifications.permission.title" = "通知";
+"notifications.permission.sampleScheduled" = "サンプル通知がスケジュールされました。";
+
+/* Language Alert */
+"lang.system.sheet.title" = "システム言語を使用しますか？";
+"lang.system.sheet.message" = "アプリの言語設定をiOSのシステム設定と同期します。";
+"lang.system.sheet.continue" = "続ける";
+"lang.system.sheet.cancel" = "キャンセル";
+
+/* System unavailable */
+"lang.system.unavailable" = "このデバイスでは言語設定を利用できません。";
+"profile.setName.title" = "ユーザー名";
+"profile.setName.message" = "プロフィールに表示される名前を設定してください。";
+
+/* Profile fallback */
+"profile.unknownName" = "不明";
+
+/* Account Delete */
+"settings.account.delete" = "アカウントを削除";
+"account.delete.title"    = "アカウントを削除";
+"account.delete.message"  = "この操作は取り消せません。すべてのデータが削除されます。";
+"common.delete"           = "削除";
+
+/* Notification Permission Errors */
+"notifications.permission.denied"   = "通知が許可されていません。設定から有効にしてください。";
+"notifications.permission.settings" = "通知設定がオフになっています。「設定 > 通知」からオンにできます。";
+
+/* Daily Reminder with Placeholder */
+"settings.dailyReminder.subtitle.everydayAt" = "毎日 %@ にリマインドを受け取ります。";
+
+/* Additional Profile info */
+"profile.signin"          = "ログイン";
+"profile.signin.subtitle" = "アカウントでログインして同期する。";
+"profile.email.missing"   = "メールアドレスが見つかりません";
+
+/* Filter Sheet */
+"filter.sheet.title"        = "表示するタスク";
+"filter.menu.allTasks"      = "すべてのタスク";
+"filter.menu.todayTasks"    = "今日のタスク";
+"filter.menu.weekTasks"     = "今週のタスク";
+"filter.menu.overdueTasks"  = "未完了のタスク";
+
+/* Support */
+"settings.support"  = "サポートとフィードバック";
+"settings.legal"      = "プライバシーと規約";
+
+/* Mail Error */
+"mail.error.title"   = "メール";
+"mail.error.message" = "メールアプリを開けませんでした。";
+
+/* Support & Feedback */
+"support.sendEmail" = "メールを送る";
+"support.reportBug" = "バグを報告";
+"support.email.subject" = "Taskly サポート / フィードバック";
+"support.email.subject.bug" = "Taskly バグ報告";
+
+/* Support Mail Body */
+"support.mail.greeting" = "こんにちは、";
+"support.mail.bugPrompt" = "以下のバグを報告します：";
+"support.mail.feedbackPrompt" = "フィードバック：";
+"support.mail.appLine" = "アプリ: %@";
+"support.mail.versionLine" = "バージョン: %@ (%@)";
+"support.mail.deviceLine" = "デバイス: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "プライバシーポリシー";
+"legal.termsOfUse" = "利用規約";
+
+/* Link Error */
+"link.error.title" = "リンク";
+"link.error.message" = "リンクを開けませんでした。";
+
+/* Mail Error redundant */
+"mail.error.title" = "メール";
+"mail.error.message" = "メールアプリを開けませんでした。";
+
+"settings.rateUs" = "評価する";
+"settings.rateUs.subtitle" = "App Storeで評価してください";

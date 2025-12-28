@@ -1,0 +1,307 @@
+"app.title" = "Taskly";
+"common.ok" = "ОК";
+"common.cancel" = "Скасувати";
+"common.save" = "Зберегти";
+"common.error" = "Помилка";
+
+/* Tabs */
+"tab.tasks" = "Завдання";
+"tab.settings" = "Налаштування";
+
+/* Titles */
+"items.title" = "Завдання";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "Вхід";
+"login.subtitle" = "Синхронізуйте свої завдання з хмарою";
+"login.email.placeholder" = "E-mail";
+"login.password.placeholder" = "Пароль";
+"login.signin" = "Увійти";
+"login.apple" = "Продовжити з Apple";
+"login.google" = "Продовжити з Google";
+"login.orcontinue" = "або продовжити через";
+"login.noaccount" = "Немає акаунту? Зареєструватися";
+"login.footer" = "Продовжуючи, ви приймаєте нашу Політику конфіденційності та Умови використання.";
+
+/* Register */
+"register.title" = "Реєстрація";
+"register.subtitle" = "Це займе всього хвилину";
+"register.name.placeholder" = "Ім'я та прізвище";
+"register.email.placeholder" = "E-mail";
+"register.password.placeholder" = "Пароль";
+"register.confirm.placeholder" = "Підтвердьте пароль";
+"register.signup" = "Зареєструватися";
+"register.footer" = "Вже є акаунт? Увійти";
+
+/* Auth / Errors */
+"auth.error.title" = "Помилка входу";
+"auth.validation.missing" = "Введіть коректний e-mail та пароль не менше 6 символів.";
+"auth.userNotFound.title" = "Акаунт не знайдено";
+"auth.userNotFound.message" = "Акаунт з таким e-mail не знайдено. Бажаєте зареєструватися?";
+"auth.wrongPassword.title" = "Невірний пароль";
+"auth.wrongPassword.message" = "Будь ласка, перевірте пароль і спробуйте знову.";
+"auth.unavailable.title" = "Недоступно";
+"auth.unavailable.message" = "Вхід через e-mail потребує FirebaseAuth. Будь ласка, зареєструйтеся або використовуйте Apple/Google.";
+"auth.unsupported.title" = "Не підтримується";
+"auth.unsupported.message" = "Ця функція потребує iOS 13 або новішої версії.";
+"auth.google.title" = "Вхід через Google";
+"auth.google.clientIdMissing" = "ClientID не знайдено. Перевірте файл GoogleService-Info.plist.";
+"auth.google.sdkMissing" = "GoogleSignIn SDK не додано. Будь ласка, додайте його через Swift Package Manager.";
+"auth.google.missingToken" = "Не вдалося отримати токен Google.";
+"auth.apple.missingToken" = "Не вдалося отримати токен Apple.";
+"auth.firebase.missing.title" = "Firebase не налаштовано";
+"auth.firebase.missing.message" = "Відсутній FirebaseApp.configure(). Переконайтеся, що він викликається і файл GoogleService-Info.plist на місці.";
+"auth.required.title" = "Необхідно увійти";
+"auth.required.message" = "Будь ласка, увійдіть, щоб додавати завдання.";
+
+/* Register Success / Errors */
+"register.error.title" = "Помилка";
+"register.validation.missing" = "Будь ласка, заповніть усі поля.";
+"register.password.mismatch" = "Паролі не збігаються.";
+"register.success.title" = "Реєстрація успішна";
+"register.success.message" = "Ваш акаунт успішно створено.";
+"register.error.generic" = "Помилка реєстрації. Спробуйте ще раз.";
+"register.error.emailInUse" = "Цей e-mail вже використовується.";
+"register.error.invalidEmail" = "Будь ласка, введіть коректну e-mail адресу.";
+"register.error.weakPassword" = "Пароль має бути не менше 6 символів.";
+"register.error.network" = "Помилка мережі. Перевірте інтернет-з'єднання та спробуйте ще раз.";
+"register.demo.title" = "Демо-реєстрація";
+"register.demo.message" = "FirebaseAuth не встановлено. Акаунт створено локально. Спробуйте увійти.";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================= */
+"filter.all" = "Всі";
+"filter.today" = "Сьогодні";
+"filter.overdue" = "Протерміновані";
+
+"list.section.pending" = "ЗАВДАННЯ";
+"list.section.done"    = "ЗАВЕРШЕНО";
+
+"empty.title"    = "Завдань поки немає";
+"empty.subtitle" = "Оберіть категорію вище. Натисніть і утримуйте емодзі, щоб змінити його.";
+"empty.cta"      = " Нове завдання 🖇️";
+
+/* Actions */
+"actions.delete"   = "Видалити";
+"actions.undo"     = "Скасувати";
+"actions.complete" = "Завершити";
+"actions.signout"  = "Вийти";
+"actions.edit"     = "Редагувати";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
+"add.title" = "Нове завдання";
+"add.message" = "Введіть заголовок. Емодзі категорії буде вибрано з фільтра вище.";
+"add.placeholder.title" = "Заголовок завдання";
+"add.placeholder.notes" = "Нотатки (необов'язково)";
+"add.cancel" = "Скасувати";
+"add.add" = "Додати";
+"add.choose.category" = "Обрати категорію";
+"add.back" = "Назад";
+
+"detail.title" = "Деталі завдання";
+"detail.no.date" = "Дата не вказана";
+"detail.notes" = "Опис";
+
+"alerts.missing.title" = "Недостатньо даних";
+"alerts.missing.message" = "Заголовок завдання не може бути порожнім.";
+"tasks.add.failed" = "Не вдалося додати завдання.";
+
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "Налаштування";
+"settings.language" = "Мова";
+"settings.language.system" = "Мова системи";
+"settings.language.turkish" = "Турецька";
+"settings.language.english" = "Англійська";
+"settings.language.german" = "Німецька";
+"settings.theme" = "Тема";
+"settings.notifications" = "Сповіщення";
+"settings.about" = "Про додаток";
+"settings.ok" = "ОК";
+
+/* Theme Options */
+"theme.system" = "Системна";
+"theme.light" = "Світла";
+"theme.dark" = "Темна";
+
+/* Notifications */
+"notif.daily.body" = "Щоденне нагадування: перевірте свої завдання на сьогодні.";
+"notif.sample.body" = "Не пропустіть! У вас є завдання.";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "Використовувати мову системи?";
+"lang.system.sheet.message"  = "Мова додатка буде відповідати налаштуванням системи iOS.";
+"lang.system.sheet.continue" = "Продовжити";
+"lang.system.sheet.cancel"   = "Скасувати";
+
+"signout.confirm.title"   = "Вихід";
+"signout.confirm.message" = "Ви впевнені, що хочете вийти з акаунту?";
+"signout.confirm.cancel"  = "Скасувати";
+"signout.confirm.ok"      = "Вийти";
+
+"about.title"    = "Про додаток";
+"about.version"  = "Taskly v%@";
+"about.subtitle" = "Дякуємо, що користуєтесь Taskly!";
+
+"profile.email.title" = "E-mail";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "Завдання";
+"filter.all" = "Всі";
+"list.section.pending" = "ЗАВДАННЯ";
+"list.section.done" = "ЗАВЕРШЕНО";
+
+"empty.title" = "Завдань поки немає";
+"empty.subtitle" = "Оберіть категорію вище. Натисніть і утримуйте емодзі, щоб змінити його.";
+"empty.cta" = " Нове завдання 🖇️";
+
+/* ADD TASK FLOW */
+"add.title" = "Нове завдання";
+"add.message" = "Введіть заголовок. Емодзі категорії буде вибрано з фільтра вище.";
+"add.placeholder.title" = "Заголовок завдання";
+"add.placeholder.notes" = "Нотатки (необов'язково)";
+"add.cancel" = "Скасувати";
+"add.add" = "Додати";
+"add.choose.category" = "Обрати категорію";
+"add.back" = "Назад";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "Недостатньо даних";
+"alerts.missing.message" = "Заголовок завдання не може бути порожнім.";
+"common.error" = "Помилка";
+"tasks.add.failed" = "Не вдалося додати завдання.";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "Видалити";
+"actions.undo" = "Скасувати";
+"actions.complete" = "Завершити";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "Необхідно увійти";
+"auth.required.message" = "Будь ласка, увійдіть, щоб додавати завдання.";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "Змінити категорію";
+"cat.edit.message" = "Введіть один емодзі.";
+"cat.invalid.title" = "Некоректний емодзі";
+"cat.invalid.message" = "Будь ласка, введіть тільки один емодзі.";
+
+/* TASK DETAIL */
+"detail.title" = "Деталі завдання";
+"detail.no.date" = "Дата не вказана";
+"detail.notes" = "Нотатки";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "Час прийшов!";
+"reminder.thirtyMins.title" = "До завдання залишилося 30 хвилин";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "ОК";
+
+/* Günlük Hatırlatıcı (eksik anahtarlar) */
+"settings.dailyReminder" = "Щоденне нагадування";
+"settings.dailyReminder.subtitle.everydayAt" = "Отримуйте нагадування про завдання щоранку.";
+
+/* Eski tireli varyantı da güvence için ekleyelim */
+"settings.dailyReminder.subtitle.every-dayAt" = "Отримуйте нагадування про завдання щоранку.";
+
+/* Bildirim durumu (ekran altta yeşil yazı) */
+"settings.notifications.on" = "Сповіщення увімкнено";
+"settings.notifications.off" = "Сповіщення вимкнено";
+
+/* Bildirim izinleri uyarıları */
+"notifications.permission.title" = "Сповіщення";
+"notifications.permission.sampleScheduled" = "Тестове сповіщення успішно заплановано.";
+
+/* Dil (Giriş + Ayarlar) */
+"settings.language" = "Мова";
+"settings.ok" = "ОК";
+
+/* Sistem dili uyarısı */
+"lang.system.sheet.title" = "Використовувати мову системи?";
+"lang.system.sheet.message" = "Мова додатка буде відповідати системній мові iOS.";
+"lang.system.sheet.continue" = "Продовжити";
+"lang.system.sheet.cancel" = "Скасувати";
+
+/* Ayarlar bağlantısı açıламazsa */
+"lang.system.unavailable" = "Налаштування мови недоступні на цьому пристрої.";
+"profile.setName.title" = "Ім'я користувача";
+"profile.setName.message" = "Вкажіть ім'я, яке буде відображатися у профілі.";
+
+/* Profil – bilinmeyen ad fallback (GEREKLİ) */
+"profile.unknownName" = "Невідомо";
+
+/* Hesabı Sil (GEREKLİ) */
+"settings.account.delete" = "Видалити акаунт";
+"account.delete.title"    = "Видалення акаунту";
+"account.delete.message"  = "Цю дію неможливо скасувати. Усі ваші дані будуть видалені.";
+"common.delete"           = "Видалити";
+
+/* Bildirim izinleri uyarıları (GEREKLİ) */
+"notifications.permission.denied"   = "Доступ до сповіщень заборонено. Увімкніть їх у налаштуваннях.";
+"notifications.permission.settings" = "Сповіщення вимкнено. Ви можете увімкнути їх у Налаштування > Сповіщення.";
+
+/* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
+"settings.dailyReminder.subtitle.everydayAt" = "Отримуйте нагадування щодня о %@.";
+
+/* (Opsiyonel ama faydalı) */
+"profile.signin"          = "Увійти";
+"profile.signin.subtitle" = "Увійдіть у свій акаунт для синхронізації.";
+"profile.email.missing"   = "E-mail не знайдено";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "Завдання для відображення";
+"filter.menu.allTasks"      = "Всі завдання";
+"filter.menu.todayTasks"    = "Завдання на сьогодні";
+"filter.menu.weekTasks"     = "Завдання на тиждень";
+"filter.menu.overdueTasks"  = "Незавершені завдання";
+
+
+/*Geri Bildirim*/
+"settings.support"  = "Підтримка та відгуки";
+"settings.legal"      = "Конфіденційність та умови";
+
+/* Mail */
+"mail.error.title"   = "E-mail";
+"mail.error.message" = "Не вдалося відкрити поштовий додаток.";
+
+
+/* Support & Feedback */
+"support.sendEmail" = "Надіслати листа";
+"support.reportBug" = "Повідомити про помилку";
+"support.email.subject" = "Підтримка / Відгук Taskly";
+"support.email.subject.bug" = "Звіт про помилку Taskly";
+
+/* Support Mail Body */
+"support.mail.greeting" = "Вітаю,";
+"support.mail.bugPrompt" = "Я хочу повідомити про помилку:";
+"support.mail.feedbackPrompt" = "Мій відгук:";
+"support.mail.appLine" = "Додаток: %@";
+"support.mail.versionLine" = "Версія: %@ (%@)";
+"support.mail.deviceLine" = "Пристрій: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "Політика конфіденційності";
+"legal.termsOfUse" = "Умови використання";
+
+/* Link Error */
+"link.error.title" = "Посилання";
+"link.error.message" = "Не вдалося відкрити посилання.";
+
+/* Mail Error */
+"mail.error.title" = "E-mail";
+"mail.error.message" = "Не вдалося відкрити поштовий додаток.";
+
+"settings.rateUs" = "Оцініть нас";
+"settings.rateUs.subtitle" = "Залиште оцінку в App Store";

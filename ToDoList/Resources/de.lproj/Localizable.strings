@@ -294,3 +294,6 @@
 /* Mail Error */
 "mail.error.title" = "E-Mail";
 "mail.error.message" = "Die E-Mail-App konnte nicht geöffnet werden.";
+
+"settings.rateUs" = "Bewerten";
+"settings.rateUs.subtitle" = "Im App Store bewerten";

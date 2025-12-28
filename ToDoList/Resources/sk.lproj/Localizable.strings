@@ -1,0 +1,295 @@
+"app.title" = "Taskly";
+"common.ok" = "OK";
+"common.cancel" = "Zrušiť";
+"common.save" = "Uložiť";
+"common.error" = "Chyba";
+
+/* Tabs */
+"tab.tasks" = "Úlohy";
+"tab.settings" = "Nastavenia";
+
+/* Titles */
+"items.title" = "Úlohy";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "Prihlásenie";
+"login.subtitle" = "Synchronizujte svoje úlohy s cloudom";
+"login.email.placeholder" = "E-mail";
+"login.password.placeholder" = "Heslo";
+"login.signin" = "Prihlásiť sa";
+"login.apple" = "Pokračovať cez Apple";
+"login.google" = "Pokračovať cez Google";
+"login.orcontinue" = "alebo pokračujte cez";
+"login.noaccount" = "Nemáte účet? Zaregistrujte sa";
+"login.footer" = "Pokračovaním súhlasíte s našimi Zásadami ochrany osobných údajov a Podmienkami používania.";
+
+/* Register */
+"register.title" = "Registrácia";
+"register.subtitle" = "Zaberie to len minútu";
+"register.name.placeholder" = "Meno a priezvisko";
+"register.email.placeholder" = "E-mail";
+"register.password.placeholder" = "Heslo";
+"register.confirm.placeholder" = "Potvrďte heslo";
+"register.signup" = "Zaregistrovať sa";
+"register.footer" = "Už máte účet? Prihláste sa";
+
+/* Auth / Errors */
+"auth.error.title" = "Chyba prihlásenia";
+"auth.validation.missing" = "Zadajte platný e-mail a heslo s dĺžkou aspoň 6 znakov.";
+"auth.userNotFound.title" = "Účet nenájdený";
+"auth.userNotFound.message" = "K tomuto e-mailu nebol nájdený žiadny účet. Chcete sa zaregistrovať?";
+"auth.wrongPassword.title" = "Nesprávne heslo";
+"auth.wrongPassword.message" = "Skontrolujte svoje heslo a skúste to znova.";
+"auth.unavailable.title" = "Nedostupné";
+"auth.unavailable.message" = "Prihlásenie cez e-mail vyžaduje FirebaseAuth. Zaregistrujte sa alebo použite Apple/Google.";
+"auth.unsupported.title" = "Nepodporované";
+"auth.unsupported.message" = "Táto funkcia vyžaduje iOS 13 alebo novší.";
+"auth.google.title" = "Google prihlásenie";
+"auth.google.clientIdMissing" = "ClientID nebol nájdený. Skontrolujte súbor GoogleService-Info.plist.";
+"auth.google.sdkMissing" = "GoogleSignIn SDK nie je pridané. Pridajte ho cez Swift Package Manager.";
+"auth.google.missingToken" = "Nepodarilo sa získať Google ID token.";
+"auth.apple.missingToken" = "Nepodarilo sa získať Apple ID token.";
+"auth.firebase.missing.title" = "Firebase nie je konfigurovaný";
+"auth.firebase.missing.message" = "Chýba FirebaseApp.configure(). Uistite sa, že je volaný a GoogleService-Info.plist existuje.";
+"auth.required.title" = "Vyžaduje sa prihlásenie";
+"auth.required.message" = "Ak chcete pridať úlohu, prihláste sa.";
+
+/* Register Success / Errors */
+"register.error.title" = "Chyba";
+"register.validation.missing" = "Vyplňte všetky polia.";
+"register.password.mismatch" = "Heslá sa nezhodujú.";
+"register.success.title" = "Registrácia úspešná";
+"register.success.message" = "Váš účet bol úspešne vytvorený.";
+"register.error.generic" = "Registrácia zlyhala. Skúste to znova.";
+"register.error.emailInUse" = "Táto e-mailová adresa sa už používa.";
+"register.error.invalidEmail" = "Zadajte platnú e-mailovú adresu.";
+"register.error.weakPassword" = "Heslo musí mať aspoň 6 znakov.";
+"register.error.network" = "Chyba siete. Skontrolujte pripojenie a skúste to znova.";
+"register.demo.title" = "Demo registrácia";
+"register.demo.message" = "FirebaseAuth nie je nainštalovaný. Účet bol vytvorený lokálne. Skúste sa prihlásiť.";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================= */
+"filter.all" = "Všetko";
+"filter.today" = "Dnes";
+"filter.overdue" = "Zmeškané";
+
+"list.section.pending" = "ÚLOHY";
+"list.section.done"    = "DOKONČENÉ";
+
+"empty.title"    = "Zatiaľ žiadne úlohy";
+"empty.subtitle" = "Vyberte kategóriu hore. Emojis môžete zmeniť dlhým stlačením.";
+"empty.cta"      = " Nová úloha 🖇️";
+
+/* Actions */
+"actions.delete"   = "Vymazať";
+"actions.undo"     = "Späť";
+"actions.complete" = "Dokončiť";
+"actions.signout"  = "Odhlásiť sa";
+"actions.edit"     = "Upraviť";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
+"add.title" = "Nová úloha";
+"add.message" = "Zadajte názov. Kategória emoji sa vyberie podľa horného filtra.";
+"add.placeholder.title" = "Názov úlohy";
+"add.placeholder.notes" = "Poznámky (voliteľné)";
+"add.cancel" = "Zrušiť";
+"add.add" = "Pridať";
+"add.choose.category" = "Vybrať kategóriu";
+"add.back" = "Späť";
+
+"detail.title" = "Detail úlohy";
+"detail.no.date" = "Dátum nie je určený";
+"detail.notes" = "Popis";
+
+"alerts.missing.title" = "Chýbajúce údaje";
+"alerts.missing.message" = "Názov úlohy nemôže byť prázdny.";
+"tasks.add.failed" = "Úlohu sa nepodarilo pridať.";
+
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "Nastavenia";
+"settings.language" = "Jazyk";
+"settings.language.system" = "Systémový jazyk";
+"settings.language.turkish" = "Turečtina";
+"settings.language.english" = "Angličtina";
+"settings.language.german" = "Nemčina";
+"settings.theme" = "Téma";
+"settings.notifications" = "Hlásenia";
+"settings.about" = "O aplikácii";
+"settings.ok" = "OK";
+
+/* Theme Options */
+"theme.system" = "Systém";
+"theme.light" = "Svetlá";
+"theme.dark" = "Tmavá";
+
+/* Notifications */
+"notif.daily.body" = "Denná pripomienka: Pozrite si dnešné úlohy.";
+"notif.sample.body" = "Nezmeškajte to! Máte úlohu.";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "Použiť systémový jazyk?";
+"lang.system.sheet.message"  = "Jazyk aplikácie bude nastavený podľa jazyka systému iOS.";
+"lang.system.sheet.continue" = "Pokračovať";
+"lang.system.sheet.cancel"   = "Zrušiť";
+
+"signout.confirm.title"   = "Odhlásiť sa";
+"signout.confirm.message" = "Naozaj sa chcete odhlásiť zo svojho účtu?";
+"signout.confirm.cancel"  = "Zrušiť";
+"signout.confirm.ok"      = "Odhlásiť sa";
+
+"about.title"    = "O aplikácii";
+"about.version"  = "Taskly v%@";
+"about.subtitle" = "Ďakujeme, že používate Taskly!";
+
+"profile.email.title" = "E-mail";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "Úlohy";
+"filter.all" = "Všetko";
+"list.section.pending" = "ÚLOHY";
+"list.section.done" = "DOKONČENÉ";
+
+"empty.title" = "Zatiaľ žiadne úlohy";
+"empty.subtitle" = "Vyberte kategóriu hore. Emojis môžete zmeniť dlhým stlačením.";
+"empty.cta" = " Nová úloha 🖇️";
+
+/* ADD TASK FLOW */
+"add.title" = "Nová úloha";
+"add.message" = "Zadajte názov. Kategória emoji sa vyberie podľa horného filtra.";
+"add.placeholder.title" = "Názov úlohy";
+"add.placeholder.notes" = "Poznámky (voliteľné)";
+"add.cancel" = "Zrušiť";
+"add.add" = "Pridať";
+"add.choose.category" = "Vybrať kategóriu";
+"add.back" = "Späť";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "Chýbajúce údaje";
+"alerts.missing.message" = "Názov úlohy nemôže byť prázdny.";
+"common.error" = "Chyba";
+"tasks.add.failed" = "Úlohu sa nepodarilo pridať.";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "Vymazať";
+"actions.undo" = "Späť";
+"actions.complete" = "Dokončiť";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "Vyžaduje sa prihlásenie";
+"auth.required.message" = "Ak chcete pridať úlohu, prihláste sa.";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "Upraviť kategóriu";
+"cat.edit.message" = "Zadajte jedno emoji.";
+"cat.invalid.title" = "Neplatné emoji";
+"cat.invalid.message" = "Zadajte, prosím, iba jedno emoji.";
+
+/* TASK DETAIL */
+"detail.title" = "Detail úlohy";
+"detail.no.date" = "Dátum nie je určený";
+"detail.notes" = "Poznámky";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "Čas na úlohu!";
+"reminder.thirtyMins.title" = "Do úlohy zostáva 30 minút";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "OK";
+
+/* Günlük Hatırlatıcı */
+"settings.dailyReminder" = "Denná pripomienka";
+"settings.dailyReminder.subtitle.everydayAt" = "Dostávajte pripomienky na svoje úlohy každé ráno.";
+"settings.dailyReminder.subtitle.every-dayAt" = "Dostávajte pripomienky na svoje úlohy každé ráno.";
+
+/* Bildirim durumu */
+"settings.notifications.on" = "Hlásenia zapnuté";
+"settings.notifications.off" = "Hlásenia vypnuté";
+
+/* Bildirim izinleri uyarıları */
+"notifications.permission.title" = "Hlásenia";
+"notifications.permission.sampleScheduled" = "Vzorové hlásenie bolo úspešne naplánované.";
+
+/* Sistem dili uyarısı */
+"lang.system.sheet.title" = "Použiť systémový jazyk?";
+"lang.system.sheet.message" = "Jazyk aplikácie bude sledovať systémový jazyk iOS.";
+"lang.system.sheet.continue" = "Pokračovať";
+"lang.system.sheet.cancel" = "Zrušiť";
+
+/* Ayarlar bağlantısı açılamazsa */
+"lang.system.unavailable" = "Nastavenia jazyka nie sú na tomto zariadení dostupné.";
+"profile.setName.title" = "Používateľské meno";
+"profile.setName.message" = "Nastavte meno, ktoré sa bude zobrazovať vo vašom profile.";
+
+/* Profil fallback */
+"profile.unknownName" = "Neznáme";
+
+/* Hesabı Sil */
+"settings.account.delete" = "Zmazať účet";
+"account.delete.title"    = "Zmazať účet";
+"account.delete.message"  = "Túto operáciu nie je možné vrátiť späť. Všetky vaše údaje budú vymazané.";
+"common.delete"           = "Zmazať";
+
+/* Bildirim izinleri uyarıları */
+"notifications.permission.denied"   = "Povolenie na hlásenia nebolo udelené. Aktivujte ho v nastaveniach.";
+"notifications.permission.settings" = "Povolenie na hlásenia je vypnuté. Môžete ho zapnúť v časti Nastavenia > Hlásenia.";
+
+/* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
+"settings.dailyReminder.subtitle.everydayAt" = "Dostávajte pripomienku každý deň o %@.";
+
+/* Profil senkronizasyon */
+"profile.signin"          = "Prihlásiť sa";
+"profile.signin.subtitle" = "Prihláste sa do svojho účtu pre synchronizáciu.";
+"profile.email.missing"   = "E-mail nebol nájdený";
+
+/* Filter Sheet */
+"filter.sheet.title"        = "Zobraziť úlohy";
+"filter.menu.allTasks"      = "Všetky úlohy";
+"filter.menu.todayTasks"    = "Dnešné úlohy";
+"filter.menu.weekTasks"     = "Úlohy na tento týždeň";
+"filter.menu.overdueTasks"  = "Nedokončené úlohy";
+
+/* Destek & Hukuki */
+"settings.support" = "Podpora a spätná väzba";
+"settings.legal"   = "Súkromie a podmienky";
+
+/* Mail */
+"mail.error.title"   = "E-mail";
+"mail.error.message" = "Nepodarilo sa otvoriť e-mailovú aplikáciu.";
+
+/* Support & Feedback */
+"support.sendEmail" = "Poslať e-mail";
+"support.reportBug" = "Nahlásiť chybu";
+"support.email.subject" = "Taskly Podpora / Spätná väzba";
+"support.email.subject.bug" = "Taskly Nahlásenie chyby";
+
+/* Support Mail Body */
+"support.mail.greeting" = "Ahoj,";
+"support.mail.bugPrompt" = "Chcem nahlásiť chybu:";
+"support.mail.feedbackPrompt" = "Moja spätná väzba:";
+"support.mail.appLine" = "Aplikácia: %@";
+"support.mail.versionLine" = "Verzia: %@ (%@)";
+"support.mail.deviceLine" = "Zariadenie: %@";
+"support.mail.osLine" = "iOS: %@";
+
+/* Legal */
+"legal.privacyPolicy" = "Zásady ochrany osobných údajov";
+"legal.termsOfUse" = "Podmienky používania";
+
+/* Link Error */
+"link.error.title" = "Odkaz";
+"link.error.message" = "Nepodarilo sa otvoriť odkaz.";
+
+"settings.rateUs" = "Ohodnoťte nás";
+"settings.rateUs.subtitle" = "Ohodnoťte aplikáciu v App Store";

@@ -1,0 +1,307 @@
+"app.title" = "Taskly";
+"common.ok" = "确定";
+"common.cancel" = "取消";
+"common.save" = "保存";
+"common.error" = "错误";
+
+/* Tabs */
+"tab.tasks" = "任务";
+"tab.settings" = "设置";
+
+/* Titles */
+"items.title" = "任务";
+
+/* =============================
+   LOGIN / REGISTER
+   ============================= */
+/* Login */
+"login.title" = "登录";
+"login.subtitle" = "将您的任务同步到云端";
+"login.email.placeholder" = "电子邮件";
+"login.password.placeholder" = "密码";
+"login.signin" = "登录";
+"login.apple" = "通过 Apple 继续";
+"login.google" = "通过 Google 继续";
+"login.orcontinue" = "或通过以下方式继续";
+"login.noaccount" = "还没有账号？注册";
+"login.footer" = "继续操作即表示您同意我们的隐私政策和使用条款。";
+
+/* Register */
+"register.title" = "注册";
+"register.subtitle" = "只需一分钟";
+"register.name.placeholder" = "姓名";
+"register.email.placeholder" = "电子邮件";
+"register.password.placeholder" = "密码";
+"register.confirm.placeholder" = "确认密码";
+"register.signup" = "注册";
+"register.footer" = "已经有账号？登录";
+
+/* Auth / Errors */
+"auth.error.title" = "登录错误";
+"auth.validation.missing" = "请输入有效的电子邮件和至少 6 位数的密码。";
+"auth.userNotFound.title" = "找不到账号";
+"auth.userNotFound.message" = "找不到与此电子邮件关联的账号。您想注册吗？";
+"auth.wrongPassword.title" = "密码错误";
+"auth.wrongPassword.message" = "请检查您的密码并重试。";
+"auth.unavailable.title" = "不可用";
+"auth.unavailable.message" = "电子邮件登录需要 FirebaseAuth。请注册或使用 Apple/Google。";
+"auth.unsupported.title" = "不支持";
+"auth.unsupported.message" = "此功能需要 iOS 13 或更高版本。";
+"auth.google.title" = "Google 登录";
+"auth.google.clientIdMissing" = "找不到 ClientID。请检查 GoogleService-Info.plist 文件。";
+"auth.google.sdkMissing" = "未添加 GoogleSignIn SDK。请通过 Swift Package Manager 添加。";
+"auth.google.missingToken" = "无法获取 Google 身份令牌。";
+"auth.apple.missingToken" = "无法获取 Apple 身份令牌。";
+"auth.firebase.missing.title" = "Firebase 未配置";
+"auth.firebase.missing.message" = "缺少 FirebaseApp.configure()。请确保已调用它并且 GoogleService-Info.plist 存在。";
+"auth.required.title" = "需要登录";
+"auth.required.message" = "请登录以添加任务。";
+
+/* Register Success / Errors */
+"register.error.title" = "错误";
+"register.validation.missing" = "请填写所有字段。";
+"register.password.mismatch" = "密码不匹配。";
+"register.success.title" = "注册成功";
+"register.success.message" = "您的账号已成功创建。";
+"register.error.generic" = "注册失败。请重试。";
+"register.error.emailInUse" = "此电子邮件地址已被使用。";
+"register.error.invalidEmail" = "请输入有效的电子邮件地址。";
+"register.error.weakPassword" = "密码长度必须至少为 6 个字符。";
+"register.error.network" = "网络错误。请检查您的互联网连接并重试。";
+"register.demo.title" = "演示注册";
+"register.demo.message" = "未安装 FirebaseAuth。账号已在本地创建。请尝试登录。";
+
+/* =============================
+   LIST / FILTER / EMPTY STATE
+   ============================ */
+"filter.all" = "全部";
+"filter.today" = "今天";
+"filter.overdue" = "已过期";
+
+"list.section.pending" = "任务";
+"list.section.done"    = "已完成";
+
+"empty.title"    = "尚无任务";
+"empty.subtitle" = "从上方选择一个类别。长按表情符号可进行更改。";
+"empty.cta"      = " 新任务 🖇️";
+
+/* Actions */
+"actions.delete"   = "删除";
+"actions.undo"     = "撤销";
+"actions.complete" = "完成";
+"actions.signout"  = "登出";
+"actions.edit"     = "编辑";
+
+/* =============================
+   ADD / DETAIL
+   ============================= */
+"add.title" = "新任务";
+"add.message" = "输入标题。表情符号类别将从上方的过滤器中选择。";
+"add.placeholder.title" = "任务标题";
+"add.placeholder.notes" = "备注（可选）";
+"add.cancel" = "取消";
+"add.add" = "添加";
+"add.choose.category" = "选择类别";
+"add.back" = "返回";
+
+"detail.title" = "任务详情";
+"detail.no.date" = "未指定日期";
+"detail.notes" = "描述";
+
+"alerts.missing.title" = "信息缺失";
+"alerts.missing.message" = "任务标题不能为空。";
+"tasks.add.failed" = "无法添加任务。";
+
+/* =============================
+   SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
+   ============================= */
+"settings.title" = "设置";
+"settings.language" = "语言";
+"settings.language.system" = "系统语言";
+"settings.language.turkish" = "土耳其语";
+"settings.language.english" = "英语";
+"settings.language.german" = "德语";
+"settings.theme" = "主题";
+"settings.notifications" = "通知";
+"settings.about" = "关于";
+"settings.ok" = "确定";
+
+/* Theme Options */
+"theme.system" = "系统";
+"theme.light" = "浅色";
+"theme.dark" = "深色";
+
+/* Notifications */
+"notif.daily.body" = "每日提醒：查看您今天的任务。";
+"notif.sample.body" = "不要错过！您有一个任务。";
+
+/* =============================
+   LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
+   ============================= */
+"lang.system.sheet.title"    = "使用系统语言？";
+"lang.system.sheet.message"  = "应用程序语言将根据 iOS 系统语言进行设置。";
+"lang.system.sheet.continue" = "继续";
+"lang.system.sheet.cancel"   = "取消";
+
+"signout.confirm.title"   = "登出";
+"signout.confirm.message" = "您确定要退出登录吗？";
+"signout.confirm.cancel"  = "取消";
+"signout.confirm.ok"      = "登出";
+
+"about.title"    = "关于";
+"about.version"  = "Taskly v%@";
+"about.subtitle" = "感谢您使用 Taskly！";
+
+"profile.email.title" = "电子邮件";
+
+
+/* ITEMS / LIST / FILTER / EMPTY */
+"items.title" = "任务";
+"filter.all" = "全部";
+"list.section.pending" = "任务";
+"list.section.done" = "已完成";
+
+"empty.title" = "尚无任务";
+"empty.subtitle" = "从上方选择一个类别。长按表情符号可进行更改。";
+"empty.cta" = " 新任务 🖇️";
+
+/* ADD TASK FLOW */
+"add.title" = "新任务";
+"add.message" = "输入标题。表情符号类别将从上方的过滤器中选择。";
+"add.placeholder.title" = "任务标题";
+"add.placeholder.notes" = "备注（可选）";
+"add.cancel" = "取消";
+"add.add" = "添加";
+"add.choose.category" = "选择类别";
+"add.back" = "返回";
+
+/* ALERTS / ERRORS */
+"alerts.missing.title" = "信息缺失";
+"alerts.missing.message" = "任务标题不能为空。";
+"common.error" = "错误";
+"tasks.add.failed" = "无法添加任务。";
+
+/* SWIPE ACTIONS */
+"actions.delete" = "删除";
+"actions.undo" = "撤销";
+"actions.complete" = "完成";
+
+/* AUTH REQUIRED (add flow) */
+"auth.required.title" = "需要登录";
+"auth.required.message" = "请登录以添加任务。";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "编辑类别";
+"cat.edit.message" = "输入单个表情符号。";
+"cat.invalid.title" = "无效表情符号";
+"cat.invalid.message" = "请仅输入一个表情符号。";
+
+/* TASK DETAIL */
+"detail.title" = "任务详情";
+"detail.no.date" = "未指定日期";
+"detail.notes" = "备注";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "任务时间到了！";
+"reminder.thirtyMins.title" = "任务还有 30 分钟开始";
+
+/* COMMON OK (alert buttons) */
+"settings.ok" = "确定";
+
+/* Günlük Hatırlatıcı (eksik anahtarlar) */
+"settings.dailyReminder" = "每日提醒";
+"settings.dailyReminder.subtitle.everydayAt" = "每天早上接收任务提醒。";
+
+/* Eski tireli varyantı da güvence için ekleyelim */
+"settings.dailyReminder.subtitle.every-dayAt" = "每天早上接收任务提醒。";
+
+/* Bildirim durumu (ekran altta yeşil yazı) */
+"settings.notifications.on" = "通知已开启";
+"settings.notifications.off" = "通知已关闭";
+
+/* Bildirim izinleri uyarıları */
+"notifications.permission.title" = "通知";
+"notifications.permission.sampleScheduled" = "示例通知已成功安排。";
+
+/* Dil (Giriş + Ayarlar) */
+"settings.language" = "语言";
+"settings.ok" = "确定";
+
+/* Sistem dili uyarısı */
+"lang.system.sheet.title" = "使用系统语言？";
+"lang.system.sheet.message" = "应用程序语言将遵循 iOS 系统语言。";
+"lang.system.sheet.continue" = "继续";
+"lang.system.sheet.cancel" = "取消";
+
+/* Ayarlar bağlantısı açılamazsa */
+"lang.system.unavailable" = "此设备上无法使用语言设置。";
+"profile.setName.title" = "用户名";
+"profile.setName.message" = "设置将在您的个人资料中显示的名称。";
+
+/* Profil – bilinmeyen ad fallback (GEREKLİ) */
+"profile.unknownName" = "未知";
+
+/* Hesabı Sil (GEREKLİ) */
+"settings.account.delete" = "删除账号";
+"account.delete.title"    = "删除账号";
+"account.delete.message"  = "此操作无法撤销。您的所有数据将被删除。";
+"common.delete"           = "删除";
+
+/* Bildirim izinleri uyarıları (GEREKLİ) */
+"notifications.permission.denied"   = "未授予通知权限。请在设置中启用。";
+"notifications.permission.settings" = "通知权限已关闭。您可以前往 设置 > 通知 开启。";
+
+/* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
+"settings.dailyReminder.subtitle.everydayAt" = "每天 %@ 接收提醒。";
+
+/* (Opsiyonel ama faydalı) */
+"profile.signin"          = "登录";
+"profile.signin.subtitle" = "登录您的账号进行同步。";
+"profile.email.missing"   = "找不到电子邮件";
+
+/* Filter Sheet (Tasks List) */
+"filter.sheet.title"        = "要显示的任务";
+"filter.menu.allTasks"      = "所有任务";
+"filter.menu.todayTasks"    = "今天的任务";
+"filter.menu.weekTasks"     = "本周任务";
+"filter.menu.overdueTasks"  = "未完成的任务";
+
+
+/*Geri Bildirim*/
+"settings.support"  = "支持与反馈";
+"settings.legal"      = "隐私与条款";
+
+/* Mail */
+"mail.error.title"   = "电子邮件";
+"mail.error.message" = "无法打开邮件应用程序。";
+
+
+/* Support & Feedback */
+"support.sendEmail" = "发送邮件";
+"support.reportBug" = "报告 Bug";
+"support.email.subject" = "Taskly 支持 / 反馈";
+"support.email.subject.bug" = "Taskly Bug 报告";
+
+/* Support Mail Body */
+"support.mail.greeting" = "您好，";
+"support.mail.bugPrompt" = "我想报告一个 Bug：";
+"support.mail.feedbackPrompt" = "我的反馈：";
+"support.mail.appLine" = "应用程序：%@";
+"support.mail.versionLine" = "版本：%@ (%@)";
+"support.mail.deviceLine" = "设备：%@";
+"support.mail.osLine" = "iOS：%@";
+
+/* Legal */
+"legal.privacyPolicy" = "隐私政策";
+"legal.termsOfUse" = "使用条款";
+
+/* Link Error */
+"link.error.title" = "链接";
+"link.error.message" = "无法打开链接。";
+
+/* Mail Error */
+"mail.error.title" = "电子邮件";
+"mail.error.message" = "无法打开邮件应用程序。";
+
+"settings.rateUs" = "為我們評分";
+"settings.rateUs.subtitle" = "在 App Store 留下評價";

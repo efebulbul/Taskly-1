@@ -302,3 +302,6 @@
 /* Mail Error */
 "mail.error.title" = "E-posta";
 "mail.error.message" = "E-posta uygulaması açılamadı.";
+
+"settings.rateUs" = "Bizi değerlendirin";
+"settings.rateUs.subtitle" = "App Store’da puan ver";

@@ -99,8 +99,8 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
 
     // MARK: - Legal
 
-    private var privacyPolicyURLString: String { "https://www.efebulbul.com" }
-    private var termsOfUseURLString: String { "https://www.efebulbul.com" }
+    private var privacyPolicyURLString: String { "https://www.efebulbul.com/project/TasklyX/" }
+    private var termsOfUseURLString: String { "https://www.efebulbul.com/project/TasklyX/" }
 
     func presentLegalLinks() {
         let ac = UIAlertController(title: L("settings.legal"), message: nil, preferredStyle: .actionSheet)

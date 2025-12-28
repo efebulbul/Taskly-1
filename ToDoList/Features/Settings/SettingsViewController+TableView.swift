@@ -6,6 +6,7 @@
 //
 import UIKit
 import UserNotifications
+import StoreKit
 #if canImport(FirebaseAuth)
 import FirebaseAuth
 #endif
@@ -120,6 +121,13 @@ extension SettingsViewController {
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
 
+            case .rateUs:
+                cfg.text = L("settings.rateUs")
+                cfg.secondaryText = L("settings.rateUs.subtitle")
+                cfg.secondaryTextProperties.color = .secondaryLabel
+                cfg.image = UIImage(systemName: "star.bubble")
+                cell.accessoryType = .disclosureIndicator
+
             case .about:
                 cfg.text = L("settings.about")
                 cfg.image = UIImage(systemName: "info.circle")
@@ -177,6 +185,8 @@ extension SettingsViewController {
                 openAppSettings()
             case .dailyReminder:
                 break
+            case .rateUs:
+                requestAppStoreReview()
             case .about:
                 presentAbout()
             case .support:
