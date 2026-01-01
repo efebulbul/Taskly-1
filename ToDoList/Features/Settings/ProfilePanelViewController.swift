@@ -20,7 +20,7 @@ final class ProfilePanelViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = 64
         tableView.estimatedRowHeight = 64
-        title = Lf("settings.account.title", "Hesap")
+        title = L("settings.account.title")
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
@@ -33,7 +33,7 @@ final class ProfilePanelViewController: UITableViewController {
         switch Row(rawValue: indexPath.row)! {
         case .name:
             var cfg = UIListContentConfiguration.valueCell()
-            cfg.text = Lf("profile.name.title", "Kullanıcı Adı")
+            cfg.text = L("profile.name.title")
             cfg.secondaryText = displayName ?? "—"
             cfg.textProperties.adjustsFontForContentSizeCategory = true
             cfg.secondaryTextProperties.adjustsFontForContentSizeCategory = true
@@ -80,7 +80,7 @@ final class ProfilePanelViewController: UITableViewController {
 
         case .delete:
             var cfg = UIListContentConfiguration.cell()
-            cfg.text = Lf("settings.account.delete", "Hesabı Sil")
+            cfg.text = L("settings.account.delete")
             cfg.textProperties.font = .preferredFont(forTextStyle: .footnote)
             cfg.textProperties.color = .systemRed
             cfg.image = UIImage(systemName: "trash")

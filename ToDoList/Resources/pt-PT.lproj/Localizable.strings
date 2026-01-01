@@ -108,10 +108,6 @@
 "detail.no.date" = "Data não definida";
 "detail.notes" = "Descrição";
 
-"alerts.missing.title" = "Informação em falta";
-"alerts.missing.message" = "O título da tarefa não pode estar vazio.";
-"tasks.add.failed" = "Falha ao adicionar a tarefa.";
-
 /* =============================
    SETTINGS / THEME / LANGUAGE / NOTIFICATIONS
    ============================= */
@@ -153,32 +149,11 @@
 "about.subtitle" = "Obrigado por usares o Taskly!";
 
 "profile.email.title" = "E-mail";
-
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Tarefas";
-"filter.all" = "Todas";
-"list.section.pending" = "TAREFAS";
-"list.section.done" = "CONCLUÍDAS";
-
-"empty.title" = "Ainda não há tarefas";
-"empty.subtitle" = "Escolhe uma categoria acima. Prime longamente no emoji para o alterares.";
-"empty.cta" = " Nova Tarefa 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Nova Tarefa";
-"add.message" = "Introduz um título. O emoji da categoria será escolhido a partir do filtro acima.";
-"add.placeholder.title" = "Título da tarefa";
-"add.placeholder.notes" = "Notas (opcional)";
-"add.cancel" = "Cancelar";
-"add.add" = "Adicionar";
-"add.choose.category" = "Escolher Categoria";
-"add.back" = "Voltar";
+"profile.name.title" = "Nome de utilizador";
 
 /* ALERTS / ERRORS */
 "alerts.missing.title" = "Informação em falta";
 "alerts.missing.message" = "O título da tarefa não pode estar vazio.";
-"common.error" = "Erro";
 "tasks.add.failed" = "Falha ao adicionar a tarefa.";
 
 /* SWIPE ACTIONS */
@@ -196,44 +171,22 @@
 "cat.invalid.title" = "Emoji Inválido";
 "cat.invalid.message" = "Por favor, introduz apenas um emoji.";
 
-/* TASK DETAIL */
-"detail.title" = "Detalhes da Tarefa";
-"detail.no.date" = "Data não definida";
-"detail.notes" = "Notas";
-
 /* NOTIFICATION TITLES (ReminderScheduler) */
 "reminder.dueNow.title" = "Está na hora!";
 "reminder.thirtyMins.title" = "Faltam 30 minutos para a tarefa";
 
-/* COMMON OK (alert buttons) */
-"settings.ok" = "OK";
-
 /* Günlük Hatırlatıcı (eksik anahtarlar) */
 "settings.dailyReminder" = "Lembrete Diário";
-"settings.dailyReminder.subtitle.everydayAt" = "Recebe um lembrete das tuas tarefas todas as manhãs.";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "Recebe um lembrete das tuas tarefas todas as manhãs.";
 
 /* Bildirim durumu (ekran altta yeşil yazı) */
 "settings.notifications.on" = "Notificações ativadas";
 "settings.notifications.off" = "Notificações desativadas";
 
 /* Bildirim izinleri uyarıları */
-"notifications.permission.title" = "Notifiche";
+"notifications.permission.title" = "Notificações";
 "notifications.permission.sampleScheduled" = "Foi agendada com sucesso uma notificação de teste.";
 
-/* Dil (Giriş + Ayarlar) */
-"settings.language" = "Idioma";
-"settings.ok" = "OK";
-
 /* Sistem dili uyarısı */
-"lang.system.sheet.title" = "Usar idioma do sistema?";
-"lang.system.sheet.message" = "O idioma da aplicação seguirá o idioma do sistema iOS.";
-"lang.system.sheet.continue" = "Continuar";
-"lang.system.sheet.cancel" = "Cancelar";
-
-/* Ayarlar bağlantısı açılamazsa */
 "lang.system.unavailable" = "As definições de idioma não estão disponíveis neste dispositivo.";
 "profile.setName.title" = "Nome de utilizador";
 "profile.setName.message" = "Define um nome para ser exibido no teu perfil.";
@@ -300,11 +253,10 @@
 "link.error.message" = "Não foi possível abrir o link.";
 
 /* Mail Error */
-"mail.error.title" = "E-mail";
-"mail.error.message" = "Não foi possível abrir a aplicação de e-mail.";
-
 "settings.rateUs" = "Avalie-nos";
 "settings.rateUs.subtitle" = "Deixe uma avaliação na App Store";
 
 "settings.section.generalPreferences" = "Preferências gerais";
 "settings.section.supportInfo" = "Suporte e informações";
+
+"settings.openSettings" = "Abrir ajustes";

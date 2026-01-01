@@ -17,7 +17,7 @@
 /* Login */
 "login.title" = "Σύνδεση";
 "login.subtitle" = "Συγχρονίστε τις εργασίες σας στο cloud";
-"login.email.placeholder" = "Email";
+"login.email.placeholder" = "Ηλεκτρονικό ταχυδρομείο";
 "login.password.placeholder" = "Κωδικός πρόσβασης";
 "login.signin" = "Σύνδεση";
 "login.apple" = "Συνέχεια με Apple";
@@ -30,7 +30,7 @@
 "register.title" = "Εγγραφή";
 "register.subtitle" = "Θα πάρει μόνο ένα λεπτό";
 "register.name.placeholder" = "Ονοματεπώνυμο";
-"register.email.placeholder" = "Email";
+"register.email.placeholder" = "Ηλεκτρονικό ταχυδρομείο";
 "register.password.placeholder" = "Κωδικός πρόσβασης";
 "register.confirm.placeholder" = "Επιβεβαίωση κωδικού";
 "register.signup" = "Εγγραφή";
@@ -152,43 +152,10 @@
 "about.version"  = "Taskly v%@";
 "about.subtitle" = "Ευχαριστούμε που χρησιμοποιείτε το Taskly!";
 
-"profile.email.title" = "Email";
+"profile.email.title" = "Ηλεκτρονικό ταχυδρομείο";
 
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Εργασίες";
-"filter.all" = "Όλα";
-"list.section.pending" = "ΕΡΓΑΣΙΕΣ";
-"list.section.done" = "ΟΛΟΚΛΗΡΩΘΗΚΑΝ";
-
-"empty.title" = "Δεν υπάρχουν εργασίες";
-"empty.subtitle" = "Επιλέξτε μια κατηγορία παραπάνω. Πατήστε παρατεταμένα το emoji για αλλαγή.";
-"empty.cta" = " Νέα Εργασία 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Νέα Εργασία";
-"add.message" = "Εισαγάγετε τίτλο. Το emoji κατηγορίας θα επιλεγεί από το παραπάνω φίλτρο.";
-"add.placeholder.title" = "Τίτλος εργασίας";
-"add.placeholder.notes" = "Σημειώσεις (προαιρετικά)";
-"add.cancel" = "Ακύρωση";
-"add.add" = "Προσθήκη";
-"add.choose.category" = "Επιλογή Κατηγορίας";
-"add.back" = "Πίσω";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Λείπουν Πληροφορίες";
-"alerts.missing.message" = "Ο τίτλος της εργασίας δεν μπορεί να είναι κενός.";
-"common.error" = "Σφάλμα";
-"tasks.add.failed" = "Αποτυχία προσθήκης εργασίας.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Διαγραφή";
-"actions.undo" = "Αναίρεση";
-"actions.complete" = "Ολοκλήρωση";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Απαιτείται Σύνδεση";
-"auth.required.message" = "Παρακαλώ συνδεθείτε για να προσθέσετε εργασίες.";
+/* Username label for profile */
+"profile.name.title" = "Όνομα χρήστη";
 
 /* CATEGORY EDIT */
 "cat.edit.title" = "Επεξεργασία Κατηγορίας";
@@ -196,24 +163,13 @@
 "cat.invalid.title" = "Μη έγκυρο Emoji";
 "cat.invalid.message" = "Παρακαλώ εισαγάγετε μόνο ένα emoji.";
 
-/* TASK DETAIL */
-"detail.title" = "Λεπτομέρειες Εργασίας";
-"detail.no.date" = "Δεν ορίστηκε ημερομηνία";
-"detail.notes" = "Σημειώσεις";
 
 /* NOTIFICATION TITLES (ReminderScheduler) */
 "reminder.dueNow.title" = "Ώρα για εργασία!";
 "reminder.thirtyMins.title" = "30 λεπτά απομένουν για την εργασία";
 
-/* COMMON OK (alert buttons) */
-"settings.ok" = "OK";
-
 /* Günlük Hatırlatıcı (eksik anahtarlar) */
 "settings.dailyReminder" = "Ημερήσια Υπενθύμιση";
-"settings.dailyReminder.subtitle.everydayAt" = "Λάβετε υπενθύμιση για τις εργασίες σας κάθε πρωί.";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "Λάβετε υπενθύμιση για τις εργασίες σας κάθε πρωί.";
 
 /* Bildirim durumu (ekran altta yeşil yazı) */
 "settings.notifications.on" = "Ειδοποιήσεις ενεργές";
@@ -223,19 +179,9 @@
 "notifications.permission.title" = "Ειδοποιήσεις";
 "notifications.permission.sampleScheduled" = "Μια δοκιμαστική ειδοποίηση προγραμματίστηκε με επιτυχία.";
 
-/* Dil (Giriş + Ayarlar) */
-"settings.language" = "Γλώσσα";
-"settings.ok" = "OK";
-
 /* Sistem dili uyarısı */
-"lang.system.sheet.title" = "Χρήση γλώσσας συστήματος;";
-"lang.system.sheet.message" = "Η γλώσσα της εφαρμογής θα ακολουθεί τη γλώσσα συστήματος του iOS.";
-"lang.system.sheet.continue" = "Συνέχεια";
-"lang.system.sheet.cancel" = "Ακύρωση";
-
-/* Ayarlar bağlantısı açılamazsa */
 "lang.system.unavailable" = "Οι ρυθμίσεις γλώσσας δεν είναι διαθέσιμες σε αυτή τη συσκευή.";
-"profile.setName.title" = "Όνομα Χρήστη";
+"profile.setName.title" = "Όνομα χρήστη";
 "profile.setName.message" = "Ορίστε ένα όνομα που θα εμφανίζεται στο προφίλ σας.";
 
 /* Profil – bilinmeyen ad fallback (GEREKLİ) */
@@ -257,7 +203,7 @@
 /* (Opsiyonel ama faydalı) */
 "profile.signin"          = "Σύνδεση";
 "profile.signin.subtitle" = "Συνδεθείτε με τον λογαριασμό σας για συγχρονισμό.";
-"profile.email.missing"   = "Το email δεν βρέθηκε";
+"profile.email.missing"   = "Το ηλεκτρονικό ταχυδρομείο δεν βρέθηκε";
 
 /* Filter Sheet (Tasks List) */
 "filter.sheet.title"        = "Εργασίες προς εμφάνιση";
@@ -266,15 +212,13 @@
 "filter.menu.weekTasks"     = "Εργασίες Εβδομάδας";
 "filter.menu.overdueTasks"  = "Μη ολοκληρωμένες Εργασίες";
 
-
 /*Geri Bildirim*/
 "settings.support"  = "Υποστήριξη & Σχόλια";
 "settings.legal"      = "Απόρρητο & Όροι";
 
 /* Mail */
-"mail.error.title"   = "Email";
+"mail.error.title"   = "Ηλεκτρονικό ταχυδρομείο";
 "mail.error.message" = "Αποτυχία ανοίγματος της εφαρμογής email.";
-
 
 /* Support & Feedback */
 "support.sendEmail" = "Αποστολή Email";
@@ -299,12 +243,10 @@
 "link.error.title" = "Σύνδεσμος";
 "link.error.message" = "Αποτυχία ανοίγματος συνδέσμου.";
 
-/* Mail Error */
-"mail.error.title" = "Email";
-"mail.error.message" = "Αποτυχία ανοίγματος της εφαρμογής email.";
-
 "settings.rateUs" = "Αξιολογήστε μας";
 "settings.rateUs.subtitle" = "Αφήστε μια αξιολόγηση στο App Store";
 
 "settings.section.generalPreferences" = "Γενικές Προτιμήσεις";
 "settings.section.supportInfo" = "Υποστήριξη & Πληροφορίες";
+
+"settings.openSettings" = "Ρυθμίσεις";

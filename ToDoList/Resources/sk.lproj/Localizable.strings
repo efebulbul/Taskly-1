@@ -108,6 +108,7 @@
 "detail.no.date" = "Dátum nie je určený";
 "detail.notes" = "Popis";
 
+/* ALERTS */
 "alerts.missing.title" = "Chýbajúce údaje";
 "alerts.missing.message" = "Názov úlohy nemôže byť prázdny.";
 "tasks.add.failed" = "Úlohu sa nepodarilo pridať.";
@@ -122,9 +123,12 @@
 "settings.language.english" = "Angličtina";
 "settings.language.german" = "Nemčina";
 "settings.theme" = "Téma";
-"settings.notifications" = "Hlásenia";
+"settings.notifications" = "Upozornenia";
 "settings.about" = "O aplikácii";
 "settings.ok" = "OK";
+
+"settings.account.title"  = "Účet";
+"settings.account.delete" = "Zmazať účet";
 
 /* Theme Options */
 "theme.system" = "Systém";
@@ -134,6 +138,19 @@
 /* Notifications */
 "notif.daily.body" = "Denná pripomienka: Pozrite si dnešné úlohy.";
 "notif.sample.body" = "Nezmeškajte to! Máte úlohu.";
+
+/* Reminder Notification Titles */
+"reminder.dueNow.title" = "Čas úlohy!";
+"reminder.thirtyMins.title" = "Úloha o 30 minút";
+
+/* Notifications */
+"settings.notifications.on" = "Upozornenia zapnuté";
+"settings.notifications.off" = "Upozornenia vypnuté";
+
+"notifications.permission.title" = "Upozornenia";
+"notifications.permission.sampleScheduled" = "Vzorové upozornenie bolo úspešne naplánované.";
+"notifications.permission.denied"   = "Povolenie na upozornenia nebolo udelené. Aktivujte ho v nastaveniach.";
+"notifications.permission.settings" = "Upozornenia sú vypnuté. Môžete ich zapnúť v časti Nastavenia > Upozornenia.";
 
 /* =============================
    LANGUAGE SHEET / SIGN OUT / ABOUT / PROFILE
@@ -153,65 +170,10 @@
 "about.subtitle" = "Ďakujeme, že používate Taskly!";
 
 "profile.email.title" = "E-mail";
-
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Úlohy";
-"filter.all" = "Všetko";
-"list.section.pending" = "ÚLOHY";
-"list.section.done" = "DOKONČENÉ";
-
-"empty.title" = "Zatiaľ žiadne úlohy";
-"empty.subtitle" = "Vyberte kategóriu hore. Emojis môžete zmeniť dlhým stlačením.";
-"empty.cta" = " Nová úloha 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Nová úloha";
-"add.message" = "Zadajte názov. Kategória emoji sa vyberie podľa horného filtra.";
-"add.placeholder.title" = "Názov úlohy";
-"add.placeholder.notes" = "Poznámky (voliteľné)";
-"add.cancel" = "Zrušiť";
-"add.add" = "Pridať";
-"add.choose.category" = "Vybrať kategóriu";
-"add.back" = "Späť";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Chýbajúce údaje";
-"alerts.missing.message" = "Názov úlohy nemôže byť prázdny.";
-"common.error" = "Chyba";
-"tasks.add.failed" = "Úlohu sa nepodarilo pridať.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Vymazať";
-"actions.undo" = "Späť";
-"actions.complete" = "Dokončiť";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Vyžaduje sa prihlásenie";
-"auth.required.message" = "Ak chcete pridať úlohu, prihláste sa.";
-
-/* CATEGORY EDIT */
-"cat.edit.title" = "Upraviť kategóriu";
-"cat.edit.message" = "Zadajte jedno emoji.";
-"cat.invalid.title" = "Neplatné emoji";
-"cat.invalid.message" = "Zadajte, prosím, iba jedno emoji.";
-
-/* TASK DETAIL */
-"detail.title" = "Detail úlohy";
-"detail.no.date" = "Dátum nie je určený";
-"detail.notes" = "Poznámky";
-
-/* NOTIFICATION TITLES (ReminderScheduler) */
-"reminder.dueNow.title" = "Čas na úlohu!";
-"reminder.thirtyMins.title" = "Do úlohy zostáva 30 minút";
-
-/* COMMON OK (alert buttons) */
-"settings.ok" = "OK";
+"profile.name.title" = "Používateľské meno";
 
 /* Günlük Hatırlatıcı */
 "settings.dailyReminder" = "Denná pripomienka";
-"settings.dailyReminder.subtitle.everydayAt" = "Dostávajte pripomienky na svoje úlohy každé ráno.";
-"settings.dailyReminder.subtitle.every-dayAt" = "Dostávajte pripomienky na svoje úlohy každé ráno.";
 
 /* Bildirim durumu */
 "settings.notifications.on" = "Hlásenia zapnuté";
@@ -220,12 +182,8 @@
 /* Bildirim izinleri uyarıları */
 "notifications.permission.title" = "Hlásenia";
 "notifications.permission.sampleScheduled" = "Vzorové hlásenie bolo úspešne naplánované.";
-
-/* Sistem dili uyarısı */
-"lang.system.sheet.title" = "Použiť systémový jazyk?";
-"lang.system.sheet.message" = "Jazyk aplikácie bude sledovať systémový jazyk iOS.";
-"lang.system.sheet.continue" = "Pokračovať";
-"lang.system.sheet.cancel" = "Zrušiť";
+"notifications.permission.denied"   = "Povolenie na hlásenia nebolo udelené. Aktivujte ho v nastaveniach.";
+"notifications.permission.settings" = "Povolenie na hlásenia je vypnuté. Môžete ho zapnúť v časti Nastavenia > Hlásenia.";
 
 /* Ayarlar bağlantısı açılamazsa */
 "lang.system.unavailable" = "Nastavenia jazyka nie sú na tomto zariadení dostupné.";
@@ -236,14 +194,9 @@
 "profile.unknownName" = "Neznáme";
 
 /* Hesabı Sil */
-"settings.account.delete" = "Zmazať účet";
 "account.delete.title"    = "Zmazať účet";
 "account.delete.message"  = "Túto operáciu nie je možné vrátiť späť. Všetky vaše údaje budú vymazané.";
 "common.delete"           = "Zmazať";
-
-/* Bildirim izinleri uyarıları */
-"notifications.permission.denied"   = "Povolenie na hlásenia nebolo udelené. Aktivujte ho v nastaveniach.";
-"notifications.permission.settings" = "Povolenie na hlásenia je vypnuté. Môžete ho zapnúť v časti Nastavenia > Hlásenia.";
 
 /* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
 "settings.dailyReminder.subtitle.everydayAt" = "Dostávajte pripomienku každý deň o %@.";
@@ -296,3 +249,5 @@
 
 "settings.section.generalPreferences" = "Všeobecné nastavenia";
 "settings.section.supportInfo" = "Podpora a informácie";
+
+"settings.openSettings" = "Otvoriť nastavenia";

@@ -153,42 +153,8 @@
 "about.subtitle" = "Tasklyをご利用いただきありがとうございます！";
 
 "profile.email.title" = "メールアドレス";
+"profile.name.title" = "ユーザー名";
 
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "タスク";
-"filter.all" = "すべて";
-"list.section.pending" = "進行中";
-"list.section.done" = "完了済み";
-
-"empty.title" = "タスクがありません";
-"empty.subtitle" = "上のカテゴリーから選んでください。絵文字を長押しすると変更できます。";
-"empty.cta" = " 新しいタスク 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "タスクを追加";
-"add.message" = "タイトルを入力。絵文字カテゴリーは上部のフィルターに基づいて設定されます。";
-"add.placeholder.title" = "タスクのタイトル";
-"add.placeholder.notes" = "メモ (任意)";
-"add.cancel" = "キャンセル";
-"add.add" = "追加";
-"add.choose.category" = "カテゴリーを選択";
-"add.back" = "戻る";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "入力不足";
-"alerts.missing.message" = "タスクのタイトルは必須です。";
-"common.error" = "エラー";
-"tasks.add.failed" = "タスクを追加できませんでした。";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "削除";
-"actions.undo" = "元に戻す";
-"actions.complete" = "完了";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "ログインが必要です";
-"auth.required.message" = "タスクを追加するにはログインしてください。";
 
 /* CATEGORY EDIT */
 "cat.edit.title" = "カテゴリーを編集";
@@ -196,22 +162,12 @@
 "cat.invalid.title" = "無効な絵文字";
 "cat.invalid.message" = "絵文字は1つだけ入力してください。";
 
-/* TASK DETAIL */
-"detail.title" = "タスク詳細";
-"detail.no.date" = "日付未設定";
-"detail.notes" = "メモ";
-
 /* NOTIFICATION TITLES (ReminderScheduler) */
 "reminder.dueNow.title" = "タスクの時間です！";
 "reminder.thirtyMins.title" = "タスク開始の30分前です";
 
-/* COMMON OK (alert buttons) */
-"settings.ok" = "OK";
-
 /* Daily Reminder */
 "settings.dailyReminder" = "デイリーリマインダー";
-"settings.dailyReminder.subtitle.everydayAt" = "毎朝、タスクのリマインダーを受け取ります。";
-"settings.dailyReminder.subtitle.every-dayAt" = "毎朝、タスクのリマインダーを受け取ります。";
 
 /* Notification Status */
 "settings.notifications.on" = "通知オン";
@@ -220,12 +176,6 @@
 /* Permissions */
 "notifications.permission.title" = "通知";
 "notifications.permission.sampleScheduled" = "サンプル通知がスケジュールされました。";
-
-/* Language Alert */
-"lang.system.sheet.title" = "システム言語を使用しますか？";
-"lang.system.sheet.message" = "アプリの言語設定をiOSのシステム設定と同期します。";
-"lang.system.sheet.continue" = "続ける";
-"lang.system.sheet.cancel" = "キャンセル";
 
 /* System unavailable */
 "lang.system.unavailable" = "このデバイスでは言語設定を利用できません。";
@@ -291,12 +241,10 @@
 "link.error.title" = "リンク";
 "link.error.message" = "リンクを開けませんでした。";
 
-/* Mail Error redundant */
-"mail.error.title" = "メール";
-"mail.error.message" = "メールアプリを開けませんでした。";
-
 "settings.rateUs" = "評価する";
 "settings.rateUs.subtitle" = "App Storeで評価してください";
 
 "settings.section.generalPreferences" = "一般設定";
 "settings.section.supportInfo" = "サポートと情報";
+
+"settings.openSettings" = "設定を開く";

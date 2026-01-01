@@ -108,6 +108,7 @@
 "detail.no.date" = "Дата не указана";
 "detail.notes" = "Описание";
 
+/* Alerts */
 "alerts.missing.title" = "Недостаточно информации";
 "alerts.missing.message" = "Заголовок задачи не может быть пустым.";
 "tasks.add.failed" = "Не удалось добавить задачу.";
@@ -125,6 +126,21 @@
 "settings.notifications" = "Уведомления";
 "settings.about" = "О приложении";
 "settings.ok" = "ОК";
+
+/* Settings Sections */
+"settings.section.generalPreferences" = "Общие настройки";
+"settings.section.supportInfo" = "Поддержка и информация";
+
+/* Rate Us */
+"settings.rateUs" = "Оцените нас";
+"settings.rateUs.subtitle" = "Поставьте оценку в App Store";
+
+/* Notification Status */
+"settings.notifications.on" = "Уведомления включены";
+"settings.notifications.off" = "Уведомления выключены";
+
+/* Account */
+"settings.account.title" = "Аккаунт";
 
 /* Theme Options */
 "theme.system" = "Системная";
@@ -153,88 +169,8 @@
 "about.subtitle" = "Спасибо, что пользуетесь Taskly!";
 
 "profile.email.title" = "Электронная почта";
+"profile.name.title" = "Имя пользователя";
 
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Задачи";
-"filter.all" = "Все";
-"list.section.pending" = "ЗАДАЧИ";
-"list.section.done" = "ВЫПОЛНЕНО";
-
-"empty.title" = "Задач пока нет";
-"empty.subtitle" = "Выберите категорию выше. Вы можете изменить эмодзи, удерживая его.";
-"empty.cta" = " Новая задача 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Новая задача";
-"add.message" = "Введите заголовок. Эмодзи категории будет выбран из фильтра выше.";
-"add.placeholder.title" = "Заголовок задачи";
-"add.placeholder.notes" = "Заметки (необязательно)";
-"add.cancel" = "Отмена";
-"add.add" = "Добавить";
-"add.choose.category" = "Выбрать категорию";
-"add.back" = "Назад";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Недостаточно информации";
-"alerts.missing.message" = "Заголовок задачи не может быть пустым.";
-"common.error" = "Ошибка";
-"tasks.add.failed" = "Не удалось добавить задачу.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Удалить";
-"actions.undo" = "Отменить";
-"actions.complete" = "Завершить";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Требуется вход";
-"auth.required.message" = "Пожалуйста, войдите в систему, чтобы добавлять задачи.";
-
-/* CATEGORY EDIT */
-"cat.edit.title" = "Изменить категорию";
-"cat.edit.message" = "Введите один эмодзи.";
-"cat.invalid.title" = "Неверный эмодзи";
-"cat.invalid.message" = "Пожалуйста, введите только один эмодзи.";
-
-/* TASK DETAIL */
-"detail.title" = "Детали задачи";
-"detail.no.date" = "Дата не указана";
-"detail.notes" = "Заметки";
-
-/* NOTIFICATION TITLES (ReminderScheduler) */
-"reminder.dueNow.title" = "Пора за дело!";
-"reminder.thirtyMins.title" = "До задачи осталось 30 минут";
-
-/* COMMON OK (alert buttons) */
-"settings.ok" = "ОК";
-
-/* Günlük Hatırlatıcı (eksik anahtarlar) */
-"settings.dailyReminder" = "Ежедневное напоминание";
-"settings.dailyReminder.subtitle.everydayAt" = "Получайте напоминание о задачах каждое утро.";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "Получайте напоминание о задачах каждое утро.";
-
-/* Bildirim durumu (ekran altta yeşil yazı) */
-"settings.notifications.on" = "Уведомления включены";
-"settings.notifications.off" = "Уведомления выключены";
-
-/* Bildirim izinleri uyarıları */
-"notifications.permission.title" = "Уведомления";
-"notifications.permission.sampleScheduled" = "Тестовое уведомление успешно запланировано.";
-
-/* Dil (Giriş + Ayarlar) */
-"settings.language" = "Язык";
-"settings.ok" = "ОК";
-
-/* Sistem dili uyarısı */
-"lang.system.sheet.title" = "Использовать язык системы?";
-"lang.system.sheet.message" = "Язык приложения будет соответствовать языку системы iOS.";
-"lang.system.sheet.continue" = "Продолжить";
-"lang.system.sheet.cancel" = "Отмена";
-
-/* Ayarlar bağlantısı açılamazsa */
-"lang.system.unavailable" = "Настройки языка недоступны на этом устройстве.";
 "profile.setName.title" = "Имя пользователя";
 "profile.setName.message" = "Выберите имя, которое будет отображаться в вашем профиле.";
 
@@ -248,10 +184,13 @@
 "common.delete"           = "Удалить";
 
 /* Bildirim izinleri uyarıları (GEREKLİ) */
+"notifications.permission.title" = "Уведомления";
+"notifications.permission.sampleScheduled" = "Тестовое уведомление успешно запланировано.";
 "notifications.permission.denied"   = "Доступ к уведомлениям запрещен. Включите их в настройках.";
 "notifications.permission.settings" = "Уведомления отключены. Вы можете включить их в меню Настройки > Уведомления.";
 
 /* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
+"settings.dailyReminder" = "Ежедневное напоминание";
 "settings.dailyReminder.subtitle.everydayAt" = "Получайте напоминание каждый день в %@.";
 
 /* (Opsiyonel ama faydalı) */
@@ -299,12 +238,5 @@
 "link.error.title" = "Ссылка";
 "link.error.message" = "Не удалось открыть ссылку.";
 
-/* Mail Error */
-"mail.error.title" = "Электронная почта";
-"mail.error.message" = "Не удалось открыть почтовое приложение.";
-
-"settings.rateUs" = "Оцените нас";
-"settings.rateUs.subtitle" = "Оставьте оценку в App Store";
-
-"settings.section.generalPreferences" = "Общие настройки";
-"settings.section.supportInfo" = "Поддержка и информация";
+/* Settings Open */
+"settings.openSettings" = "Открыть настройки";

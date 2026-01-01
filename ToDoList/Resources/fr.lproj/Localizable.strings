@@ -153,88 +153,8 @@
 "about.subtitle" = "Merci d'utiliser Taskly !";
 
 "profile.email.title" = "E-mail";
+"profile.name.title" = "Nom d'utilisateur";
 
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Tâches";
-"filter.all" = "Tout";
-"list.section.pending" = "TÂCHES";
-"list.section.done" = "TERMINÉ";
-
-"empty.title" = "Pas encore de tâches";
-"empty.subtitle" = "Choisissez une catégorie ci-dessus. Vous pouvez changer l'emoji par un appui long.";
-"empty.cta" = " Nouvelle Tâche 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Nouvelle Tâche";
-"add.message" = "Entrez un titre. La catégorie emoji sera sélectionnée à partir du filtre ci-dessus.";
-"add.placeholder.title" = "Titre de la tâche";
-"add.placeholder.notes" = "Notes (optionnel)";
-"add.cancel" = "Annuler";
-"add.add" = "Ajouter";
-"add.choose.category" = "Choisir une catégorie";
-"add.back" = "Retour";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Information manquante";
-"alerts.missing.message" = "Le titre de la tâche ne peut pas être vide.";
-"common.error" = "Erreur";
-"tasks.add.failed" = "Échec de l'ajout de la tâche.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Supprimer";
-"actions.undo" = "Annuler";
-"actions.complete" = "Terminer";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Connexion requise";
-"auth.required.message" = "Veuillez vous connecter pour ajouter des tâches.";
-
-/* CATEGORY EDIT */
-"cat.edit.title" = "Modifier la catégorie";
-"cat.edit.message" = "Entrez un seul emoji.";
-"cat.invalid.title" = "Emoji invalide";
-"cat.invalid.message" = "Veuillez entrer un seul emoji.";
-
-/* TASK DETAIL */
-"detail.title" = "Détail de la tâche";
-"detail.no.date" = "Date non spécifiée";
-"detail.notes" = "Notes";
-
-/* NOTIFICATION TITLES (ReminderScheduler) */
-"reminder.dueNow.title" = "C'est l'heure !";
-"reminder.thirtyMins.title" = "La tâche commence dans 30 minutes";
-
-/* COMMON OK (alert buttons) */
-"settings.ok" = "OK";
-
-/* Günlük Hatırlatıcı (eksik anahtarlar) */
-"settings.dailyReminder" = "Rappel quotidien";
-"settings.dailyReminder.subtitle.everydayAt" = "Recevez un rappel de vos tâches chaque matin.";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "Recevez un rappel de vos tâches chaque matin.";
-
-/* Bildirim durumu (ekran altta yeşil yazı) */
-"settings.notifications.on" = "Notifications activées";
-"settings.notifications.off" = "Notifications désactivées";
-
-/* Bildirim izinleri uyarıları */
-"notifications.permission.title" = "Notifications";
-"notifications.permission.sampleScheduled" = "Un exemple de notification a été programmé avec succès.";
-
-/* Dil (Giriş + Ayarlar) */
-"settings.language" = "Langue";
-"settings.ok" = "OK";
-
-/* Sistem dili uyarısı */
-"lang.system.sheet.title" = "Utiliser la langue du système ?";
-"lang.system.sheet.message" = "La langue de l'application suivra la langue du système iOS.";
-"lang.system.sheet.continue" = "Continuer";
-"lang.system.sheet.cancel" = "Annuler";
-
-/* Ayarlar bağlantısı açılamazsa */
-"lang.system.unavailable" = "Les paramètres de langue sont indisponibles sur cet appareil.";
 "profile.setName.title" = "Nom d'utilisateur";
 "profile.setName.message" = "Définissez un nom qui sera affiché sur votre profil.";
 
@@ -299,12 +219,21 @@
 "link.error.title" = "Lien";
 "link.error.message" = "Impossible d'ouvrir le lien.";
 
-/* Mail Error */
-"mail.error.title" = "E-mail";
-"mail.error.message" = "Impossible d'ouvrir l'application d'e-mail.";
-
+/* Settings sections and rate us */
 "settings.rateUs" = "Évaluez-nous";
 "settings.rateUs.subtitle" = "Laisser un avis sur l’App Store";
 
 "settings.section.generalPreferences" = "Préférences générales";
 "settings.section.supportInfo" = "Assistance et informations";
+
+"settings.openSettings" = "Ouvrir les réglages";
+
+/* CATEGORY EDIT */
+"cat.edit.title" = "Modifier la catégorie";
+"cat.edit.message" = "Entrez un seul emoji.";
+"cat.invalid.title" = "Emoji invalide";
+"cat.invalid.message" = "Veuillez entrer un seul emoji.";
+
+/* NOTIFICATION TITLES (ReminderScheduler) */
+"reminder.dueNow.title" = "C'est l'heure !";
+"reminder.thirtyMins.title" = "La tâche commence dans 30 minutes";

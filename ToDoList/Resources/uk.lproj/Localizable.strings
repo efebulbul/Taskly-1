@@ -123,7 +123,8 @@
 "settings.language.german" = "Німецька";
 "settings.theme" = "Тема";
 "settings.notifications" = "Сповіщення";
-"settings.about" = "Про додаток";
+"settings.notifications.on" = "Сповіщення увімкнено";
+"settings.notifications.off" = "Сповіщення вимкнено";
 "settings.ok" = "ОК";
 
 /* Theme Options */
@@ -148,93 +149,9 @@
 "signout.confirm.cancel"  = "Скасувати";
 "signout.confirm.ok"      = "Вийти";
 
-"about.title"    = "Про додаток";
-"about.version"  = "Taskly v%@";
-"about.subtitle" = "Дякуємо, що користуєтесь Taskly!";
-
 "profile.email.title" = "E-mail";
+"profile.name.title" = "Імʼя користувача";
 
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Завдання";
-"filter.all" = "Всі";
-"list.section.pending" = "ЗАВДАННЯ";
-"list.section.done" = "ЗАВЕРШЕНО";
-
-"empty.title" = "Завдань поки немає";
-"empty.subtitle" = "Оберіть категорію вище. Натисніть і утримуйте емодзі, щоб змінити його.";
-"empty.cta" = " Нове завдання 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Нове завдання";
-"add.message" = "Введіть заголовок. Емодзі категорії буде вибрано з фільтра вище.";
-"add.placeholder.title" = "Заголовок завдання";
-"add.placeholder.notes" = "Нотатки (необов'язково)";
-"add.cancel" = "Скасувати";
-"add.add" = "Додати";
-"add.choose.category" = "Обрати категорію";
-"add.back" = "Назад";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Недостатньо даних";
-"alerts.missing.message" = "Заголовок завдання не може бути порожнім.";
-"common.error" = "Помилка";
-"tasks.add.failed" = "Не вдалося додати завдання.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Видалити";
-"actions.undo" = "Скасувати";
-"actions.complete" = "Завершити";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Необхідно увійти";
-"auth.required.message" = "Будь ласка, увійдіть, щоб додавати завдання.";
-
-/* CATEGORY EDIT */
-"cat.edit.title" = "Змінити категорію";
-"cat.edit.message" = "Введіть один емодзі.";
-"cat.invalid.title" = "Некоректний емодзі";
-"cat.invalid.message" = "Будь ласка, введіть тільки один емодзі.";
-
-/* TASK DETAIL */
-"detail.title" = "Деталі завдання";
-"detail.no.date" = "Дата не вказана";
-"detail.notes" = "Нотатки";
-
-/* NOTIFICATION TITLES (ReminderScheduler) */
-"reminder.dueNow.title" = "Час прийшов!";
-"reminder.thirtyMins.title" = "До завдання залишилося 30 хвилин";
-
-/* COMMON OK (alert buttons) */
-"settings.ok" = "ОК";
-
-/* Günlük Hatırlatıcı (eksik anahtarlar) */
-"settings.dailyReminder" = "Щоденне нагадування";
-"settings.dailyReminder.subtitle.everydayAt" = "Отримуйте нагадування про завдання щоранку.";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "Отримуйте нагадування про завдання щоранку.";
-
-/* Bildirim durumu (ekran altta yeşil yazı) */
-"settings.notifications.on" = "Сповіщення увімкнено";
-"settings.notifications.off" = "Сповіщення вимкнено";
-
-/* Bildirim izinleri uyarıları */
-"notifications.permission.title" = "Сповіщення";
-"notifications.permission.sampleScheduled" = "Тестове сповіщення успішно заплановано.";
-
-/* Dil (Giriş + Ayarlar) */
-"settings.language" = "Мова";
-"settings.ok" = "ОК";
-
-/* Sistem dili uyarısı */
-"lang.system.sheet.title" = "Використовувати мову системи?";
-"lang.system.sheet.message" = "Мова додатка буде відповідати системній мові iOS.";
-"lang.system.sheet.continue" = "Продовжити";
-"lang.system.sheet.cancel" = "Скасувати";
-
-/* Ayarlar bağlantısı açıламazsa */
-"lang.system.unavailable" = "Налаштування мови недоступні на цьому пристрої.";
 "profile.setName.title" = "Ім'я користувача";
 "profile.setName.message" = "Вкажіть ім'я, яке буде відображатися у профілі.";
 
@@ -242,17 +159,24 @@
 "profile.unknownName" = "Невідомо";
 
 /* Hesabı Sil (GEREKLİ) */
+"settings.account.title" = "Акаунт";
 "settings.account.delete" = "Видалити акаунт";
 "account.delete.title"    = "Видалення акаунту";
 "account.delete.message"  = "Цю дію неможливо скасувати. Усі ваші дані будуть видалені.";
 "common.delete"           = "Видалити";
 
 /* Bildirim izinleri uyarıları (GEREKLİ) */
+"notifications.permission.title" = "Сповіщення";
+"notifications.permission.sampleScheduled" = "Тестове сповіщення успішно заплановано.";
 "notifications.permission.denied"   = "Доступ до сповіщень заборонено. Увімкніть їх у налаштуваннях.";
 "notifications.permission.settings" = "Сповіщення вимкнено. Ви можете увімкнути їх у Налаштування > Сповіщення.";
+"settings.openSettings" = "Відкрити налаштування";
 
 /* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
 "settings.dailyReminder.subtitle.everydayAt" = "Отримуйте нагадування щодня о %@.";
+
+/* Günlük Hatırlatıcı (eksik anahtarlar) */
+"settings.dailyReminder" = "Щоденне нагадування";
 
 /* (Opsiyonel ama faydalı) */
 "profile.signin"          = "Увійти";
@@ -266,7 +190,6 @@
 "filter.menu.weekTasks"     = "Завдання на тиждень";
 "filter.menu.overdueTasks"  = "Незавершені завдання";
 
-
 /*Geri Bildirim*/
 "settings.support"  = "Підтримка та відгуки";
 "settings.legal"      = "Конфіденційність та умови";
@@ -274,7 +197,6 @@
 /* Mail */
 "mail.error.title"   = "E-mail";
 "mail.error.message" = "Не вдалося відкрити поштовий додаток.";
-
 
 /* Support & Feedback */
 "support.sendEmail" = "Надіслати листа";
@@ -299,12 +221,13 @@
 "link.error.title" = "Посилання";
 "link.error.message" = "Не вдалося відкрити посилання.";
 
-/* Mail Error */
-"mail.error.title" = "E-mail";
-"mail.error.message" = "Не вдалося відкрити поштовий додаток.";
-
+/* Support Mail Body */
 "settings.rateUs" = "Оцініть нас";
 "settings.rateUs.subtitle" = "Залиште оцінку в App Store";
 
 "settings.section.generalPreferences" = "Загальні налаштування";
 "settings.section.supportInfo" = "Підтримка та інформація";
+
+/* Notification Titles (ReminderScheduler) */
+"reminder.dueNow.title" = "Час прийшов!";
+"reminder.thirtyMins.title" = "До завдання залишилося 30 хвилин";

@@ -153,67 +153,24 @@
 "about.subtitle" = "¡Gracias por usar Taskly!";
 
 "profile.email.title" = "Correo electrónico";
+"profile.name.title" = "Nombre de usuario";
 
 
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Tareas";
-"filter.all" = "Todos";
-"list.section.pending" = "TAREAS";
-"list.section.done" = "COMPLETADO";
-
-"empty.title" = "Aún no hay tareas";
-"empty.subtitle" = "Elige una categoría arriba. Puedes cambiar el emoji manteniendo presionado.";
-"empty.cta" = " Nueva Tarea 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Nueva Tarea";
-"add.message" = "Introduce un título. El emoji de categoría se elegirá del filtro superior.";
-"add.placeholder.title" = "Título de la tarea";
-"add.placeholder.notes" = "Notas (opcional)";
-"add.cancel" = "Cancelar";
-"add.add" = "Añadir";
-"add.choose.category" = "Elegir categoría";
-"add.back" = "Atrás";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Información faltante";
-"alerts.missing.message" = "El título de la tarea no puede estar vacío.";
-"common.error" = "Error";
-"tasks.add.failed" = "No se pudo añadir la tarea.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Eliminar";
-"actions.undo" = "Deshacer";
-"actions.complete" = "Completar";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Inicio de sesión requerido";
-"auth.required.message" = "Por favor, inicia sesión para añadir tareas.";
-
-/* CATEGORY EDIT */
+/* =============================
+   CATEGORY EDIT
+   ============================= */
 "cat.edit.title" = "Editar categoría";
 "cat.edit.message" = "Introduce un solo emoji.";
 "cat.invalid.title" = "Emoji no válido";
 "cat.invalid.message" = "Por favor, introduce solo un emoji.";
 
-/* TASK DETAIL */
-"detail.title" = "Detalle de la Tarea";
-"detail.no.date" = "Fecha no especificada";
-"detail.notes" = "Notas";
-
 /* NOTIFICATION TITLES (ReminderScheduler) */
 "reminder.dueNow.title" = "¡Es la hora!";
 "reminder.thirtyMins.title" = "Faltan 30 minutos para la tarea";
 
-/* COMMON OK (alert buttons) */
-"settings.ok" = "Aceptar";
-
 /* Günlük Hatırlatıcı (eksik anahtarlar) */
 "settings.dailyReminder" = "Recordatorio diario";
-"settings.dailyReminder.subtitle.everydayAt" = "Recibe un recordatorio de tus tareas cada mañana.";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "Recibe un recordatorio de tus tareas cada mañana.";
+"settings.dailyReminder.subtitle.everydayAt" = "Recibe un recordatorio cada día a las %@.";
 
 /* Bildirim durumu (ekran altta yeşil yazı) */
 "settings.notifications.on" = "Notificaciones activas";
@@ -224,16 +181,8 @@
 "notifications.permission.sampleScheduled" = "Se ha programado con éxito una notificación de prueba.";
 
 /* Dil (Giriş + Ayarlar) */
-"settings.language" = "Idioma";
-"settings.ok" = "Aceptar";
 
 /* Sistem dili uyarısı */
-"lang.system.sheet.title" = "¿Usar idioma del sistema?";
-"lang.system.sheet.message" = "El idioma de la aplicación seguirá el del sistema iOS.";
-"lang.system.sheet.continue" = "Continuar";
-"lang.system.sheet.cancel" = "Cancelar";
-
-/* Ayarlar bağlantısı açılamazsa */
 "lang.system.unavailable" = "Los ajustes de idioma no están disponibles en este dispositivo.";
 "profile.setName.title" = "Nombre de usuario";
 "profile.setName.message" = "Elige un nombre para mostrar en tu perfil.";
@@ -250,9 +199,6 @@
 /* Bildirim izinleri uyarıları (GEREKLİ) */
 "notifications.permission.denied"   = "Permiso de notificación denegado. Actívalo en ajustes.";
 "notifications.permission.settings" = "Las notificaciones están desactivadas. Puedes activarlas en Ajustes > Notificaciones.";
-
-/* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
-"settings.dailyReminder.subtitle.everydayAt" = "Recibe un recordatorio cada día a las %@.";
 
 /* (Opsiyonel ama faydalı) */
 "profile.signin"          = "Iniciar sesión";
@@ -299,9 +245,6 @@
 "link.error.title" = "Enlace";
 "link.error.message" = "No se pudo abrir el enlace.";
 
-/* Mail Error */
-"mail.error.title" = "Correo electrónico";
-"mail.error.message" = "No se pudo abrir la aplicación de correo.";
 
 "settings.rateUs" = "Valóranos";
 "settings.rateUs.subtitle" = "Deja una valoración en App Store";
@@ -309,5 +252,4 @@
 "settings.section.generalPreferences" = "Preferencias Generales";
 "settings.section.supportInfo" = "Soporte e Información";
 
-"settings.section.generalPreferences" = "Preferencias Generales";
-"settings.section.supportInfo" = "Soporte e Información";
+"settings.openSettings" = "Abrir ajustes";

@@ -153,42 +153,13 @@
 "about.subtitle" = "感谢您使用 Taskly！";
 
 "profile.email.title" = "电子邮件";
+"profile.name.title" = "用户名";
 
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "任务";
-"filter.all" = "全部";
-"list.section.pending" = "任务";
-"list.section.done" = "已完成";
-
-"empty.title" = "尚无任务";
-"empty.subtitle" = "从上方选择一个类别。长按表情符号可进行更改。";
-"empty.cta" = " 新任务 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "新任务";
-"add.message" = "输入标题。表情符号类别将从上方的过滤器中选择。";
-"add.placeholder.title" = "任务标题";
-"add.placeholder.notes" = "备注（可选）";
-"add.cancel" = "取消";
-"add.add" = "添加";
-"add.choose.category" = "选择类别";
-"add.back" = "返回";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "信息缺失";
-"alerts.missing.message" = "任务标题不能为空。";
-"common.error" = "错误";
-"tasks.add.failed" = "无法添加任务。";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "删除";
-"actions.undo" = "撤销";
-"actions.complete" = "完成";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "需要登录";
-"auth.required.message" = "请登录以添加任务。";
+"settings.account.title" = "账户";
+"settings.account.delete" = "删除账号";
+"account.delete.title"    = "删除账号";
+"account.delete.message"  = "此操作无法撤销。您的所有数据将被删除。";
+"common.delete"           = "删除";
 
 /* CATEGORY EDIT */
 "cat.edit.title" = "编辑类别";
@@ -196,24 +167,12 @@
 "cat.invalid.title" = "无效表情符号";
 "cat.invalid.message" = "请仅输入一个表情符号。";
 
-/* TASK DETAIL */
-"detail.title" = "任务详情";
-"detail.no.date" = "未指定日期";
-"detail.notes" = "备注";
-
 /* NOTIFICATION TITLES (ReminderScheduler) */
 "reminder.dueNow.title" = "任务时间到了！";
 "reminder.thirtyMins.title" = "任务还有 30 分钟开始";
 
-/* COMMON OK (alert buttons) */
-"settings.ok" = "确定";
-
 /* Günlük Hatırlatıcı (eksik anahtarlar) */
 "settings.dailyReminder" = "每日提醒";
-"settings.dailyReminder.subtitle.everydayAt" = "每天早上接收任务提醒。";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "每天早上接收任务提醒。";
 
 /* Bildirim durumu (ekran altta yeşil yazı) */
 "settings.notifications.on" = "通知已开启";
@@ -222,34 +181,18 @@
 /* Bildirim izinleri uyarıları */
 "notifications.permission.title" = "通知";
 "notifications.permission.sampleScheduled" = "示例通知已成功安排。";
+"notifications.permission.denied"   = "未授予通知权限。请在设置中启用。";
+"notifications.permission.settings" = "通知权限已关闭。您可以前往 设置 > 通知 开启。";
 
 /* Dil (Giriş + Ayarlar) */
-"settings.language" = "语言";
-"settings.ok" = "确定";
-
+ 
 /* Sistem dili uyarısı */
-"lang.system.sheet.title" = "使用系统语言？";
-"lang.system.sheet.message" = "应用程序语言将遵循 iOS 系统语言。";
-"lang.system.sheet.continue" = "继续";
-"lang.system.sheet.cancel" = "取消";
-
-/* Ayarlar bağlantısı açılamazsa */
 "lang.system.unavailable" = "此设备上无法使用语言设置。";
 "profile.setName.title" = "用户名";
 "profile.setName.message" = "设置将在您的个人资料中显示的名称。";
 
 /* Profil – bilinmeyen ad fallback (GEREKLİ) */
 "profile.unknownName" = "未知";
-
-/* Hesabı Sil (GEREKLİ) */
-"settings.account.delete" = "删除账号";
-"account.delete.title"    = "删除账号";
-"account.delete.message"  = "此操作无法撤销。您的所有数据将被删除。";
-"common.delete"           = "删除";
-
-/* Bildirim izinleri uyarıları (GEREKLİ) */
-"notifications.permission.denied"   = "未授予通知权限。请在设置中启用。";
-"notifications.permission.settings" = "通知权限已关闭。您可以前往 设置 > 通知 开启。";
 
 /* Günlük hatırlatıcı alt yazısı – SAAT YER TUTUCU İLE */
 "settings.dailyReminder.subtitle.everydayAt" = "每天 %@ 接收提醒。";
@@ -299,12 +242,11 @@
 "link.error.title" = "链接";
 "link.error.message" = "无法打开链接。";
 
-/* Mail Error */
-"mail.error.title" = "电子邮件";
-"mail.error.message" = "无法打开邮件应用程序。";
-
+/* Settings */
 "settings.rateUs" = "為我們評分";
 "settings.rateUs.subtitle" = "在 App Store 留下評價";
 
 "settings.section.generalPreferences" = "通用设置";
 "settings.section.supportInfo" = "支持与信息";
+
+"settings.openSettings" = "打开设置";

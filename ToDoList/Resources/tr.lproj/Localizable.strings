@@ -154,66 +154,18 @@
 
 "profile.email.title" = "E-posta";
 
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Görevler";
-"filter.all" = "Tümü";
-"list.section.pending" = "GÖREVLER";
-"list.section.done" = "TAMAMLANDI";
-
-"empty.title" = "Henüz görev yok";
-"empty.subtitle" = "Yukarıdan bir kategori seç. Emojiyi uzun basarak değiştirebilirsin.";
-"empty.cta" = " Yeni Görev 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Yeni Görev";
-"add.message" = "Bir başlık gir. Emoji kategori üstteki filtreden seçilecek.";
-"add.placeholder.title" = "Görev başlığı";
-"add.placeholder.notes" = "Notlar (isteğe bağlı)";
-"add.cancel" = "Vazgeç";
-"add.add" = "Ekle";
-"add.choose.category" = "Kategori Seç";
-"add.back" = "Geri";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Eksik Bilgi";
-"alerts.missing.message" = "Görev başlığı boş olamaz.";
-"common.error" = "Hata";
-"tasks.add.failed" = "Görev eklenemedi.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Sil";
-"actions.undo" = "Geri Al";
-"actions.complete" = "Tamamla";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Giriş Gerekli";
-"auth.required.message" = "Görev eklemek için lütfen giriş yap.";
-
 /* CATEGORY EDIT */
 "cat.edit.title" = "Kategoriyi Düzenle";
 "cat.edit.message" = "Tek bir emoji gir.";
 "cat.invalid.title" = "Geçersiz Emoji";
 "cat.invalid.message" = "Lütfen sadece bir emoji gir.";
 
-/* TASK DETAIL */
-"detail.title" = "Görev Detayı";
-"detail.no.date" = "Tarih belirtilmedi";
-"detail.notes" = "Notlar";
-
 /* NOTIFICATION TITLES (ReminderScheduler) */
 "reminder.dueNow.title" = "Görev Zamanı!";
 "reminder.thirtyMins.title" = "Göreve 30 dakika kaldı";
 
-/* COMMON OK (alert buttons) */
-"settings.ok" = "Tamam";
-
 /* Günlük Hatırlatıcı (eksik anahtarlar) */
 "settings.dailyReminder" = "Günlük Hatırlatıcı";
-"settings.dailyReminder.subtitle.everydayAt" = "Her sabah görevlerini hatırlatıcı al.";
-
-/* Eski tireli varyantı da güvence için ekleyelim */
-"settings.dailyReminder.subtitle.every-dayAt" = "Her sabah görevlerini hatırlatıcı al.";
 
 /* Bildirim durumu (ekran altta yeşil yazı) */
 "settings.notifications.on" = "Bildirimler aktif";
@@ -223,25 +175,16 @@
 "notifications.permission.title" = "Bildirimler";
 "notifications.permission.sampleScheduled" = "Örnek bir bildirim başarıyla planlandı.";
 
-/* Dil (Giriş + Ayarlar) */
-"settings.language" = "Dil";
-"settings.ok" = "Tamam"; // varsa tekrar ekleme
-
-/* Sistem dili uyarısı */
-"lang.system.sheet.title" = "Sistem Dili Kullanılsın mı?";
-"lang.system.sheet.message" = "Uygulama dili iOS sistem dilini takip edecek.";
-"lang.system.sheet.continue" = "Devam Et";
-"lang.system.sheet.cancel" = "Vazgeç";
-
 /* Ayarlar bağlantısı açılamazsa */
 "lang.system.unavailable" = "Bu cihazda dil ayarları kullanılamıyor.";
-"profile.setName.title" = "Kullanıcı Adı";
+"profile.name.title" = "Kullanıcı Adı";
 "profile.setName.message" = "Profilinde gösterilecek bir ad belirle.";
 
 /* Profil – bilinmeyen ad fallback (GEREKLİ) */
 "profile.unknownName" = "Bilinmiyor";
 
 /* Hesabı Sil (GEREKLİ) */
+"settings.account.title" = "Hesap";
 "settings.account.delete" = "Hesabı Sil";
 "account.delete.title"    = "Hesabı Sil";
 "account.delete.message"  = "Bu işlem geri alınamaz. Tüm verilerin silinecek.";
@@ -299,12 +242,11 @@
 "link.error.title" = "Bağlantı";
 "link.error.message" = "Bağlantı açılamadı.";
 
-/* Mail Error */
-"mail.error.title" = "E-posta";
-"mail.error.message" = "E-posta uygulaması açılamadı.";
-
+/* Support Mail Body */
 "settings.rateUs" = "Bizi değerlendirin";
 "settings.rateUs.subtitle" = "App Store’da puan ver";
 
 "settings.section.generalPreferences" = "Genel Tercihler";
 "settings.section.supportInfo" = "Destek ve Bilgi";
+
+"settings.openSettings" = "Ayarlar";

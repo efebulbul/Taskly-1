@@ -153,42 +153,7 @@
 "about.subtitle" = "Danke, dass du Taskly verwendest!";
 
 "profile.email.title" = "E-Mail";
-
-
-/* ITEMS / LIST / FILTER / EMPTY */
-"items.title" = "Aufgaben";
-"filter.all" = "Alle";
-"list.section.pending" = "AUFGABEN";
-"list.section.done" = "ERLEDIGT";
-
-"empty.title" = "Noch keine Aufgaben";
-"empty.subtitle" = "Wähle oben eine Kategorie. Halte das Emoji gedrückt, um es zu ändern.";
-"empty.cta" = "Neue Aufgabe 🖇️";
-
-/* ADD TASK FLOW */
-"add.title" = "Neue Aufgabe";
-"add.message" = "Gib einen Titel ein. Die Emoji-Kategorie wird über den oberen Filter gewählt.";
-"add.placeholder.title" = "Aufgabentitel";
-"add.placeholder.notes" = "Notizen (optional)";
-"add.cancel" = "Abbrechen";
-"add.add" = "Hinzufügen";
-"add.choose.category" = "Kategorie wählen";
-"add.back" = "Zurück";
-
-/* ALERTS / ERRORS */
-"alerts.missing.title" = "Fehlende Angaben";
-"alerts.missing.message" = "Der Aufgabentitel darf nicht leer sein.";
-"common.error" = "Fehler";
-"tasks.add.failed" = "Aufgabe konnte nicht hinzugefügt werden.";
-
-/* SWIPE ACTIONS */
-"actions.delete" = "Löschen";
-"actions.undo" = "Rückgängig";
-"actions.complete" = "Abschließen";
-
-/* AUTH REQUIRED (add flow) */
-"auth.required.title" = "Anmeldung erforderlich";
-"auth.required.message" = "Bitte melde dich an, um Aufgaben hinzuzufügen.";
+"profile.name.title" = "Benutzername";
 
 /* CATEGORY EDIT */
 "cat.edit.title" = "Kategorie bearbeiten";
@@ -196,42 +161,12 @@
 "cat.invalid.title" = "Ungültiges Emoji";
 "cat.invalid.message" = "Bitte gib nur ein einzelnes Emoji ein.";
 
-/* TASK DETAIL */
-"detail.title" = "Aufgabendetails";
-"detail.no.date" = "Kein Datum angegeben";
-"detail.notes" = "Notizen";
-
 /* NOTIFICATION TITLES (ReminderScheduler) */
 "reminder.dueNow.title" = "Es ist Zeit für deine Aufgabe!";
 "reminder.thirtyMins.title" = "Noch 30 Minuten bis zur Aufgabe";
 
-/* COMMON OK (alert buttons) */
-"settings.ok" = "OK";
-
 /* Tägliche Erinnerung (fehlende Schlüssel) */
 "settings.dailyReminder" = "Tägliche Erinnerung";
-"settings.dailyReminder.subtitle.everydayAt" = "Erhalte jeden Morgen eine Erinnerung.";
-
-/* Zur Sicherheit auch die alte, mit Bindestrich */
-"settings.dailyReminder.subtitle.every-dayAt" = "Erhalte jeden Morgen eine Erinnerung.";
-
-/* Benachrichtigungsstatus */
-"settings.notifications.on" = "Benachrichtigungen aktiviert";
-"settings.notifications.off" = "Benachrichtigungen deaktiviert";
-
-/* Benachrichtigungsberechtigungen */
-"notifications.permission.title" = "Benachrichtigungen";
-"notifications.permission.sampleScheduled" = "Eine Beispielbenachrichtigung wurde erfolgreich geplant.";
-
-/* Sprache (Login + Einstellungen) */
-"settings.language" = "Sprache";
-"settings.ok" = "OK"; // falls vorhanden, nicht duplizieren
-
-/* Systemsprachen-Hinweis */
-"lang.system.sheet.title" = "Systemsprache verwenden?";
-"lang.system.sheet.message" = "Die App-Sprache folgt der iOS-Systemsprache.";
-"lang.system.sheet.continue" = "Fortfahren";
-"lang.system.sheet.cancel" = "Abbrechen";
 
 /* Fallback, wenn die Einstellungs-URL nicht geöffnet werden kann */
 "lang.system.unavailable" = "Spracheinstellungen sind auf diesem Gerät nicht verfügbar.";
@@ -244,14 +179,12 @@
 "account.delete.message"  = "Diese Aktion kann nicht rückgängig gemacht werden. Alle deine Daten werden gelöscht.";
 "common.delete"           = "Löschen";
 
+"notifications.permission.title" = "Benachrichtigungen";
+"notifications.permission.sampleScheduled" = "Eine Beispielbenachrichtigung wurde erfolgreich geplant.";
 "notifications.permission.denied"   = "Benachrichtigungen sind nicht erlaubt. Bitte in den Einstellungen aktivieren.";
-"notifications.permission.settings" = "Benachrichtigungen sind deaktiviert. Du kannst sie unter Einstellungen > Mitteilungen aktivieren.";
+"notifications.permission.settings" = "Benachrichtigungen sind deaktiviert. Du kannst sie unter Einstellungen > Benachrichtigungen aktivieren.";
 
 "settings.dailyReminder.subtitle.everydayAt" = "Jeden Tag um %@.";
-
-"profile.signin"          = "Anmelden";
-"profile.signin.subtitle" = "Melde dich an, um deine Aufgaben zu synchronisieren.";
-"profile.email.missing"   = "E-Mail nicht verfügbar";
 
 /* Filter Sheet (Tasks List) */
 "filter.sheet.title"        = "Anzuzeigende Aufgaben";
@@ -264,11 +197,6 @@
 "settings.support" = "Support & Feedback";
 "settings.legal"   = "Datenschutz & Nutzungsbedingungen";
 
-/* Mail */
-"mail.error.title"   = "E-Mail";
-"mail.error.message" = "Die E-Mail-App konnte nicht geöffnet werden.";
-
-/* Support & Feedback */
 "support.sendEmail" = "E-Mail senden";
 "support.reportBug" = "Fehler melden";
 "support.email.subject" = "Taskly Support / Feedback";
@@ -291,12 +219,10 @@
 "link.error.title" = "Link";
 "link.error.message" = "Der Link konnte nicht geöffnet werden.";
 
-/* Mail Error */
-"mail.error.title" = "E-Mail";
-"mail.error.message" = "Die E-Mail-App konnte nicht geöffnet werden.";
-
 "settings.rateUs" = "Bewerten";
 "settings.rateUs.subtitle" = "Im App Store bewerten";
 
 "settings.section.generalPreferences" = "Allgemeine Einstellungen";
 "settings.section.supportInfo" = "Support & Informationen";
+
+"settings.openSettings" = "Einstellungen öffnen";

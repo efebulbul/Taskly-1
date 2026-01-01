@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 #if canImport(FirebaseAuth)
 import FirebaseAuth
 #endif
@@ -16,6 +17,52 @@ import GoogleSignIn
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+
+    // MARK: - Notifications Permission on App Open
+    private func requestNotificationPermissionOnAppOpenIfNeeded() {
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                // First-time: show the system permission prompt
+                center.requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
+
+            case .denied:
+                // iOS will not show the system prompt again. Show a one-time alert to open Settings.
+                let key = "taskly.didPromptNotificationsDenied"
+                guard !UserDefaults.standard.bool(forKey: key) else { return }
+                UserDefaults.standard.set(true, forKey: key)
+
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    guard let root = self.window?.rootViewController else { return }
+
+                    let title = L("settings.notifications")
+                    let message = L("notifications.permission.settings")
+                    let cancel = L("common.cancel")
+                    let openSettingsTitle = L("settings.openSettings")
+
+                    let alert = UIAlertController(title: title,
+                                                  message: message,
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: cancel, style: .cancel))
+                    alert.addAction(UIAlertAction(title: openSettingsTitle, style: .default, handler: { _ in
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }))
+
+                    // Present on top-most VC
+                    var top = root
+                    while let presented = top.presentedViewController { top = presented }
+                    top.present(alert, animated: true)
+                }
+
+            default:
+                break
+            }
+        }
+    }
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -39,6 +86,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         window?.overrideUserInterfaceStyle = resolvedInterfaceStyle()
+
+        // Ask notification permission on app open (only if needed)
+        requestNotificationPermissionOnAppOpenIfNeeded()
+
         presentLoginIfNeeded(animated: true)
     }
 
@@ -100,4 +151,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         #endif
     }
 }
-
